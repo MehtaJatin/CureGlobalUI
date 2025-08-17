@@ -30,9 +30,16 @@ import { VaccineComponent } from './vaccine/vaccine.component';
 import { DentictsPartComponent } from './Components/denticts-part/denticts-part.component';
 import { TestimonialPartComponent } from './Components/testimonial-part/testimonial-part.component';
 import { ScrollComponent } from './Components/scroll/scroll.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminServicesComponent } from './admin/services/services.component';
+import { AdminSetupComponent } from './admin-setup/admin-setup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { FirebaseService } from './backend/firebase.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -62,7 +69,10 @@ import { FormsModule } from '@angular/forms';
     VaccineComponent,
     DentictsPartComponent,
     TestimonialPartComponent,
-    ScrollComponent
+    ScrollComponent,
+    AdminDashboardComponent,
+    AdminServicesComponent,
+    AdminSetupComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,13 +80,12 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     CarouselModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
-  providers: [
-    
-  ],
-  bootstrap: [AppComponent]
+  providers: [FirebaseService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
-
+export class AppModule {}

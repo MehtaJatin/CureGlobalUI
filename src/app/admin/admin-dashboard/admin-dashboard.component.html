@@ -1,0 +1,127 @@
+<div class="admin-dashboard">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h1>Admin Dashboard</h1>
+          <p class="text-muted">Welcome back, {{ currentUser?.displayName || currentUser?.email }}</p>
+        </div>
+        <div class="col-md-6 text-end">
+          <button class="btn btn-outline-danger" (click)="signOut()">
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="container mt-4">
+    <div class="row" *ngIf="!isLoading">
+      <div class="col-md-3 mb-4">
+        <div class="stat-card">
+          <div class="stat-icon bg-primary">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ stats.totalServices || 0 }}</h3>
+            <p>Total Services</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="stat-card">
+          <div class="stat-icon bg-success">
+            <i class="fas fa-hospital"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ stats.totalHospitals || 0 }}</h3>
+            <p>Total Hospitals</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="stat-card">
+          <div class="stat-icon bg-info">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ stats.totalDoctors || 0 }}</h3>
+            <p>Total Doctors</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="stat-card">
+          <div class="stat-icon bg-warning">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ stats.totalBookings || 0 }}</h3>
+            <p>Total Bookings</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="text-center" *ngIf="isLoading">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Management Cards -->
+    <div class="row mt-4" *ngIf="!isLoading">
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="management-card" (click)="navigateToServices()">
+          <div class="card-icon">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+          <h4>Manage Services</h4>
+          <p>Add, edit, and manage medical services</p>
+          <div class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="management-card" (click)="navigateToHospitals()">
+          <div class="card-icon">
+            <i class="fas fa-hospital"></i>
+          </div>
+          <h4>Manage Hospitals</h4>
+          <p>Add, edit, and manage hospital information</p>
+          <div class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="management-card" (click)="navigateToDoctors()">
+          <div class="card-icon">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <h4>Manage Doctors</h4>
+          <p>Add, edit, and manage doctor profiles</p>
+          <div class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="management-card" (click)="navigateToBookings()">
+          <div class="card-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h4>View Bookings</h4>
+          <p>View and manage patient appointments</p>
+          <div class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

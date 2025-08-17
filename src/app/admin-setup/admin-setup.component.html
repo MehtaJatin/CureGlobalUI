@@ -1,0 +1,94 @@
+<div class="admin-setup">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="setup-card">
+          <div class="setup-header">
+            <h2>Create Admin User</h2>
+            <p class="text-muted">Set up your first admin account</p>
+          </div>
+
+          <form (ngSubmit)="createAdminUser()">
+            <div class="mb-3">
+              <label for="displayName" class="form-label">Full Name *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="displayName"
+                [(ngModel)]="adminData.displayName"
+                name="displayName"
+                required
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address *</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                [(ngModel)]="adminData.email"
+                name="email"
+                required
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password *</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                [(ngModel)]="adminData.password"
+                name="password"
+                required
+                placeholder="Enter a strong password"
+                minlength="6"
+              />
+              <div class="form-text">
+                Password must be at least 6 characters long
+              </div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="isLoading"
+              >
+                <span
+                  *ngIf="isLoading"
+                  class="spinner-border spinner-border-sm me-2"
+                ></span>
+                {{ isLoading ? "Creating Admin User..." : "Create Admin User" }}
+              </button>
+            </div>
+          </form>
+
+          <!-- Message Display -->
+          <div
+            *ngIf="message"
+            class="alert mt-3"
+            [class]="
+              messageType === 'success' ? 'alert-success' : 'alert-danger'
+            "
+          >
+            {{ message }}
+          </div>
+
+          <div class="setup-footer">
+            <p class="text-muted small">
+              <strong>Note:</strong> This will create an admin user with full
+              access to manage the medical app.
+            </p>
+            <button class="btn btn-link" (click)="goToLogin()">
+              Already have an account? Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

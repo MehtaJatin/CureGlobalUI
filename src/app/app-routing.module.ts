@@ -17,31 +17,37 @@ import { ServiceDetailsComponent } from './service-details/service-details.compo
 import { ServicesComponent } from './services/services.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { VaccineComponent } from './vaccine/vaccine.component';
+import { AdminSetupComponent } from './admin-setup/admin-setup.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminServicesComponent } from './admin/services/services.component';
 
 const routes: Routes = [
-  {path:'', redirectTo:"home", pathMatch:"full"},
-  {path:'home' , component:HomeComponent},
-  {path:'about' , component:AboutComponent},
-  {path:'services' , component:ServicesComponent},
-  {path:'service-details' , component:ServiceDetailsComponent},
-  {path:'dentict' , component:DentictsComponent},
-  {path:'doctor-details' , component:DoctorDetailsComponent},
-  {path:'booking' , component:BookingComponent},
-  {path:'pricing' , component:PricingComponent},
-  {path:'testimonials' , component:TestimonialsComponent},
-  {path:'vaccine' , component:VaccineComponent},
-  {path:'privacy' , component:PrivacyComponent},
-  {path:'login' , component:LoginComponent},
-  {path:'register' , component:RegisterComponent},
-  {path:'blog' , component:BlogComponent},
-  {path:'blog-details' , component:BlogDetailsComponent},
-  {path:'contact' , component:ContactComponent},
-  {path:'**' , component:NotfoundComponent},
-  {path:'notfound' , component:NotfoundComponent}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'service-details', component: ServiceDetailsComponent },
+  { path: 'dentict', component: DentictsComponent },
+  { path: 'doctor-details', component: DoctorDetailsComponent },
+  { path: 'booking', component: BookingComponent },
+  { path: 'pricing', component: PricingComponent },
+  { path: 'testimonials', component: TestimonialsComponent },
+  { path: 'vaccine', component: VaccineComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'blog', component: BlogComponent },
+  { path: 'blog-details', component: BlogDetailsComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'admin-setup', component: AdminSetupComponent },
+  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'admin/services', component: AdminServicesComponent },
+  { path: '**', component: NotfoundComponent },
+  { path: 'notfound', component: NotfoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

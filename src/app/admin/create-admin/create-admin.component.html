@@ -1,0 +1,114 @@
+<div class="create-admin-page">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h3>Create Admin User</h3>
+            <p class="text-muted">
+              Create the first admin user for your medical app
+            </p>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="createAdmin()">
+              <div class="mb-3">
+                <label for="displayName" class="form-label"
+                  >Display Name *</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="displayName"
+                  [(ngModel)]="adminData.displayName"
+                  name="displayName"
+                  placeholder="Enter display name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address *</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  [(ngModel)]="adminData.email"
+                  name="email"
+                  placeholder="Enter email address"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label">Password *</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  [(ngModel)]="adminData.password"
+                  name="password"
+                  placeholder="Enter password (min 6 characters)"
+                  minlength="6"
+                  required
+                />
+                <div class="form-text">
+                  Password must be at least 6 characters long
+                </div>
+              </div>
+
+              <div class="d-grid gap-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="isLoading"
+                >
+                  <span
+                    *ngIf="isLoading"
+                    class="spinner-border spinner-border-sm me-2"
+                  ></span>
+                  {{ isLoading ? "Creating Admin..." : "Create Admin User" }}
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  (click)="goToLogin()"
+                >
+                  Go to Login
+                </button>
+              </div>
+            </form>
+
+            <!-- Message Display -->
+            <div
+              *ngIf="message"
+              class="alert mt-3"
+              [class]="
+                messageType === 'success' ? 'alert-success' : 'alert-danger'
+              "
+            >
+              {{ message }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5>Instructions:</h5>
+            <ol>
+              <li>Fill in the admin user details above</li>
+              <li>Click "Create Admin User"</li>
+              <li>Once created, you can login with these credentials</li>
+              <li>You'll have access to the admin dashboard</li>
+            </ol>
+            <div class="alert alert-info">
+              <strong>Note:</strong> This component should be removed after
+              creating the first admin user for security reasons.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

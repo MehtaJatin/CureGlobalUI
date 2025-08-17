@@ -1,0 +1,218 @@
+<div class="services-management">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h1>Manage Services</h1>
+          <p class="text-muted">Add, edit, and manage medical services</p>
+        </div>
+        <div class="col-md-6 text-end">
+          <button class="btn btn-primary me-2" (click)="showAddServiceForm()">
+            <i class="fas fa-plus"></i> Add Service
+          </button>
+          <button class="btn btn-outline-secondary" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <!-- Add/Edit Service Form -->
+    <div class="row" *ngIf="showAddForm">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>{{ editingService ? 'Edit Service' : 'Add New Service' }}</h5>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="saveService()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="serviceName" class="form-label">Service Name *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="serviceName"
+                    [(ngModel)]="newService.name"
+                    name="name"
+                    required
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="serviceCategory" class="form-label">Category *</label>
+                  <select
+                    class="form-select"
+                    id="serviceCategory"
+                    [(ngModel)]="newService.category"
+                    name="category"
+                    required
+                  >
+                    <option value="">Select Category</option>
+                    <option *ngFor="let category of categories" [value]="category">
+                      {{ category }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="servicePrice" class="form-label">Price (₹)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="servicePrice"
+                    [(ngModel)]="newService.price"
+                    name="price"
+                    min="0"
+                  />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="serviceDuration" class="form-label">Duration (minutes)</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="serviceDuration"
+                    [(ngModel)]="newService.duration"
+                    name="duration"
+                    min="15"
+                    step="15"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="serviceDescription" class="form-label">Description *</label>
+                <textarea
+                  class="form-control"
+                  id="serviceDescription"
+                  [(ngModel)]="newService.description"
+                  name="description"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="serviceActive"
+                    [(ngModel)]="newService.isActive"
+                    name="isActive"
+                  />
+                  <label class="form-check-label" for="serviceActive">
+                    Active Service
+                  </label>
+                </div>
+              </div>
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                  {{ editingService ? 'Update Service' : 'Add Service' }}
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="cancelForm()">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services List -->
+    <div class="row" *ngIf="!isLoading">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>All Services ({{ services.length }})</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Service Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let service of services">
+                    <td>
+                      <strong>{{ service.name }}</strong>
+                      <br>
+                      <small class="text-muted">{{ service.description }}</small>
+                    </td>
+                    <td>
+                      <span class="badge bg-info">{{ service.category }}</span>
+                    </td>
+                    <td>₹{{ service.price }}</td>
+                    <td>{{ service.duration }} min</td>
+                    <td>
+                      <span
+                        class="badge"
+                        [class]="service.isActive ? 'bg-success' : 'bg-danger'"
+                      >
+                        {{ service.isActive ? 'Active' : 'Inactive' }}
+                      </span>
+                    </td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button
+                          class="btn btn-sm btn-outline-primary"
+                          (click)="showEditServiceForm(service)"
+                          title="Edit"
+                        >
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button
+                          class="btn btn-sm"
+                          [class]="service.isActive ? 'btn-outline-warning' : 'btn-outline-success'"
+                          (click)="toggleServiceStatus(service)"
+                          [title]="service.isActive ? 'Deactivate' : 'Activate'"
+                        >
+                          <i class="fas" [class]="service.isActive ? 'fa-pause' : 'fa-play'"></i>
+                        </button>
+                        <button
+                          class="btn btn-sm btn-outline-danger"
+                          (click)="deleteService(service)"
+                          title="Delete"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="text-center" *ngIf="isLoading">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="text-center mt-4" *ngIf="!isLoading && services.length === 0">
+      <div class="empty-state">
+        <i class="fas fa-stethoscope fa-3x text-muted mb-3"></i>
+        <h4>No Services Found</h4>
+        <p class="text-muted">Start by adding your first medical service.</p>
+        <button class="btn btn-primary" (click)="showAddServiceForm()">
+          <i class="fas fa-plus"></i> Add First Service
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
