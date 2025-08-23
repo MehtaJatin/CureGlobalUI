@@ -28,7 +28,7 @@ export class AdminDashboardComponent implements OnInit {
     this.authService.getCurrentUser().subscribe((user) => {
       this.currentUser = user;
       if (!user || user.role !== 'admin') {
-        this.router.navigate(['login']);
+        this.router.navigate(['/login']);
       }
     });
   }

@@ -1,0 +1,66 @@
+{
+  "__collections__": {
+    "hospitals": {
+      "allHospital": {
+        "hospitals": [
+          {
+            "hospitalName": "Pushpawati Singhania Research Institute, New Delhi",
+            "hospitalLocation": "New Delhi, India",
+            "imageName": "Pushpawati"
+          },
+          {
+            "hospitalName": "Batra Hospital & Medical Research Centre, New Delhi",
+            "hospitalLocation": "New Delhi, India",
+            "imageName": "Batra"
+          },
+          {
+            "hospitalName": "Manipal Hospital Formerly AMRI Hospital, Kolkata (Mukundapur)",
+            "hospitalLocation": "Kolkata, India",
+            "imageName": "Manipal"
+          },
+          {
+            "hospitalName": "Fortis Hospital Delhi Shalimar Bagh",
+            "hospitalLocation": "New Delhi, India",
+            "imageName": "Fortis"
+          },
+          {
+            "hospitalName": "Fortis Escorts Hospital, Amritsar",
+            "hospitalLocation": "Amritsar, India",
+            "imageName": "Fortis"
+          },
+          {
+            "hospitalName": "Apollo Gleneagles Hospital Kolkata",
+            "hospitalLocation": "Kolkata, India",
+            "imageName": "Apollo"
+          },
+          {
+            "hospitalName": "Manipal Hospital Formerly Columbia Asia, Palam Vihar Gurgaon",
+            "hospitalLocation": "Gurgaon, India",
+            "imageName": "Manipal"
+          },
+          {
+            "hospitalName": "Apollo Hospital Bangalore Bannerghatta Road",
+            "hospitalLocation": "Bangalore, India",
+            "imageName": "Apollo"
+          },
+          {
+            "hospitalName": "Paras Hospitals, Gurgaon",
+            "hospitalLocation": "Gurgaon, India",
+            "imageName": "Paras"
+          },
+          {
+            "hospitalName": "Manipal Hospital Formerly AMRI Hospital, Kolkata (Dhakuria)",
+            "hospitalLocation": "Kolkata, India",
+            "imageName": "Manipal"
+          },
+          {
+            "hospitalName": "Medica Superspecialty Hospital",
+            "hospitalLocation": "Kolkata, India",
+            "imageName": "Medica"
+          }
+        ]
+      }
+    }
+  }
+}
+

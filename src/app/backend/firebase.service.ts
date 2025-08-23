@@ -66,6 +66,30 @@ export class FirebaseService {
     );
   }
 
+  getServices(): Observable<any[]> {
+    const serviceCollection = collection(this.firestore, 'services');
+    return from(
+      getDocs(serviceCollection).then((snapshot) => {
+        return snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      })
+    );
+  }
+
+  getHospitals(): Observable<any[]> {
+    const hospitalCollection = collection(this.firestore, 'hospitals');
+    return from(
+      getDocs(hospitalCollection).then((snapshot) => {
+        return snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      })
+    );
+  }
+
   // Get bookings by email
   getBookingsByEmail(email: string): Observable<any[]> {
     const bookingCollection = collection(this.firestore, 'bookings');

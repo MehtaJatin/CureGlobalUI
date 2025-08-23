@@ -1,0 +1,38 @@
+{
+  "__collections__": {
+    "services": {
+      "allServices": {
+        "services": [
+          {
+            "serviceName": "Weight Loss",
+            "serviceDescription": "Proven bariatric surgery solutions."
+          },
+          {
+            "serviceName": "Spine Surgery",
+            "serviceDescription": "Accurate spine surgery for enhanced mobility."
+          },
+          {
+            "serviceName": "Orthopedics",
+            "serviceDescription": "Specialized joint and bone deformity care."
+          },
+          {
+            "serviceName": "Oncology",
+            "serviceDescription": "Cutting-edge cancer care you can rely on."
+          },
+          {
+            "serviceName": "Neurosurgery",
+            "serviceDescription": "Neurosurgical care includes both adults and children."
+          },
+          {
+            "serviceName": "Liver Transplant",
+            "serviceDescription": "Liver transplants of varying complexity."
+          },
+          {
+            "serviceName": "Kidney Transplant",
+            "serviceDescription": "Advanced kidney care and transplant services."
+          }
+        ]
+      }
+    }
+  }
+}
