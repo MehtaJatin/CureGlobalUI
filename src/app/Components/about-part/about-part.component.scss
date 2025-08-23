@@ -8,12 +8,14 @@
         font-size: 38px;
 
         span{
+            font-size: 25px;
             color: $main_color;
         }
     }
 
     p{
         max-width: 720px;
+        color: $main_color
     }
 
     .about-list{
