@@ -51,115 +51,41 @@
 
 <div class="services-area pb-75">
     <div class="container">
-        <div class="section-title-warp">
-            <span class="sub-title">
-                <i class='bx bx-hash'></i>
-                Our Services
-            </span>
-            <h2>Enjoy Specialized Care Through Precision, Artistry, and Experience</h2>
-            <a routerLink="/services" class="default-btn">View All</a>
+      <div class="section-title-warp">
+        <span class="sub-title">
+          <i class='bx bx-hash'></i>
+          Our Services
+        </span>
+        <h2>Enjoy Specialized Care Through Precision, Artistry, and Experience</h2>
+        <a routerLink="/services" class="default-btn">View All</a>
+      </div>
+  
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let service of services">
+          <div class="single-services">
+            <div class="services-image">
+              <!-- <a [routerLink]="service.link" class="d-block">
+                <img [src]="service.image" alt="{{ service.title }}">
+              </a> -->
+              <a class="d-block">
+                <img [src]="service.image" alt="{{ service.title }}">
+              </a>
+            </div>
+            <div class="services-content">
+              <!-- <h3>
+                <a [routerLink]="service.link">{{ service.title }}</a>
+              </h3> -->
+              <h3>
+                <a>{{ service.title }}</a>
+              </h3>
+              <p>{{ service.description }}</p>
+            </div>
+          </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="single-services">
-                    <div class="services-image">
-                        <a routerLink="/service-details" class="d-block">
-                            <img src="assets/images/services-1.jpg">
-                        </a>
-                    </div>
-                    <div class="services-content">
-                        <h3>
-                            <a routerLink="/service-details">Spine Surgery </a>
-                        </h3>
-                        <p>General dentistry covers a range of treatment options and procedures fundamental to 
-                            protecting and maintaining a good standard of oral health.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="single-services">
-                    <div class="services-image">
-                        <a routerLink="/service-details" class="d-block">
-                            <img src="assets/images/services-2.jpg">
-                        </a>
-                    </div>
-                    <div class="services-content">
-                        <h3>
-                            <a routerLink="/service-details">Cosmetic Dentistry</a>
-                        </h3>
-                        <p>Cosmetic dentistry is the branch of dentistry that focuses on improving the appearance of your smile. 
-                            Common cosmetic dental treatments include teeth whitening.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="single-services">
-                    <div class="services-image">
-                        <a routerLink="/service-details" class="d-block">
-                            <img src="assets/images/services-3.jpg">
-                        </a>
-                    </div>
-                    <div class="services-content">
-                        <h3>
-                            <a routerLink="/service-details">Dental Implants</a>
-                        </h3>
-                        <p>Dental Implant is an artificial tooth root made of medical grade titanium, 
-                            it looks like a screw and is very strong but also light in weight. </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="single-services">
-                    <div class="services-image">
-                        <a routerLink="/service-details" class="d-block">
-                            <img src="assets/images/services-4.jpg">
-                        </a>
-                    </div>
-                    <div class="services-content">
-                        <h3>
-                            <a routerLink="/service-details">Orthodontics</a>
-                        </h3>
-                        <p>Orthodontics is a dentistry specialty that addresses the diagnosis, prevention,
-                         management, and correction of mal-positioned teeth and jaws, and misaligned bite patterns.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="single-services">
-                    <div class="services-image">
-                        <a routerLink="/service-details" class="d-block">
-                            <img src="assets/images/services-5.jpg">
-                        </a>
-                    </div>
-                    <div class="services-content">
-                        <h3>
-                            <a routerLink="/service-details">Teeth Whitening</a>
-                        </h3>
-                        <p>Teeth whitening refers to a variety of processes that aim to make someone’s natural teeth appear brighter and whiter. 
-                            Teeth whitening methods include sanding down stains, bleaching, ultraviolet (UV) light.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="single-services">
-                    <div class="services-image">
-                        <a routerLink="/service-details" class="d-block">
-                            <img src="assets/images/services-6.jpg">
-                        </a>
-                    </div>
-                    <div class="services-content">
-                        <h3>
-                            <a routerLink="/service-details">Teeth Cleaning</a>
-                        </h3>
-                        <p>Teeth cleaning is performed at a dental office to remove plaque and tartar from the teeth. 
-                            Plaque is a sticky film containing bacteria that forms on the tooth surface. Teeth cleaning is part of oral hygiene
-                            </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
+  
 
 <app-call-us></app-call-us>
 
