@@ -1,0 +1,43 @@
+{
+  "__collections__": {
+    "doctors": {
+      "doctor_profiles": {
+        "dr-vivek-gupta-7906": {
+          "name": "Dr. Vivek Gupta",
+          "imageLink": "https://themediglobal.com/wp-content/uploads/elementor/thumbs/dr-vivek-gupta-surgical-oncologist-r9kk7rbkefgxltloz8i4v8pwyf1hl30wubl3zwj92k.jpg",
+          "specialization": "Oncology",
+          "location": "India",
+          "experience": "16+ Years",
+          "position": "Senior Consultant",
+          "hospitalAffiliation": "Millennium Cancer Center, Gurgaon",
+          "biography": "Dr. Vivek Gupta is a Senior Consultant in the department of Surgical Oncology. He has a rich experience in the field of Surgical Oncology and has worked in different capacities at corporate sector hospitals such as Indraprastha Apollo Hospital, New Delhi, Max Group of Hospitals and Artemis Hospital at Gurgaon. He has been trained from the premier medical institutes such as AIIMS, New Delhi and Nizam’s Hyderabad. In his 18 years of Oncological experience, he has developed special interest in the fields of Breast Conservative Surgery, Sentinel Node Biopsy, Head & Neck Surgery, and Isolated Limb Perfusion. He is also a permanent member of number of medical societies including National Academy of Medical Sciences, Association of Surgeons of India (ASI), and Indian Association of Surgical Oncologists (IASO) and International Association of Surgeons, Gastroenterologists and Oncologists.",
+          "url": "https://themediglobal.com/doctors/dr-vivek-gupta/"
+        },
+        "dr-atul-sharma-7904": {
+          "name": "Dr. Atul Sharma",
+          "imageLink": "https://themediglobal.com/wp-content/uploads/elementor/thumbs/dr-Atul-sharmacosmetic-r9kk7v2x5rm2w9g8da4n57rrbyiyfvfu6u71x0dodo.jpg",
+          "specialization": "Cosmetic",
+          "location": "Delhi, India",
+          "experience": "> 10-year experience",
+          "position": "Consultant, Plastic Surgery, Plastic Surgeon",
+          "qualifications": "MS, MCh, DNB",
+          "hospitalAffiliation": "Kailash Hospital & Neuro Institute",
+          "biography": "Experience: Department Of Plastic Surgery, Superspeciality Paediatric Hospital & Post Graduate Teaching Institute, Noida – Assistant Professor, Plastic Surgery. Department Of Cosmetology And Plastic Surgery, Artemis Hospital, Gurgaon – Associate Consultant, Plastic Surgery. Department Of Plastic Surgery, PGIMER, Chandigarh – Senior Resident (M.Ch.). Department Of Burns And Plastic Surgery, Lok Nayak Hospital & Maulana Azad Medical College, New Delhi – Senior Resident. Department Of Surgery, JNMC, AMU, Aligarh – Junior Resident. Maharaja Yashwantrao Hospital, Indore – Rotatory Internship.",
+          "url": "https://themediglobal.com/doctors/dr-atul-sharma/"
+        },
+        "dr-anant-kumar-7557": {
+          "name": "Dr. Anant Kumar",
+          "imageLink": "https://themediglobal.com/wp-content/uploads/elementor/thumbs/dr._anant-kumar-r96er8fd10oa5u8krfypfer2ph5jekev95h4za7p2k.webp",
+          "specialization": "Urology, Kidney Transplant",
+          "location": "New Delhi, India",
+          "experience": "35+ Years",
+          "position": "Chairman, Uro-Oncology, Robotic and Kidney Transplant",
+          "qualifications": "MBBS, MS, DNB, FRCS, FICS",
+          "hospitalAffiliation": "Max Healthcare",
+          "biography": "Dr. Anant Kumar is one of the most experienced and best Uro-Onco Surgeons and Kidney Transplant specialists in India. He has been performing urology, uro-oncology, and kidney transplants for the last 35 years. He has a vast experience of over 3500 kidney transplants and laparoscopic urology surgeries. He holds the record for performing the highest number of kidney transplants in Uttar Pradesh. He has been felicitated with Dr. B.C. Roy Award, a prestigious award in the medical field. He has performed more than 2,000 major open surgeries on Kidney & Bladder Cancer. He is well-known for successfully performing complicated Laparoscopic Urology cases and has performed more than 1500 Laparoscopic donor Nephrectomy.",
+          "url": "https://themediglobal.com/doctors/dr-anant-kumar/"
+        }
+      }
+    }
+  }
+}

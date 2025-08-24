@@ -90,6 +90,18 @@ export class FirebaseService {
     );
   }
 
+  getDoctors(): Observable<any[]> {
+    const doctorsCollection = collection(this.firestore, 'doctors');
+    return from(
+      getDocs(doctorsCollection).then((snapshot) => {
+        return snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      })
+    );
+  }
+
   // Get bookings by email
   getBookingsByEmail(email: string): Observable<any[]> {
     const bookingCollection = collection(this.firestore, 'bookings');
