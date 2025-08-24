@@ -4,7 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist/app5",
+    "public": "dist/cure-global-ui",
     "ignore": [
       "firebase.json",
       "**/.*",
