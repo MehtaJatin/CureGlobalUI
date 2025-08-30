@@ -1,0 +1,126 @@
+{
+  "__collections__": {
+    "hospital-detail": {
+      "pushpawati_singhania_research_institute": {
+        "name": "Pushpawati Singhania Research Institute",
+        "city": "New Delhi",
+        "country": "India",
+        "established_year": 1996,
+        "accreditations": ["NABL", "NABH"],
+        "description": "Pushpawati Singhania Research Institute opened its doors in 1996 and holds both NABL and NABH accreditation. It is widely recognized as the best hospital in India for gastroenterology and was the first center in South Asia—and remains a leader in the country—for medical and surgical care of digestive disorders. The institute is backed by the JK Group, one of India’s top industrial houses. Every department works together to give patients warm, skilled care and the latest in medical technology.",
+        "image_url": "https://themediglobal.com/wp-content/uploads/elementor/thumbs/psri_hospital_in_delhi-r9ivxionf20mc7qgpmaiav12dpvx54y510lje7tkso.jpg",
+        "focus_areas": [
+          "Gastroenterology and gastro-surgery",
+          "Nephrology, urology, and kidney transplant",
+          "Treatment of liver, kidney, gall bladder, pancreas, and gastrointestinal tract diseases"
+        ],
+        "additional_care": [
+          "General medicine and critical care",
+          "Geriatrics and diabetic endocrinology",
+          "Pediatric gastroenterology",
+          "Gynaecology and ENT (ear, nose, and throat)",
+          "Cancer treatment and hepatobiliary surgery",
+          "Nutrition and dietetics",
+          "Chest and eye diseases",
+          "Pain management and stoma care"
+        ],
+        "team": {
+          "doctors": 900,
+          "staff": 500
+        },
+        "specialties": [
+          "Cardiac Care",
+          "Cancer Care",
+          "Neuroscience",
+          "Gastroenterology",
+          "Liver Transplant",
+          "Bone Marrow Transplant",
+          "Orthopedics",
+          "Obstetrics & Gynecology",
+          "Plastic, Aesthetic & Reconstructive Surgery",
+          "ENT",
+          "Critical Care Pediatrics (PICU)",
+          "Kidney Transplant"
+        ],
+        "centers_of_excellence": [
+          {
+            "name": "Heart Institute",
+            "description": "A state-of-the-art facility for complete cardiac care. This includes interventional cardiology, cardiac surgery, and advanced diagnostics to manage and prevent heart disease."
+          },
+          {
+            "name": "Institute of Neurosciences",
+            "description": "Specializes in treating neurological disorders with expert care in neurology, neurosurgery, spine surgery, and stroke management using cutting-edge technology."
+          },
+          {
+            "name": "Bone & Joint Institute",
+            "description": "Provides world-class orthopedic services, including joint replacements, sports injury care, trauma surgery, and minimally invasive spine procedures."
+          },
+          {
+            "name": "Cancer Institute",
+            "description": "A comprehensive center offering multidisciplinary cancer treatment. Services include surgical oncology, medical oncology, radiation therapy, and personalized support throughout your care journey."
+          },
+          {
+            "name": "Division of Medical Oncology & Hematology",
+            "description": "Focuses on treating solid tumors and blood cancers. We provide chemotherapy, immunotherapy, targeted therapy, and full hematological support under the guidance of skilled oncologists."
+          }
+        ],
+        "amenities": {
+          "comfort_during_stay": [
+            "TV in room",
+            "Free Wifi",
+            "Mobility accessible rooms",
+            "Laundry",
+            "Safe in the room",
+            "Dry cleaning",
+            "Religious facilities",
+            "Spa and wellness",
+            "Business centre services",
+            "Dedicated smoking areas",
+            "Special offer for group stays",
+            "Private rooms",
+            "Phone in Room",
+            "Family accommodation",
+            "Welcome",
+            "Nursery / Nanny services",
+            "Personal assistance / Concierge",
+            "Fitness",
+            "Café",
+            "Shop",
+            "Beauty Salon",
+            "Parking available"
+          ],
+          "money_matters": [
+            "Health insurance coordination",
+            "Foreign currency exchange",
+            "Credit Card",
+            "Netbanking",
+            "Medical travel insurance",
+            "ATM",
+            "Debit Card"
+          ],
+          "food": ["Diet on Request", "International Cuisine", "Restaurant"],
+          "treatment_related": [
+            "Medical records transfer",
+            "Rehabilitation",
+            "Document legalisation",
+            "Online doctor consultation",
+            "Pharmacy",
+            "Post operative followup"
+          ],
+          "language": ["Interpreter", "Translation services"],
+          "transportation": [
+            "Airport pickup",
+            "Local transportation booking",
+            "Car Hire",
+            "Air ambulance",
+            "Local tourism options",
+            "Visa / Travel office",
+            "Private driver / Limousine services"
+          ]
+        },
+        "beds": 1600,
+        "specialty_type": "Super Specialty"
+      }
+    }
+  }
+}
