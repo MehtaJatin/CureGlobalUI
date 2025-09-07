@@ -76,6 +76,16 @@ export class BookingComponent implements OnInit {
         return;
       }
 
+      // Country-specific phone validation before submit
+      const phoneError = this.whatsappService.validatePhone(
+        (data as any).countryCode,
+        data.phone
+      );
+      if (phoneError) {
+        this.Bookingmsg = phoneError;
+        return;
+      }
+
       const result = await this.firebaseService.addBooking(data);
       if (result.success) {
         this.Bookingmsg =
