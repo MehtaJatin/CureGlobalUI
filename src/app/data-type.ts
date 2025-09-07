@@ -6,6 +6,7 @@ export interface signUp {
 export interface book {
   name: string;
   email: string;
+  countryCode?: string;
   phone: string;
   query: string;
 }

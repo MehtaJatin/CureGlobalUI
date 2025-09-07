@@ -10,6 +10,38 @@ import { book } from '../data-type';
 })
 export class BookingComponent implements OnInit {
   Bookingmsg: string | undefined;
+  defaultCountryCode = '91';
+  countryCodes: { name: string; dial: string }[] = [
+    { name: 'India', dial: '91' },
+    { name: 'United States', dial: '1' },
+    { name: 'United Kingdom', dial: '44' },
+    { name: 'United Arab Emirates', dial: '971' },
+    { name: 'Australia', dial: '61' },
+    { name: 'Canada', dial: '1' },
+    { name: 'Singapore', dial: '65' },
+    { name: 'Germany', dial: '49' },
+    { name: 'France', dial: '33' },
+    { name: 'Italy', dial: '39' },
+    { name: 'Spain', dial: '34' },
+    { name: 'Netherlands', dial: '31' },
+    { name: 'Switzerland', dial: '41' },
+    { name: 'South Africa', dial: '27' },
+    { name: 'Brazil', dial: '55' },
+    { name: 'Mexico', dial: '52' },
+    { name: 'Japan', dial: '81' },
+    { name: 'China', dial: '86' },
+    { name: 'Malaysia', dial: '60' },
+    { name: 'Indonesia', dial: '62' },
+    { name: 'Bangladesh', dial: '880' },
+    { name: 'Nepal', dial: '977' },
+    { name: 'Sri Lanka', dial: '94' },
+    { name: 'Pakistan', dial: '92' },
+    { name: 'Saudi Arabia', dial: '966' },
+    { name: 'Qatar', dial: '974' },
+    { name: 'Kuwait', dial: '965' },
+    { name: 'Oman', dial: '968' },
+    { name: 'Turkey', dial: '90' },
+  ];
   constructor(
     private firebaseService: FirebaseService,
     private whatsappService: WhatsAppService
@@ -32,26 +64,6 @@ export class BookingComponent implements OnInit {
     } catch (error) {
       console.error('Firebase connection test failed:', error);
     }
-  }
-
-  // Test WhatsApp connection
-  testWhatsAppConnection() {
-    console.log('Testing WhatsApp connection...');
-    this.whatsappService.testConnection().subscribe({
-      next: (result) => {
-        console.log('WhatsApp connection test successful:', result);
-        this.Bookingmsg = 'WhatsApp connection test successful!';
-      },
-      error: (error) => {
-        console.error('WhatsApp connection test failed:', error);
-        this.Bookingmsg =
-          'WhatsApp connection test failed. Check console for details.';
-      },
-    });
-
-    setTimeout(() => {
-      this.Bookingmsg = undefined;
-    }, 5000);
   }
 
   async Booking(data: book) {
@@ -94,7 +106,9 @@ export class BookingComponent implements OnInit {
           console.error('WhatsApp service error:', whatsappError);
         }
       } else {
-        this.Bookingmsg = 'Error submitting booking. Please try again.';
+        const code = result.error?.code || 'unknown-error';
+        const msg = result.error?.message || '';
+        this.Bookingmsg = `Error submitting booking: ${code}. ${msg}`;
         console.error('Firebase error:', result.error);
       }
     } catch (error) {

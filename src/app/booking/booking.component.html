@@ -41,7 +41,22 @@
             ngModel
           />
         </div>
-        <div class="form-group">
+        <div class="form-group d-flex" style="gap: 8px">
+          <select
+            class="form-control"
+            name="countryCode"
+            ngModel
+            style="max-width: 160px"
+          >
+            <option [ngValue]="undefined" disabled>Country</option>
+            <option
+              *ngFor="let c of countryCodes"
+              [selected]="c.dial === defaultCountryCode"
+              [value]="c.dial"
+            >
+              +{{ c.dial }} - {{ c.name }}
+            </option>
+          </select>
           <input
             type="text"
             placeholder="Phone"
@@ -60,13 +75,6 @@
           ></textarea>
         </div>
         <button type="submit" class="default-btn">Book Appointment</button>
-        <button
-          type="button"
-          class="btn btn-secondary mt-2"
-          (click)="testWhatsAppConnection()"
-        >
-          Test WhatsApp Connection
-        </button>
         <div *ngIf="Bookingmsg" class="alert alert-success mt-3">
           {{ Bookingmsg }}
         </div>
