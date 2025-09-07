@@ -1,4 +1,4 @@
-<app-slider ></app-slider>
+<app-slider></app-slider>
 
 <!-- <div class="features-area pb-75">
     <div class="container">
@@ -50,45 +50,45 @@
 <app-about-part></app-about-part>
 
 <div class="services-area pb-75">
-    <div class="container">
-      <div class="section-title-warp">
-        <span class="sub-title">
-          <i class='bx bx-hash'></i>
-          Our Services
-        </span>
-        <h2>Enjoy Specialized Care Through Precision, Artistry, and Experience</h2>
-        <a routerLink="/services" class="default-btn">View All</a>
-      </div>
-  
-      <div class="row justify-content-center">
-        <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let service of services">
-          <div class="single-services">
-            <div class="services-image">
-              <!-- <a [routerLink]="service.link" class="d-block">
+  <div class="container">
+    <div class="section-title-warp">
+      <span class="sub-title">
+        <i class="bx bx-hash"></i>
+        {{ "HOME_OUR_SERVICES" | t }}
+      </span>
+      <h2>{{ "HOME_CARE_HEADLINE" | t }}</h2>
+      <a routerLink="/services" class="default-btn">{{
+        "HOME_VIEW_ALL" | t
+      }}</a>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let service of services">
+        <div class="single-services">
+          <div class="services-image">
+            <!-- <a [routerLink]="service.link" class="d-block">
                 <img [src]="service.image" alt="{{ service.title }}">
               </a> -->
-              <a class="d-block">
-                <img [src]="service.image" alt="{{ service.title }}">
-              </a>
-            </div>
-            <div class="services-content">
-              <!-- <h3>
+            <a class="d-block">
+              <img [src]="service.image" alt="{{ service.title }}" />
+            </a>
+          </div>
+          <div class="services-content">
+            <!-- <h3>
                 <a [routerLink]="service.link">{{ service.title }}</a>
               </h3> -->
-              <h3>
-                <a>{{ service.title }}</a>
-              </h3>
-              <p>{{ service.description }}</p>
-            </div>
+            <h3>
+              <a>{{ service.title | mt | async }}</a>
+            </h3>
+            <p>{{ service.description | mt | async }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
 
 <app-call-us></app-call-us>
-
 
 <!-- <div class="core-features-area pt-100 pb-75 bg-eef9ff">
     <div class="container">
@@ -255,4 +255,3 @@
         </div>
     </div>
 </div> -->
-

@@ -5,11 +5,11 @@
         <ul class="top-header-information">
           <li>
             <i class="bx bxs-map"></i>
-            Delhi, India
+            {{ "HEADER_LOCATION" | t }}
           </li>
           <li>
             <i class="bx bx-envelope-open"></i>
-            <a routerLink="/home">thecureglobew@gmail.com</a>
+            <a routerLink="/home">{{ "HEADER_EMAIL" | t }}</a>
           </li>
         </ul>
       </div>
@@ -55,7 +55,7 @@
                 src="assets/images/logo.png"
                 style="width: 60px; height: 60px; margin-right: 10px"
             /></span>
-            <span style="color: #06a3da">The Cure Globe</span>
+            <span style="color: #06a3da">{{ "BRAND_NAME" | t }}</span>
           </h3>
         </div>
       </div>
@@ -63,16 +63,16 @@
         <ul class="middle-header-content">
           <li>
             <i class="bx bx-phone-call"></i>
-            Call Today
+            {{ "HEADER_CALL_TODAY" | t }}
             <span>
-              <a href="#">+91 000000000000</a>
+              <a href="#">{{ "HEADER_PHONE" | t }}</a>
             </span>
           </li>
           <li>
             <i class="bx bx-time-five"></i>
-            Open Hour
+            {{ "HEADER_OPEN_HOUR" | t }}
             <span>
-              <a href="#">09:00 AM to 18:00 PM</a>
+              <a href="#">{{ "HEADER_OPEN_TIME" | t }}</a>
             </span>
           </li>
         </ul>

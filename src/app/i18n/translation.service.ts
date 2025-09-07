@@ -7,19 +7,22 @@ type Translations = Record<string, string>;
 @Injectable({ providedIn: 'root' })
 export class TranslationService {
   private currentLang$ = new BehaviorSubject<string>('en');
+  private version$ = new BehaviorSubject<number>(0);
   private dictionaries: Record<string, Translations> = {};
 
   constructor(private http: HttpClient) {
-    // Preload English as fallback
-    this.load('en').subscribe();
+    // Preload common languages so keys resolve immediately
+    ['en', 'hi', 'pa', 'it', 'es'].forEach((lng) => this.load(lng).subscribe());
   }
 
   setLanguage(lang: string): void {
-    if (this.currentLang$.value !== lang) {
-      this.currentLang$.next(lang);
+    const supported = ['en', 'hi', 'pa', 'it', 'es'];
+    const normalized = supported.includes(lang) ? lang : 'en';
+    if (this.currentLang$.value !== normalized) {
+      this.currentLang$.next(normalized);
     }
-    if (!this.dictionaries[lang]) {
-      this.load(lang).subscribe();
+    if (!this.dictionaries[normalized]) {
+      this.load(normalized).subscribe();
     }
   }
 
@@ -31,20 +34,33 @@ export class TranslationService {
     return this.currentLang$.value;
   }
 
+  getVersionChanges(): Observable<number> {
+    return this.version$.asObservable();
+  }
+
   translate(key: string): string {
     const lang = this.currentLang$.value;
     const dict = this.dictionaries[lang];
     if (dict && key in dict) return dict[key];
     const fallback = this.dictionaries['en'];
     if (fallback && key in fallback) return fallback[key];
+    console.warn(
+      `[i18n] Missing key '${key}' for lang '${lang}' and fallback 'en'`
+    );
     return key;
   }
 
   private load(lang: string): Observable<Translations> {
     const obs = this.http.get<Translations>(`assets/i18n/${lang}.json`);
     obs.subscribe({
-      next: (dict) => (this.dictionaries[lang] = dict || {}),
-      error: () => (this.dictionaries[lang] = {}),
+      next: (dict) => {
+        this.dictionaries[lang] = dict || {};
+        this.version$.next(this.version$.value + 1);
+      },
+      error: (e) => {
+        console.error(`[i18n] Failed loading ${lang}.json`, e);
+        this.dictionaries[lang] = {};
+      },
     });
     return obs;
   }

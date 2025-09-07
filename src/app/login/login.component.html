@@ -1,54 +1,92 @@
 <div class="page-banner-area ptb-100 four">
-    <div class="container">
-        <div class="page-banner-content">
-            <h2>Login</h2>
-            <div class="pages-list">
-                <li>
-                    <a routerLink="/home">Home</a>
-                </li>
-                <li>
-                    Login
-                </li>
-            </div>
-        </div>
+  <div class="container">
+    <div class="page-banner-content">
+      <h2>{{ "LOGIN_TITLE" | t }}</h2>
+      <div class="pages-list">
+        <li>
+          <a routerLink="/home">{{ "HOME" | t }}</a>
+        </li>
+        <li>
+          {{ "LOGIN_TITLE" | t }}
+        </li>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="login-area ptb-100">
-    <div class="container">
-        <div class="login-form">
-            <h4>Login Here</h4>
-            <p>Welcome back, login to your account!</p>
-            <form #userLogin ="ngForm" (ngSubmit)="login(userLogin.value)">
-                <div class="form-group">
-                    <label>Your email address</label>
-                    <input type="text" placeholder="Your email address" class="form-control" name="email" ngModel email #email ="ngModel" required>
-                </div>
-                <p class="invalid-input"><span *ngIf="email.invalid && email.touched " >Please enter valid input</span></p>
-                <div class="form-group">
-                    <label>Your password</label>
-                    <input type="password" placeholder="Your password" class="form-control" name="password" ngModel minlength="4" maxlength="20" #password ="ngModel" required>
-                </div>
-                <p class="invalid-input"><span *ngIf="password.invalid && password.touched " >Please enter valid input</span></p>
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-6 remember-me-wrap">
-                        <div class="form-check">
-                            <input name="gridCheck" value="I agree to the terms and privacy policy." type="checkbox" id="gridCheck" required class="form-check-input">
-                            <label for="gridCheck" class="form-check-label"> Remember me </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 lost-your-password-wrap">
-                        <a routerLink="/" class="lost-your-password">Lost your password?</a>
-                    </div>
-                </div>
-                <button type="submit" class="default-btn">Login Now</button>
-                <div class="account-text">
-                    <span>
-                        Don’t have an account? 
-                        <a routerLink="/register">Create Account</a>
-                    </span>
-                </div>
-            </form>
+  <div class="container">
+    <div class="login-form">
+      <h4>{{ "LOGIN_HERE" | t }}</h4>
+      <p>{{ "LOGIN_WELCOME" | t }}</p>
+      <form #userLogin="ngForm" (ngSubmit)="login(userLogin.value)">
+        <div class="form-group">
+          <label>{{ "LOGIN_EMAIL_LABEL" | t }}</label>
+          <input
+            type="text"
+            placeholder="{{ 'LOGIN_EMAIL_PLACEHOLDER' | t }}"
+            class="form-control"
+            name="email"
+            ngModel
+            email
+            #email="ngModel"
+            required
+          />
         </div>
+        <p class="invalid-input">
+          <span *ngIf="email.invalid && email.touched">{{
+            "FORM_INVALID" | t
+          }}</span>
+        </p>
+        <div class="form-group">
+          <label>{{ "LOGIN_PASSWORD_LABEL" | t }}</label>
+          <input
+            type="password"
+            placeholder="{{ 'LOGIN_PASSWORD_PLACEHOLDER' | t }}"
+            class="form-control"
+            name="password"
+            ngModel
+            minlength="4"
+            maxlength="20"
+            #password="ngModel"
+            required
+          />
+        </div>
+        <p class="invalid-input">
+          <span *ngIf="password.invalid && password.touched">{{
+            "FORM_INVALID" | t
+          }}</span>
+        </p>
+        <div class="row align-items-center">
+          <div class="col-lg-6 col-md-6 remember-me-wrap">
+            <div class="form-check">
+              <input
+                name="gridCheck"
+                value="I agree to the terms and privacy policy."
+                type="checkbox"
+                id="gridCheck"
+                required
+                class="form-check-input"
+              />
+              <label for="gridCheck" class="form-check-label">
+                {{ "LOGIN_REMEMBER_ME" | t }}
+              </label>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 lost-your-password-wrap">
+            <a routerLink="/" class="lost-your-password">{{
+              "LOGIN_LOST_PASSWORD" | t
+            }}</a>
+          </div>
+        </div>
+        <button type="submit" class="default-btn">{{ "LOGIN_NOW" | t }}</button>
+        <div class="account-text">
+          <span>
+            {{ "LOGIN_NO_ACCOUNT" | t }}
+            <a routerLink="/register">{{ "LOGIN_CREATE" | t }}</a>
+          </span>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

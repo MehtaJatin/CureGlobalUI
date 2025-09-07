@@ -42,6 +42,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { TranslatePipe } from './i18n/translate.pipe';
 import { LocalizePipe } from './i18n/localize.pipe';
+import { MachineTranslatePipe } from './i18n/mt.pipe';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { LocalizePipe } from './i18n/localize.pipe';
     AdminSetupComponent,
     TranslatePipe,
     LocalizePipe,
+    MachineTranslatePipe,
   ],
   imports: [
     BrowserModule,
