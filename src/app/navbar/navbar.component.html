@@ -5,7 +5,7 @@
         <!-- <h1>The Cure Globe</h1> -->
         <h3 class="brand">
           <img src="assets/images/logo.png" alt="Logo" class="brand-logo" />
-          <span class="brand-text">The Cure Globe</span>
+          <span class="brand-text">{{ "BRAND_NAME" | t }}</span>
         </h3>
       </a>
       <button
@@ -22,13 +22,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" routerLink="/home">Home</a>
+            <a class="nav-link active" routerLink="/home">{{
+              "NAV_HOME" | t
+            }}</a>
           </li>
           <li>
             <a>{{ userName | titlecase }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about">About Us</a>
+            <a class="nav-link" routerLink="/about">{{ "NAV_ABOUT" | t }}</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -37,69 +39,73 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Our Hospitals
+              {{ "NAV_OUR_HOSPITALS" | t }}
             </a>
             <ul class="dropdown-menu fade-up">
               <li>
-                <a class="dropdown-item" routerLink="/services">Bone Marrow</a>
+                <a class="dropdown-item" routerLink="/services">{{
+                  "SVC_BONE_MARROW" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Cardiology</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_CARDIOLOGY" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details">IVF</a>
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_IVF" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Cosmetic</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_COSMETIC" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Kidney Transplant</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_KIDNEY" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Liver Transplant</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_LIVER" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Gynecology</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_GYNE" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Neuro Surgery</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_NEURO" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Oncology</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_ONCO" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Orthopedics</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_ORTHO" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Spine Surgery</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_SPINE" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Weight Loss</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_WEIGHT" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/service-details"
-                  >Hematology</a
-                >
+                <a class="dropdown-item" routerLink="/service-details">{{
+                  "SVC_HEMATO" | t
+                }}</a>
               </li>
             </ul>
           </li>
@@ -110,52 +116,60 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Our Doctors
+              {{ "NAV_OUR_DOCTORS" | t }}
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item" routerLink="/dentict">Cardiology</a>
+                <a class="dropdown-item" routerLink="/dentict">{{
+                  "SVC_CARDIOLOGY" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor">Spine Surgery</a>
+                <a class="dropdown-item" routerLink="/doctor">{{
+                  "SVC_SPINE" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details"
-                  >Kidney Transplant</a
-                >
+                <a class="dropdown-item" routerLink="/doctor-details">{{
+                  "SVC_KIDNEY" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details"
-                  >Cosmetic</a
-                >
+                <a class="dropdown-item" routerLink="/doctor-details">{{
+                  "SVC_COSMETIC" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details"
-                  >Neuro Surgery</a
-                >
+                <a class="dropdown-item" routerLink="/doctor-details">{{
+                  "SVC_NEURO" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details"
-                  >Oncology</a
-                >
+                <a class="dropdown-item" routerLink="/doctor-details">{{
+                  "SVC_ONCO" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details"
-                  >Orthopedics</a
-                >
+                <a class="dropdown-item" routerLink="/doctor-details">{{
+                  "SVC_ORTHO" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details"
-                  >Hematology</a
-                >
+                <a class="dropdown-item" routerLink="/doctor-details">{{
+                  "SVC_HEMATO" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">IVF</a>
+                <a class="dropdown-item" routerLink="/doctor-details">{{
+                  "SVC_IVF" | t
+                }}</a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about">Knowledge </a>
+            <a class="nav-link" routerLink="/about"
+              >{{ "NAV_KNOWLEDGE" | t }}
+            </a>
           </li>
           <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -179,18 +193,18 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Value Added Services
+              {{ "NAV_VALUE_ADDED" | t }}
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item" routerLink="/blog"
-                  >Surgical Outsourcing</a
-                >
+                <a class="dropdown-item" routerLink="/blog">{{
+                  "NAV_SURGICAL_OUTSOURCING" | t
+                }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/blog-details"
-                  >Clinical Fellowship Program</a
-                >
+                <a class="dropdown-item" routerLink="/blog-details">{{
+                  "NAV_CLINICAL_FELLOWSHIP" | t
+                }}</a>
               </li>
             </ul>
           </li>
@@ -205,7 +219,9 @@
                     </div> -->
           </div>
           <div class="option-item">
-            <a routerLink="/booking" class="default-btn">Free Consultation </a>
+            <a routerLink="/booking" class="default-btn"
+              >{{ "BTN_FREE_CONSULTATION" | t }}
+            </a>
           </div>
         </div>
       </div>

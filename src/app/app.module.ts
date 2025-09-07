@@ -40,6 +40,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
+import { TranslatePipe } from './i18n/translate.pipe';
+import { LocalizePipe } from './i18n/localize.pipe';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { environment } from '../environments/environment';
     AdminDashboardComponent,
     AdminServicesComponent,
     AdminSetupComponent,
+    TranslatePipe,
+    LocalizePipe,
   ],
   imports: [
     BrowserModule,
