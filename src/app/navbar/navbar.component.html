@@ -42,70 +42,10 @@
               {{ "NAV_OUR_HOSPITALS" | t }}
             </a>
             <ul class="dropdown-menu fade-up">
-              <li>
-                <a class="dropdown-item" routerLink="/services">{{
-                  "SVC_BONE_MARROW" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_CARDIOLOGY" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_IVF" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_COSMETIC" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_KIDNEY" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_LIVER" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_GYNE" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_NEURO" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_ONCO" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_ORTHO" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_SPINE" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_WEIGHT" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/service-details">{{
-                  "SVC_HEMATO" | t
-                }}</a>
+              <li *ngFor="let service of services">
+                <a class="dropdown-item" [routerLink]="service.link">
+                  {{ service.title | mt | async }}
+                </a>
               </li>
             </ul>
           </li>

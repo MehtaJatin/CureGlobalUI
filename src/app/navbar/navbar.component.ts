@@ -1,36 +1,56 @@
-import { Component , OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../backend/firebase.service';
 declare var $: any;
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
-
-
 export class NavbarComponent implements OnInit {
-  userName:string="";
-  constructor(){
-    
-  }
+  userName: string = '';
+  services: any[] = [];
+
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
-    
-    window.onscroll = function() {myFunction()};
+    this.getServices();
 
-    const navbar = document.querySelector(".navbar-area");
-    
+    window.onscroll = function () {
+      myFunction();
+    };
+
+    const navbar = document.querySelector('.navbar-area');
+
     function myFunction() {
-      if (window.pageYOffset>=20) {
-        navbar?.classList.add("sticky")
+      if (window.pageYOffset >= 20) {
+        navbar?.classList.add('sticky');
       } else {
-        navbar?.classList.remove("sticky");
+        navbar?.classList.remove('sticky');
       }
     }
- 
   }
 
-
+  getServices() {
+    this.firebaseService.getServices().subscribe({
+      next: (services) => {
+        const result = services;
+        if (result.length > 0) {
+          let cnt = 1;
+          for (let ser of result) {
+            this.services.push({
+              id: cnt++,
+              title: ser.name,
+              description: ser.description,
+              image: ser.photo,
+              link: '/service-details',
+            });
+          }
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching services:', error);
+      },
+    });
+  }
 }
-
-
