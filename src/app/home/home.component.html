@@ -88,7 +88,95 @@
   </div>
 </div>
 
+<!-- How We Work Section -->
+<div class="how-we-work-area pt-100 pb-75">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="section-title-warp how-we-work-title">
+          <span class="sub-title">
+            <i class='bx bx-hash'></i>
+            How do we work
+          </span>
+          <h2>Clear Steps to Your Better Health</h2>
+        </div>
+
+        <ul class="work-steps" aria-label="Steps to get care">
+          <li class="work-step">
+            <div class="work-icon">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div class="work-content">
+              <h3>Get Support</h3>
+              <p>Share your case and we’ll reach out to help.</p>
+            </div>
+          </li>
+          <li class="work-step">
+            <div class="work-icon">
+              <i class="fa-regular fa-file-lines"></i>
+            </div>
+            <div class="work-content">
+              <h3>Fast Estimates</h3>
+              <p>Get your medical opinion and cost estimate in 48 hours.</p>
+            </div>
+          </li>
+          <li class="work-step">
+            <div class="work-icon">
+              <i class="fa-solid fa-plane-departure"></i>
+            </div>
+            <div class="work-content">
+              <h3>Seamless Arrival</h3>
+              <p>Book your flight and our team will greet you at the airport.</p>
+            </div>
+          </li>
+          <li class="work-step no-border">
+            <div class="work-icon">
+              <i class="fa-solid fa-house-medical"></i>
+            </div>
+            <div class="work-content">
+              <h3>Continued Care</h3>
+              <p>Get treatment and fly home. We stay in touch for follow ups.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="how-we-work-image">
+          <img src="assets/images/doctor-6.jpg" alt="Doctor supporting patient" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-call-us></app-call-us>
+
+<!-- Extended Services Grid -->
+<div class="extended-services-area pt-100 pb-75 bg-teal-lite">
+    <div class="container">
+      <div class="section-title-warp no-btn">
+        <span class="sub-title">
+          <i class='bx bx-hash'></i>
+          Our Services
+        </span>
+        <h2>We Cover All Your Needs</h2>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-4 col-md-6" *ngFor="let es of extendedServices">
+          <div class="ext-service-box" role="button" tabindex="0">
+            <div class="ext-icon">
+              <i [class]="es.icon"></i>
+            </div>
+            <h3>{{ es.title }}</h3>
+            <p>{{ es.desc }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 
 <!-- <div class="core-features-area pt-100 pb-75 bg-eef9ff">
     <div class="container">
@@ -143,7 +231,109 @@
 
 <!-- <app-denticts-part></app-denticts-part> -->
 
+
+<!-- Top Hospitals -->
+<div class="trusted-network pt-100 pb-75">
+  <div class="container">
+    <div class="section-title-warp no-btn trusted-title">
+      <span class="sub-title">
+        <i class='bx bx-hash'></i>
+        Trusted Network
+      </span>
+      <h2>Top Hospitals</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-6" *ngFor="let h of hospitals">
+        <div class="hospital-card reveal-card" #hospitalCard role="button" tabindex="0" [attr.aria-label]="h.title + ', ' + h.city" (click)="selectHospital(h)" (keydown.enter)="selectHospital(h)" (keydown.space)="selectHospital(h); $event.preventDefault()" [class.active]="selectedHospital?.title === h.title" [attr.aria-pressed]="selectedHospital?.title === h.title">
+          <div class="hospital-img">
+            <img [src]="h.image" [alt]="h.title" (error)="onHospitalImgError($event)" />
+          </div>
+          <div class="hospital-content">
+            <h3>{{ h.title }}</h3>
+            <span class="city">{{ h.city }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Lowest Price Guaranteed -->
+<div class="price-guarantee-area pt-100 pb-75">
+  <div class="container">
+    <div class="section-title-warp no-btn">
+      <span class="sub-title">
+        <i class='bx bx-hash'></i>
+        Transparent Pricing, Trusted Care
+      </span>
+      <h2 style="color: white;">Lowest Price Guaranteed</h2>
+    </div>
+    
+    <div class="price-controls">
+      <div class="chips">
+        <button type="button" class="chip" [class.active]="selectedCategory==='All'" (click)="setCategory('All')">All</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='Orthopedic'" (click)="setCategory('Orthopedic')">Orthopedic</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='Oncology'" (click)="setCategory('Oncology')">Oncology</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='Cardiac'" (click)="setCategory('Cardiac')">Cardiac</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='Cosmetic'" (click)="setCategory('Cosmetic')">Cosmetic</button>
+      </div>
+      <div class="search-sort">
+        <input type="search" class="proc-search" placeholder="Search procedures" [value]="searchTerm" (input)="onProcedureSearch($event)" aria-label="Search procedures"/>
+        <select class="proc-sort" (change)="onSortChange($event)" aria-label="Sort procedures">
+          <option value="relevance">Sort: Relevance</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name-asc">Name: A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-4 col-md-6" *ngFor="let p of procedures">
+        <div class="procedure-item" role="button" tabindex="0" (keydown.enter)="requestQuote(p)" (keydown.space)="$event.preventDefault(); requestQuote(p)">
+          <div class="procedure-icon">
+            <img [src]="p.icon" [alt]="p.name" (error)="onProcedureImgError($event)"/>
+          </div>
+          <div class="procedure-content">
+            <h3>{{ p.name }}</h3>
+            <span class="starting">Starting {{ p.price }}</span>
+          </div>
+          <div class="procedure-cta">
+            <button class="default-btn outline" type="button" (click)="openQuote(p)">Request a Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-helpers">
+      <button class="secondary-btn" type="button" (click)="onLookingForHelp()">Looking for Help?</button>
+      <a class="whatsapp-btn" href="https://wa.me/" target="_blank" rel="noopener">Chat With Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- Quote Modal -->
+<div class="quote-modal" [class.open]="showQuoteModal" (keydown.escape)="closeQuote()" [attr.aria-hidden]="!showQuoteModal">
+  <div class="quote-backdrop" (click)="closeQuote()"></div>
+  <div class="quote-dialog" role="dialog" aria-modal="true" aria-label="Tell Us About The Patient">
+    <button type="button" class="quote-close" (click)="closeQuote()" aria-label="Close">×</button>
+    <h3 class="quote-title">Tell Us About The Patient</h3>
+    <form (submit)="submitQuote($event)">
+      <input class="quote-input" type="text" name="patientName" placeholder="Patient Name" required />
+      <input class="quote-input" type="tel" name="phone" placeholder="Enter Phone No." required />
+      <input class="quote-input" type="email" name="email" placeholder="Enter Email" required />
+      <input class="quote-input" type="text" name="city" placeholder="Enter City" />
+      <textarea class="quote-input" name="concern" rows="3" placeholder="Kindly describe the health concern....."></textarea>
+      <input type="hidden" name="procedure" [value]="selectedProcedure?.name || ''" />
+      <button class="default-btn submit-btn" type="submit">SUBMIT NOW</button>
+    </form>
+  </div>
+</div>
+
 <app-testimonial-part></app-testimonial-part>
+
 
 <!-- <div class="blog-area pt-100 pb-75">
     <div class="container">

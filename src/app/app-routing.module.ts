@@ -6,7 +6,6 @@ import { BlogComponent } from './blog/blog.component';
 import { BookingComponent } from './booking/booking.component';
 import { ContactComponent } from './contact/contact.component';
 import { DentictsComponent } from './denticts/denticts.component';
-import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
@@ -24,11 +23,12 @@ import { AdminServicesComponent } from './admin/services/services.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  // { path: 'about', component: AboutComponent },
+  { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
-  // { path: 'service-details', component: ServiceDetailsComponent },
-  // { path: 'dentict', component: DentictsComponent },
-  // { path: 'doctor-details', component: DoctorDetailsComponent },
+  // Alias route for hospitals list
+  { path: 'hospitals', component: ServicesComponent },
+  { path: 'service-details', component: ServiceDetailsComponent },
+  { path: 'dentict', component: DentictsComponent },
   { path: 'booking', component: BookingComponent },
   { path: 'pricing', component: PricingComponent },
   { path: 'testimonials', component: TestimonialsComponent },
