@@ -1,85 +1,85 @@
-<!--<section class="hospital-page" *ngIf="!isLoading && hospital as h">-->
-<!--  <header class="hero">-->
-<!--    <div class="container">-->
-<!--      <nav class="breadcrumb">-->
-<!--        <a routerLink="/home">Home</a>-->
-<!--        <span>/</span>-->
-<!--        <a routerLink="/hospitals">Hospitals</a>-->
-<!--        <span>/</span>-->
-<!--        <span>{{ h.name }}</span>-->
-<!--      </nav>-->
-<!--      <h1 class="title">{{ h.name }}</h1>-->
-<!--      <p class="subtitle" *ngIf="h.address || h.phone">{{ h.address }} <span *ngIf="h.phone">• {{ h.phone }}</span></p>-->
-<!--    </div>-->
-<!--  </header>-->
+<section class="hospital-page" *ngIf="!isLoading && hospital as h">
+  <header class="hero">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a routerLink="/home">Home</a>
+        <span>/</span>
+        <a routerLink="/hospitals">Hospitals</a>
+        <span>/</span>
+        <span>{{ h.name }}</span>
+      </nav>
+      <h1 class="title">{{ h.name }}</h1>
+      <p class="subtitle" *ngIf="h.address || h.phone">{{ h.address }} <span *ngIf="h.phone">• {{ h.phone }}</span></p>
+    </div>
+  </header>
 
-<!--  <div class="container content-grid">-->
-<!--    <div class="main">-->
-<!--      <div class="feature" *ngIf="h.image">-->
-<!--        <img [src]="h.image" [alt]="h.name" />-->
-<!--      </div>-->
+  <div class="container content-grid">
+    <div class="main">
+      <div class="feature" *ngIf="h.image">
+        <img [src]="h.image" [alt]="h.name" />
+      </div>
 
-<!--      <section class="highlights" *ngIf="h.highlights?.length">-->
-<!--        <h2>Highlights</h2>-->
-<!--        <ul>-->
-<!--          <li *ngFor="let item of h.highlights">{{ item }}</li>-->
-<!--        </ul>-->
-<!--      </section>-->
+      <section class="highlights" *ngIf="h.highlights?.length">
+        <h2>Highlights</h2>
+        <ul>
+          <li *ngFor="let item of h.highlights">{{ item }}</li>
+        </ul>
+      </section>
 
-<!--      <section class="about" *ngIf="h.description">-->
-<!--        <h2>About {{ h.name }}</h2>-->
-<!--        <p>{{ h.description }}</p>-->
-<!--      </section>-->
+      <section class="about" *ngIf="h.description">
+        <h2>About {{ h.name }}</h2>
+        <p>{{ h.description }}</p>
+      </section>
 
-<!--      <section class="specialties" *ngIf="h.specialties?.length">-->
-<!--        <h2>Specialties</h2>-->
-<!--        <div class="chips">-->
-<!--          <span class="chip" *ngFor="let s of h.specialties">{{ s }}</span>-->
-<!--        </div>-->
-<!--      </section>-->
+      <section class="specialties" *ngIf="h.specialties?.length">
+        <h2>Specialties</h2>
+        <div class="chips">
+          <span class="chip" *ngFor="let s of h.specialties">{{ s }}</span>
+        </div>
+      </section>
 
-<!--      <section class="faq">-->
-<!--        <h2 class="animated-headline">Frequently Asked Questions</h2>-->
-<!--        <div class="accordion">-->
-<!--          <details>-->
-<!--            <summary>How can I book an appointment at {{ h.name }}?</summary>-->
-<!--            <p>Use the enquiry form on the right and our team will connect you with the hospital.</p>-->
-<!--          </details>-->
-<!--          <details>-->
-<!--            <summary>Do you support international patients?</summary>-->
-<!--            <p>Yes. We assist with visas, travel, and treatment coordination.</p>-->
-<!--          </details>-->
-<!--        </div>-->
-<!--      </section>-->
-<!--    </div>-->
+      <section class="faq">
+        <h2 class="animated-headline">Frequently Asked Questions</h2>
+        <div class="accordion">
+          <details>
+            <summary>How can I book an appointment at {{ h.name }}?</summary>
+            <p>Use the enquiry form on the right and our team will connect you with the hospital.</p>
+          </details>
+          <details>
+            <summary>Do you support international patients?</summary>
+            <p>Yes. We assist with visas, travel, and treatment coordination.</p>
+          </details>
+        </div>
+      </section>
+    </div>
 
-<!--    <aside class="sidebar">-->
-<!--      <div class="card">-->
-<!--        <h3>Enquire Now</h3>-->
-<!--        <form>-->
-<!--          <input type="text" placeholder="Patient Name" />-->
-<!--          <input type="tel" placeholder="Phone No." />-->
-<!--          <input type="email" placeholder="Enter Email" />-->
-<!--          <input type="text" placeholder="Enter City" />-->
-<!--          <textarea placeholder="Enter Your Message..."></textarea>-->
-<!--          <button type="button" class="btn primary">SUBMIT NOW</button>-->
-<!--        </form>-->
-<!--      </div>-->
+    <aside class="sidebar">
+      <div class="card">
+        <h3>Enquire Now</h3>
+        <form>
+          <input type="text" placeholder="Patient Name" />
+          <input type="tel" placeholder="Phone No." />
+          <input type="email" placeholder="Enter Email" />
+          <input type="text" placeholder="Enter City" />
+          <textarea placeholder="Enter Your Message..."></textarea>
+          <button type="button" class="btn primary">SUBMIT NOW</button>
+        </form>
+      </div>
 
-<!--      <div class="info">-->
-<!--        <h4>Address</h4>-->
-<!--        <p>{{ h.address }}</p>-->
-<!--        <h4 *ngIf="h.phone">Phone</h4>-->
-<!--        <p *ngIf="h.phone">{{ h.phone }}</p>-->
-<!--        <a *ngIf="h['website']" class="btn outline" [href]="h['website']" target="_blank" rel="noopener">Visit Website</a>-->
-<!--      </div>-->
-<!--    </aside>-->
-<!--  </div>-->
-<!--</section>-->
+      <div class="info">
+        <h4>Address</h4>
+        <p>{{ h.address }}</p>
+        <h4 *ngIf="h.phone">Phone</h4>
+        <p *ngIf="h.phone">{{ h.phone }}</p>
+        <a *ngIf="h['website']" class="btn outline" [href]="h['website']" target="_blank" rel="noopener">Visit Website</a>
+      </div>
+    </aside>
+  </div>
+</section>
 
-<!--<section class="hospital-page" *ngIf="isLoading">-->
-<!--  <div class="container loading">-->
-<!--    <div class="spinner"></div>-->
-<!--    <p>Loading hospital…</p>-->
-<!--  </div>-->
-<!--</section>-->
+<section class="hospital-page" *ngIf="isLoading">
+  <div class="container loading">
+    <div class="spinner"></div>
+    <p>Loading hospital…</p>
+  </div>
+</section>

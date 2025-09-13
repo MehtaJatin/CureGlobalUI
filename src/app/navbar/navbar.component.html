@@ -45,9 +45,9 @@
               {{ "NAV_OUR_HOSPITALS" | t }}
             </a>
             <ul class="dropdown-menu fade-up">
-              <li *ngFor="let sp of hospitalSpecialties">
-                <a class="dropdown-item" [routerLink]="['/hospitals-specialty', getSlug(sp)]">
-                  {{ sp }}
+              <li *ngFor="let service of services">
+                <a class="dropdown-item" [routerLink]="service.link">
+                  {{ service.title | mt | async }}
                 </a>
               </li>
             </ul>
