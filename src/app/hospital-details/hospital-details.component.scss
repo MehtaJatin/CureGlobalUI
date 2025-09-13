@@ -1,0 +1,62 @@
+// .hospital-page {
+//   font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+//   color: #1f2937;
+//   background: #f7f9fc;
+// }
+//
+// .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+//
+// /* Hero */
+// .hero {
+//   background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+//   color: #fff;
+//   padding: 40px 0 28px;
+// }
+// .hero .title { margin: 6px 0 2px; font-size: 2rem; font-weight: 800; }
+// .hero .subtitle { margin: 0; opacity: .9; }
+// .hero .breadcrumb { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.9); }
+// .hero .breadcrumb a { color: #fff; text-decoration: none; font-weight: 600; }
+// .hero .breadcrumb a:hover { text-decoration: underline; }
+//
+// /* Layout */
+// .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; padding: 24px 0 40px; }
+// @media (max-width: 992px) { .content-grid { grid-template-columns: 1fr; } }
+//
+// /* Main */
+// .main .feature img { width: 100%; height: auto; border-radius: 14px; box-shadow: 0 14px 35px rgba(17,24,39,0.12); }
+//
+// .main section { margin-top: 20px; background: #fff; border-radius: 14px; padding: 16px; box-shadow: 0 10px 30px rgba(17,24,39,0.06); }
+// .main section h2 { margin: 0 0 10px; font-weight: 800; color: #0f172a; }
+//
+// .highlights ul { margin: 0; padding-left: 18px; }
+// .highlights li { margin: 6px 0; }
+//
+// .specialties .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+// .specialties .chip { padding: 6px 12px; border-radius: 999px; border: 1px solid #d1d5db; background: #fff; font-weight: 600; }
+//
+// /* Sidebar */
+// .sidebar .card { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; border-radius: 14px; padding: 16px; position: sticky; top: 80px; box-shadow: 0 12px 30px rgba(17,24,39,0.12); }
+// .sidebar .card h3 { margin: 0 0 10px; font-weight: 800; }
+// .sidebar .card form { display: grid; gap: 10px; }
+// .sidebar .card input,
+// .sidebar .card textarea { width: 100%; border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.12); color: #fff; padding: 10px 12px; border-radius: 10px; outline: none; }
+// .sidebar .card input::placeholder,
+// .sidebar .card textarea::placeholder { color: rgba(255,255,255,.9); }
+// .sidebar .card .btn.primary { background: #fff; color: #1e3c72; font-weight: 800; border-radius: 10px; padding: 10px 12px; border: none; cursor: pointer; }
+//
+// .sidebar .info { margin-top: 16px; background: #fff; border-radius: 14px; padding: 14px; box-shadow: 0 10px 30px rgba(17,24,39,0.06); }
+// .sidebar .info h4 { margin: 8px 0 6px; font-weight: 800; }
+// .sidebar .btn.outline { display: inline-block; margin-top: 8px; border: 1px solid #d1d5db; color: #111827; padding: 8px 12px; border-radius: 10px; text-decoration: none; font-weight: 700; }
+//
+// /* FAQ */
+// .faq { margin-top: 20px; }
+// .faq .animated-headline { position: relative; display: inline-block; padding-bottom: 6px; margin-bottom: 12px; font-weight: 800; }
+// .faq .animated-headline::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: linear-gradient(90deg, #2a5298, #1e3c72); border-radius: 999px; }
+// .accordion { display: grid; gap: 8px; }
+// .accordion details { background: #fff; border-radius: 12px; padding: 12px 14px; box-shadow: 0 6px 20px rgba(17,24,39,0.06); }
+// .accordion summary { cursor: pointer; font-weight: 600; color: #111827; outline: none; }
+//
+// /* Loading */
+// .loading { display: grid; place-items: center; gap: 10px; padding: 40px 0; }
+// .spinner { width: 36px; height: 36px; border-radius: 50%; border: 3px solid rgba(0,0,0,.08); border-top-color: #2a5298; background: transparent; animation: spin 1s linear infinite; }
+// @keyframes spin { to { transform: rotate(360deg);} }

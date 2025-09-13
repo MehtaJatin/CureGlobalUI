@@ -19,14 +19,21 @@ import { VaccineComponent } from './vaccine/vaccine.component';
 import { AdminSetupComponent } from './admin-setup/admin-setup.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminServicesComponent } from './admin/services/services.component';
+import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
+// import { HospitalDetailsComponent } from './hospital-details/hospital-details.component';
+// import { HospitalsSpecialtyComponent } from './hospitals-specialty/hospitals-specialty.component';
+// import { TestRouteComponent } from './test-route/test-route.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
-  // Alias route for hospitals list
-  { path: 'hospitals', component: ServicesComponent },
+//   // Hospital detail must come before list to avoid prefix match swallowing
+//   { path: 'hospitals/:slug', component: HospitalDetailsComponent },
+//   { path: 'hospitals-specialty/:slug', component: HospitalsSpecialtyComponent },
+//   // Alias route for hospitals list (use full match to avoid prefix matching)
+//   { path: 'hospitals', component: ServicesComponent, pathMatch: 'full' },
   { path: 'service-details', component: ServiceDetailsComponent },
   { path: 'dentict', component: DentictsComponent },
   { path: 'booking', component: BookingComponent },
@@ -42,12 +49,13 @@ const routes: Routes = [
   { path: 'admin-setup', component: AdminSetupComponent },
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'admin/services', component: AdminServicesComponent },
-  { path: '**', component: NotfoundComponent },
+  { path: 'doctor-details', component: DoctorDetailsComponent },
   { path: 'notfound', component: NotfoundComponent },
+  { path: '**', redirectTo: '/notfound' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

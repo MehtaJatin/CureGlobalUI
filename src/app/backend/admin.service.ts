@@ -57,14 +57,14 @@ export class AdminService {
 
   // Get all services
   getServices(): Observable<Service[]> {
-    return this.firestore.collection<Service>('services', ref => 
+    return this.firestore.collection<Service>('services', ref =>
       ref.orderBy('createdAt', 'desc')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get active services
   getActiveServices(): Observable<Service[]> {
-    return this.firestore.collection<Service>('services', ref => 
+    return this.firestore.collection<Service>('services', ref =>
       ref.where('isActive', '==', true).orderBy('name')
     ).valueChanges({ idField: 'id' });
   }
@@ -108,14 +108,14 @@ export class AdminService {
 
   // Get all hospitals
   getHospitals(): Observable<Hospital[]> {
-    return this.firestore.collection<Hospital>('hospitals', ref => 
+    return this.firestore.collection<Hospital>('hospitals', ref =>
       ref.orderBy('createdAt', 'desc')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get active hospitals
   getActiveHospitals(): Observable<Hospital[]> {
-    return this.firestore.collection<Hospital>('hospitals', ref => 
+    return this.firestore.collection<Hospital>('hospitals', ref =>
       ref.where('isActive', '==', true).orderBy('name')
     ).valueChanges({ idField: 'id' });
   }
@@ -159,21 +159,21 @@ export class AdminService {
 
   // Get all doctors
   getDoctors(): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref => 
+    return this.firestore.collection<Doctor>('doctors', ref =>
       ref.orderBy('createdAt', 'desc')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get active doctors
   getActiveDoctors(): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref => 
+    return this.firestore.collection<Doctor>('doctors', ref =>
       ref.where('isActive', '==', true).orderBy('name')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get doctors by hospital
   getDoctorsByHospital(hospitalId: string): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref => 
+    return this.firestore.collection<Doctor>('doctors', ref =>
       ref.where('hospitalId', '==', hospitalId).where('isActive', '==', true)
     ).valueChanges({ idField: 'id' });
   }

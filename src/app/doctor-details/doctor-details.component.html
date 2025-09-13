@@ -1,110 +1,122 @@
-<div class="page-banner-area ptb-100 four" style="background-image: url(assets/images/page-title5.jpg);">
+<!-- Page Wrapper -->
+<section class="doctors-page">
+  <!-- Hero/Header -->
+  <header class="page-hero">
     <div class="container">
-        <div class="page-banner-content">
-            <h2>Dentist/Doctor Details</h2>
-            <div class="pages-list">
-                <li>
-                    <a routerLink="/home">Home</a>
-                </li>
-                <li>
-                    Dentist/Doctor Details
-                </li>
-            </div>
-        </div>
-    </div>
-</div>
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a routerLink="/home">Home</a>
+        <span>/</span>
+        <span>Our Doctors</span>
+      </nav>
+      <div *ngIf="specialization" class="active-filter">
+        Showing specialists for: <strong>{{ specialization }}</strong>
+        <a class="clear" [routerLink]="['/doctor-details']">Clear</a>
+      </div>
 
-<div class="dentist-details-area ptb-100">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5 col-md-12">
-                <div class="dentist-details-image">
-                    <img src="assets/images/doctor-1.jpg">
-                </div>
-            </div>
-            <div class="col-lg-7 col-md-12">
-                <div class="dentist-details-content">
-                    <h3>Dr. Johnson Melbourne</h3>
-                    <span class="designation">Prosthodontics Dentist</span>
-                    <div class="share-link">
-                        <a href="www.facebook.com"><i class='bx bxl-facebook'></i></a>
-                        <a href="www.twitter.com"><i class='bx bxl-twitter'></i></a>
-                        <a href="www.linkedin.com"><i class='bx bxl-linkedin'></i></a>
-                        <a href="www.instagram.com"><i class='bx bxl-instagram'></i></a>
-                    </div>
-                    <div class="content-overview">
-                        <p>
-                            <span>Qualification:</span>
-                            MDS, BDS - Periodontology and Oral Implantology, 5 Years Experience
-                        </p>
-                        <p>
-                            <span>Certification:</span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna.
-                        </p>
-                        <p>
-                            <span>Professional Skills:</span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna.
-                        </p>
-                        <p>
-                            <span>Education:</span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna.
-                        </p>
-                        <p>
-                            <span>Awards:</span>
-                            National Specialist Register in Dental
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="dentist-details-overview-content">
-            <p>
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-               ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-               in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-               Excepteur sint occaecat cupidatat non proident, 
-               sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="details-overview-image">
-                        <img src="assets/images/dentist-details-1.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="details-overview-image">
-                        <img src="assets/images/dentist-details-2.jpg">
-                    </div>
-                </div>
-            </div>
-            <div class="overview-text">
-                <p>
-                    <span>How to Take Care During Dental:</span>
-                    It is a long established fact that a reader will be 
-                    distracted by the readable content of a page when looking 
-                    at its layout. The point of psum is that it has a more or-less normal
-                    distribution of letters, as opposed to using.
-                </p>
-                <p>
-                    <span>When To Visit your Doctor?</span>
-                    It is a long established fact that a reader will be 
-                    distracted by the readable content of a page when looking
-                    at its layout. The point of psum is that it has a more or-less normal 
-                    distribution of letters, as opposed to using.
-                </p>
-                <p>
-                    <span>Dental Options:</span>
-                    It is a long established fact that a reader will be 
-                    distracted by the readable content of a page when looking
-                    at its layout. The point of psum is that it has a more or-less normal 
-                    distribution of letters, as opposed to using.
-                </p>
-            </div>
-        </div>
+      <!-- Specialization chips -->
+      <div class="chips" *ngIf="specializations?.length">
+        <button type="button"
+                class="chip"
+                *ngFor="let s of specializations"
+                [class.active]="s.toLowerCase() === specialization.toLowerCase()"
+                [routerLink]="['/doctor-details']" [queryParams]="{ specialization: s }">
+          {{ s }}
+        </button>
+      </div>
+
+      <!-- Enquiry form moved to right sidebar below -->
     </div>
-</div>
+  </header>
+
+  <div class="container page-content">
+    <div class="content-grid">
+      <div class="main">
+    <!-- Loading -->
+    <div *ngIf="isLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading doctors…</p>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && doctors.length === 0" class="empty">
+      <h3>No doctors found</h3>
+      <p *ngIf="specialization">We couldn't find any {{ specialization.toLowerCase() }} specialists at this time.</p>
+      <p *ngIf="!specialization">We couldn't find any doctors at this time.</p>
+      <a routerLink="/doctor-details" class="btn primary">View all doctors</a>
+    </div>
+
+    <!-- Grid -->
+    <div *ngIf="!isLoading && doctors.length > 0" class="grid">
+      <article class="card" *ngFor="let doctor of visibleDoctors">
+        <div class="media">
+          <img [src]="doctor.image || 'assets/images/doctor-avatar.jpg'" [alt]="doctor.name" loading="lazy" />
+        </div>
+        <div class="body">
+          <h3 class="name">{{ doctor.name }}</h3>
+          <p class="specialty" *ngIf="doctor.specialization">{{ doctor.specialization }}</p>
+
+          <ul class="meta">
+            <li>
+              <i class="bx bxs-clinic"></i>
+              <span>{{ doctor.hospitalName || 'Hospital not specified' }}</span>
+            </li>
+            <li *ngIf="doctor.experience">
+              <i class="bx bxs-award"></i>
+              <span>{{ doctor.experience }}+ years</span>
+            </li>
+            <li *ngIf="doctor.education">
+              <i class="bx bxs-graduation"></i>
+              <span>{{ doctor.education }}</span>
+            </li>
+          </ul>
+
+          <div class="actions">
+            <a class="btn outline" [routerLink]="['/booking']">Book Consultation</a>
+            <button type="button" class="btn" (click)="toggleExpanded(doctor)">{{ isExpanded(doctor) ? 'Hide' : 'View More' }}</button>
+          </div>
+
+          <div class="bio-expanded" *ngIf="doctor.description && isExpanded(doctor)">
+            <p>{{ doctor.description }}</p>
+          </div>
+        </div>
+      </article>
+    </div>
+      </div>
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Our Doctors</h2>
+        <p class="sidebar-subtitle">Find your ideal doctor. Expert care across leading specialties.</p>
+        <!-- Enquiry Form (sticky on desktop) -->
+        <form class="enquiry-form" (ngSubmit)="searchDoctors()" #enquiryForm="ngForm">
+          <div class="row">
+            <input type="text" name="name" [(ngModel)]="searchQuery.name" placeholder="Patient Name" />
+            <input type="tel" name="phone" [(ngModel)]="searchQuery.phone" placeholder="Phone No." />
+            <input type="email" name="email" [(ngModel)]="searchQuery.email" placeholder="Enter Email" required />
+            <input type="text" name="city" [(ngModel)]="searchQuery.city" placeholder="Enter City" required />
+            <textarea name="message" [(ngModel)]="searchQuery.message" placeholder="Enter Your Message..."></textarea>
+            <button class="btn primary" type="submit" [disabled]="enquiryForm.invalid">SUBMIT NOW</button>
+          </div>
+        </form>
+
+      </aside>
+    </div>
+    <!-- FAQ Full Width -->
+    <section class="faq">
+      <h2 class="animated-headline">Frequently Asked Questions</h2>
+      <div class="accordion">
+        <details>
+          <summary>How do I choose the right specialist?</summary>
+          <p>Use the specialty filter from the navigation. You can also compare experience, hospital and profile details.</p>
+        </details>
+        <details>
+          <summary>Can I book an online consultation?</summary>
+          <p>Yes. Click "Book Consultation" to request a call-back and we will arrange the earliest slot.</p>
+        </details>
+        <details>
+          <summary>Do you support international patients?</summary>
+          <p>Absolutely. Our care team helps with visas, travel and treatment planning end-to-end.</p>
+        </details>
+      </div>
+    </section>
+  </div>
+</section>

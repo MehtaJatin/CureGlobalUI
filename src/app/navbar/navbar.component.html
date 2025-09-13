@@ -30,6 +30,9 @@
             <a>{{ userName | titlecase }}</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/test-route']" [queryParams]="{specialization: 'TestCardiology'}">Test Route</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" routerLink="/about">{{ "NAV_ABOUT" | t }}</a>
           </li>
           <li class="nav-item dropdown">
@@ -42,62 +45,63 @@
               {{ "NAV_OUR_HOSPITALS" | t }}
             </a>
             <ul class="dropdown-menu fade-up">
-              <li *ngFor="let service of services">
-                <a class="dropdown-item" [routerLink]="service.link">
-                  {{ service.title | mt | async }}
+              <li *ngFor="let sp of hospitalSpecialties">
+                <a class="dropdown-item" [routerLink]="['/hospitals-specialty', getSlug(sp)]">
+                  {{ sp }}
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" #doctorsDropdown>
             <a
               class="nav-link dropdown-toggle"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              (click)="$event.preventDefault()"
             >
               {{ "NAV_OUR_DOCTORS" | t }}
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item" routerLink="/dentict">{{
-                  "SVC_CARDIOLOGY" | t
-                }}</a>
+                <a class="dropdown-item" [routerLink]="['/doctor-details']" [queryParams]="{specialization: 'Cardiology'}" (click)="closeDropdowns()">
+                  {{ "SVC_CARDIOLOGY" | t }}
+                </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor">{{
-                  "SVC_SPINE" | t
-                }}</a>
+                <a class="dropdown-item" [routerLink]="['/doctor-details']" [queryParams]="{specialization: 'Spine'}" (click)="closeDropdowns()">
+                  {{ "SVC_SPINE" | t }}
+                </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
-                  "SVC_KIDNEY" | t
-                }}</a>
+                <a class="dropdown-item" [routerLink]="['/doctor-details']" [queryParams]="{specialization: 'Nephrology'}" (click)="closeDropdowns()">
+                  {{ "SVC_KIDNEY" | t }}
+                </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
-                  "SVC_COSMETIC" | t
-                }}</a>
+                <a class="dropdown-item" [routerLink]="['/doctor-details']" [queryParams]="{specialization: 'Cosmetic'}" (click)="closeDropdowns()">
+                  {{ "SVC_COSMETIC" | t }}
+                </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
-                  "SVC_NEURO" | t
-                }}</a>
+                <a class="dropdown-item" [routerLink]="['/doctor-details']" [queryParams]="{specialization: 'Neurology'}">
+                  {{ "SVC_NEURO" | t }}
+                </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
-                  "SVC_ONCO" | t
-                }}</a>
+                <a class="dropdown-item" [routerLink]="['/doctor-details']" [queryParams]="{specialization: 'Oncology'}">
+                  {{ "SVC_ONCO" | t }}
+                </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
-                  "SVC_ORTHO" | t
-                }}</a>
+                <a class="dropdown-item" [routerLink]="['/doctor-details']" [queryParams]="{specialization: 'Orthopedics'}">
+                  {{ "SVC_ORTHO" | t }}
+                </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
-                  "SVC_HEMATO" | t
-                }}</a>
+                <a class="dropdown-item" [routerLink]="['/doctor-details']" [queryParams]="{specialization: 'Hematology'}">
+                  {{ "SVC_HEMATO" | t }}
+                </a>
               </li>
               <li>
                 <a class="dropdown-item" routerLink="/doctor-details">{{
