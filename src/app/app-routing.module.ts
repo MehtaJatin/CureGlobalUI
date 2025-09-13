@@ -19,6 +19,7 @@ import { VaccineComponent } from './vaccine/vaccine.component';
 import { AdminSetupComponent } from './admin-setup/admin-setup.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminServicesComponent } from './admin/services/services.component';
+import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'admin-setup', component: AdminSetupComponent },
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'admin/services', component: AdminServicesComponent },
+  { path: 'doctor-details', component: DoctorDetailsComponent },
   { path: '**', component: NotfoundComponent },
   { path: 'notfound', component: NotfoundComponent },
 ];
