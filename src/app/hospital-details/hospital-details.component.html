@@ -24,42 +24,12 @@
       <main id="main" class="site-main">
         <div class="hospital-detail-page">
 
-          <!-- Header Section with Contact Form -->
-          <div class="header-section">
-            <div class="contact-form-sticky">
-              <div class="contact-form-container">
-                <h2>Get in Touch Now</h2>
-                <p>For any enquiry reach out to us today We are here to help you every step of the way</p>
-                <form #contactForm="ngForm" (ngSubmit)="onSubmitContactForm(contactForm.value)" class="hospital-contact-form">
-                  <div class="form-group">
-                    <input type="text" name="patientName" placeholder="Patient Name" class="form-control" ngModel>
-                  </div>
-                  <div class="form-group">
-                    <input type="text" name="phone" placeholder="Phone No." class="form-control" ngModel>
-                  </div>
-                  <div class="form-group">
-                    <input type="email" name="email" placeholder="Enter Email" class="form-control" ngModel required>
-                  </div>
-                  <div class="form-group">
-                    <input type="text" name="city" placeholder="Enter City" class="form-control" ngModel required>
-                  </div>
-                  <div class="form-group">
-                    <textarea name="message" placeholder="Enter Your Message...." rows="3" class="form-control" ngModel></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary">SUBMIT NOW</button>
-                </form>
-              </div>
-            </div>
-
-            <!-- Hospital Main Info -->
-            <div class="hospital-main-info">
-              <h1 class="hospital-title">{{ hospital.name }}</h1>
-              <div class="hospital-location">
-                <i class="icon-location"></i>
-                <span>{{ hospital.address }}</span>
-              </div>
-              <div class="hospital-featured-image" *ngIf="hospital.images && hospital.images.length > 0">
-                <img [src]="hospital.images[0]" [alt]="hospital.name" loading="lazy">
+          <!-- Hospital Cover Image -->
+          <div class="hospital-cover-section">
+            <div class="hospital-cover-image" *ngIf="hospital.images && hospital.images.length > 0">
+              <img [src]="hospital.images[0]" [alt]="hospital.name" loading="lazy">
+              <div class="hospital-cover-overlay">
+                <h1 class="hospital-title">{{ hospital.name }}</h1>
               </div>
             </div>
           </div>
@@ -69,27 +39,46 @@
             <div [innerHTML]="hospital.description"></div>
           </div>
 
-          <!-- Our Doctors Section -->
-          <div class="doctors-section">
-            <h2>Our Doctors</h2>
-            <div class="doctors-grid" *ngIf="hospital.doctors && hospital.doctors.length > 0; else noDoctors">
-              <div class="doctor-card" *ngFor="let doctor of hospital.doctors">
-                <div class="doctor-image">
-                  <img src="{{ doctor.image }}"/>
+          <!-- Hospital Statistics -->
+          <div class="hospital-stats-section">
+            <div class="stats-grid">
+              <div class="stat-item">
+                <div class="stat-icon">
+                  <i class="icon-location"></i>
                 </div>
-                <div class="doctor-info">
-                  <h3>{{ doctor.name }}</h3>
-                  <p class="specialty">{{ doctor.specialty }}</p>
-                  <p class="experience">{{ doctor.experience }} Experience</p>
-                  <p class="qualification">{{ doctor.qualification }}</p>
+                <div class="stat-content">
+                  <h3>Location</h3>
+                  <p>{{ hospital.address.split(',').pop() }}</p>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon">
+                  <i class="icon-certificate"></i>
+                </div>
+                <div class="stat-content">
+                  <h3>Established in</h3>
+                  <p>{{ hospital.establishedYear }}</p>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon">
+                  <i class="icon-specialty"></i>
+                </div>
+                <div class="stat-content">
+                  <h3>Specialty</h3>
+                  <p>Super Specialty</p>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon">
+                  <i class="icon-beds"></i>
+                </div>
+                <div class="stat-content">
+                  <h3>No. of Beds</h3>
+                  <p>{{ hospital.totalBeds }}</p>
                 </div>
               </div>
             </div>
-            <ng-template #noDoctors>
-              <div class="no-doctors-found">
-                <span>No Doctor Found</span>
-              </div>
-            </ng-template>
           </div>
 
           <!-- Team and Specialties Section -->
@@ -291,6 +280,29 @@
             </div>
           </div>
 
+          <!-- Our Doctors Section -->
+          <div class="doctors-section">
+            <h2>Our Doctors</h2>
+            <div class="doctors-grid" *ngIf="hospital.doctors && hospital.doctors.length > 0; else noDoctors">
+              <div class="doctor-card" *ngFor="let doctor of hospital.doctors">
+                <div class="doctor-image">
+                  <img src="{{ doctor.image }}"/>
+                </div>
+                <div class="doctor-info">
+                  <h3>{{ doctor.name }}</h3>
+                  <p class="specialty">{{ doctor.specialty }}</p>
+                  <p class="experience">{{ doctor.experience }} Experience</p>
+                  <p class="qualification">{{ doctor.qualification }}</p>
+                </div>
+              </div>
+            </div>
+            <ng-template #noDoctors>
+              <div class="no-doctors-found">
+                <span>No Doctor Found</span>
+              </div>
+            </ng-template>
+          </div>
+
           <!-- Call to Action Section -->
           <div class="cta-section">
             <div class="cta-content">
@@ -305,48 +317,6 @@
                   <i class="icon-whatsapp"></i>
                   <span>Chat Now...</span>
                 </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Hospital Statistics -->
-          <div class="hospital-stats-section">
-            <div class="stats-grid">
-              <div class="stat-item">
-                <div class="stat-icon">
-                  <i class="icon-location"></i>
-                </div>
-                <div class="stat-content">
-                  <h3>Location</h3>
-                  <p>{{ hospital.address.split(',').pop() }}</p>
-                </div>
-              </div>
-              <div class="stat-item">
-                <div class="stat-icon">
-                  <i class="icon-certificate"></i>
-                </div>
-                <div class="stat-content">
-                  <h3>Established in</h3>
-                  <p>{{ hospital.establishedYear }}</p>
-                </div>
-              </div>
-              <div class="stat-item">
-                <div class="stat-icon">
-                  <i class="icon-specialty"></i>
-                </div>
-                <div class="stat-content">
-                  <h3>Specialty</h3>
-                  <p>Super Specialty</p>
-                </div>
-              </div>
-              <div class="stat-item">
-                <div class="stat-icon">
-                  <i class="icon-beds"></i>
-                </div>
-                <div class="stat-content">
-                  <h3>No. of Beds</h3>
-                  <p>{{ hospital.totalBeds }}</p>
-                </div>
               </div>
             </div>
           </div>
