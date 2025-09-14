@@ -9,9 +9,58 @@ import {
   where,
   orderBy,
   Timestamp,
+  doc,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  limit,
 } from 'firebase/firestore';
 import { book } from '../data-type';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+
+// Hospital interface moved from admin.service.ts
+export interface Hospital {
+  id?: string;
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  description: string;
+  image?: string;
+  images?: string[]; // Additional images for detailed view
+  specialties: string[];
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  // Extended fields for detailed hospital view
+  doctors?: {
+    id: string;
+    name: string;
+    specialty: string;
+    image: string;
+    experience: string;
+    qualification: string;
+  }[];
+  amenities?: {
+    comfort_during_stay?: string[];
+    food?: string[];
+    language?: string[];
+    money_matters?: string[];
+    transportation?: string[];
+    treatment_related?: string[];
+  };
+  centers_of_excellence?: any[];
+  establishedYear?: number;
+  totalBeds?: number;
+  statistics?: {
+    established: string;
+    beds: string;
+    doctors: string;
+    departments: string;
+  };
+  accreditations?: string[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -78,14 +127,89 @@ export class FirebaseService {
     );
   }
 
-  getHospitals(): Observable<any[]> {
+  // ==================== HOSPITALS MANAGEMENT ====================
+
+  // Get all hospitals
+  getHospitals(): Observable<Hospital[]> {
     const hospitalCollection = collection(this.firestore, 'hospitals');
+    const q = query(hospitalCollection, orderBy('createdAt', 'desc'));
     return from(
-      getDocs(hospitalCollection).then((snapshot) => {
+      getDocs(q).then((snapshot) => {
         return snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        }));
+        })) as Hospital[];
+      })
+    );
+  }
+
+  // Get hospitals by specialty
+  getHospitalsBySpecialty(specialty: string): Observable<Hospital[]> {
+    const hospitalCollection = collection(this.firestore, 'hospitals');
+    const q = query(
+      hospitalCollection,
+      where('specialties', 'array-contains', specialty),
+      where('isActive', '==', true),
+      orderBy('name')
+    );
+    return from(
+      getDocs(q).then((snapshot) => {
+        return snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Hospital[];
+      })
+    );
+  }
+
+  // Get hospital by document ID
+  getHospitalByDocId(docId: string): Observable<Hospital | undefined> {
+    const hospitalDoc = doc(this.firestore, 'hospitals', docId);
+    return from(
+      getDoc(hospitalDoc).then((docSnapshot) => {
+        if (docSnapshot.exists()) {
+          return {
+            id: docSnapshot.id,
+            ...docSnapshot.data(),
+          } as Hospital;
+        } else {
+          return undefined;
+        }
+      })
+    );
+  }
+
+  // Get hospital by ID field (searches through all hospitals, with fallback to document ID)
+  getHospitalById(hospitalId: string): Observable<Hospital | undefined> {
+    // First, try to find by 'id' field
+    const hospitalCollection = collection(this.firestore, 'hospitals');
+    const q = query(
+      hospitalCollection,
+      where('id', '==', hospitalId),
+      limit(1)
+    );
+
+    return from(
+      getDocs(q).then((snapshot) => {
+        if (snapshot.docs.length > 0) {
+          const doc = snapshot.docs[0];
+          return {
+            id: doc.id,
+            ...doc.data(),
+          } as Hospital;
+        } else {
+          console.log(`Hospital not found by id field '${hospitalId}', trying document ID`);
+          return null;
+        }
+      })
+    ).pipe(
+      switchMap(hospital => {
+        if (hospital) {
+          return of(hospital);
+        }
+        // Fallback: try to get by document ID
+        console.log(`Attempting fallback search by document ID: ${hospitalId}`);
+        return this.getHospitalByDocId(hospitalId);
       })
     );
   }

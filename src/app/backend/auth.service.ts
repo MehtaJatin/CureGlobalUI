@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+// import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -20,22 +20,12 @@ export class AuthService {
   user$: Observable<User | null>;
 
   constructor(
-    private afAuth: AngularFireAuth,
+    // private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private router: Router
   ) {
-    this.user$ = this.afAuth.authState.pipe(
-      switchMap((user) => {
-        if (user) {
-          return this.firestore
-            .doc<User>(`users/${user.uid}`)
-            .valueChanges()
-            .pipe(map((userData) => userData || null));
-        } else {
-          return from([null]);
-        }
-      })
-    );
+    // Temporarily disable auth for hospital functionality
+    this.user$ = of(null);
   }
 
   // Sign up with email and password
@@ -44,54 +34,20 @@ export class AuthService {
     password: string,
     displayName: string
   ): Promise<any> {
-    try {
-      const credential = await this.afAuth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      if (credential.user) {
-        // Create user document in Firestore
-        const userData: User = {
-          uid: credential.user.uid,
-          email: email,
-          displayName: displayName,
-          role: 'user', // Default role
-          createdAt: new Date(),
-        };
-
-        await this.firestore.doc(`users/${credential.user.uid}`).set(userData);
-        return { success: true, user: userData };
-      }
-    } catch (error) {
-      console.error('Sign up error:', error);
-      throw error;
-    }
+    console.log('Auth temporarily disabled for hospital functionality');
+    return { success: false, message: 'Auth disabled' };
   }
 
   // Sign in with email and password
   async signIn(email: string, password: string): Promise<any> {
-    try {
-      const credential = await this.afAuth.signInWithEmailAndPassword(
-        email,
-        password
-      );
-      return { success: true, user: credential.user };
-    } catch (error) {
-      console.error('Sign in error:', error);
-      throw error;
-    }
+    console.log('Auth temporarily disabled for hospital functionality');
+    return { success: false, message: 'Auth disabled' };
   }
 
   // Sign out
   async signOut(): Promise<void> {
-    try {
-      await this.afAuth.signOut();
-      this.router.navigate(['/login']);
-    } catch (error) {
-      console.error('Sign out error:', error);
-      throw error;
-    }
+    console.log('Auth temporarily disabled for hospital functionality');
+    this.router.navigate(['/login']);
   }
 
   // Check if user is admin
@@ -120,27 +76,7 @@ export class AuthService {
     password: string,
     displayName: string
   ): Promise<any> {
-    try {
-      const credential = await this.afAuth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      if (credential.user) {
-        const userData: User = {
-          uid: credential.user.uid,
-          email: email,
-          displayName: displayName,
-          role: 'admin',
-          createdAt: new Date(),
-        };
-
-        await this.firestore.doc(`users/${credential.user.uid}`).set(userData);
-        return { success: true, user: userData };
-      }
-    } catch (error) {
-      console.error('Create admin error:', error);
-      throw error;
-    }
+    console.log('Auth temporarily disabled for hospital functionality');
+    return { success: false, message: 'Auth disabled' };
   }
 }

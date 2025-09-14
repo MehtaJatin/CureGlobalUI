@@ -47,34 +47,39 @@ export interface Doctor {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
-
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore) {}
 
   // ==================== SERVICES MANAGEMENT ====================
 
   // Get all services
   getServices(): Observable<Service[]> {
-    return this.firestore.collection<Service>('services', ref =>
-      ref.orderBy('createdAt', 'desc')
-    ).valueChanges({ idField: 'id' });
+    return this.firestore
+      .collection<Service>('services', (ref) =>
+        ref.orderBy('createdAt', 'desc')
+      )
+      .valueChanges({ idField: 'id' });
   }
 
   // Get active services
   getActiveServices(): Observable<Service[]> {
-    return this.firestore.collection<Service>('services', ref =>
-      ref.where('isActive', '==', true).orderBy('name')
-    ).valueChanges({ idField: 'id' });
+    return this.firestore
+      .collection<Service>('services', (ref) =>
+        ref.where('isActive', '==', true).orderBy('name')
+      )
+      .valueChanges({ idField: 'id' });
   }
 
   // Add new service
-  async addService(service: Omit<Service, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
+  async addService(
+    service: Omit<Service, 'id' | 'createdAt' | 'updatedAt'>
+  ): Promise<string> {
     const serviceData: Service = {
       ...service,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     const docRef = await this.firestore.collection('services').add(serviceData);
@@ -85,7 +90,7 @@ export class AdminService {
   async updateService(id: string, service: Partial<Service>): Promise<void> {
     const updateData = {
       ...service,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     await this.firestore.doc(`services/${id}`).update(updateData);
@@ -100,7 +105,7 @@ export class AdminService {
   async toggleServiceStatus(id: string, isActive: boolean): Promise<void> {
     await this.firestore.doc(`services/${id}`).update({
       isActive,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
   }
 
@@ -108,27 +113,35 @@ export class AdminService {
 
   // Get all hospitals
   getHospitals(): Observable<Hospital[]> {
-    return this.firestore.collection<Hospital>('hospitals', ref =>
-      ref.orderBy('createdAt', 'desc')
-    ).valueChanges({ idField: 'id' });
+    return this.firestore
+      .collection<Hospital>('hospitals', (ref) =>
+        ref.orderBy('createdAt', 'desc')
+      )
+      .valueChanges({ idField: 'id' });
   }
 
   // Get active hospitals
   getActiveHospitals(): Observable<Hospital[]> {
-    return this.firestore.collection<Hospital>('hospitals', ref =>
-      ref.where('isActive', '==', true).orderBy('name')
-    ).valueChanges({ idField: 'id' });
+    return this.firestore
+      .collection<Hospital>('hospitals', (ref) =>
+        ref.where('isActive', '==', true).orderBy('name')
+      )
+      .valueChanges({ idField: 'id' });
   }
 
   // Add new hospital
-  async addHospital(hospital: Omit<Hospital, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
+  async addHospital(
+    hospital: Omit<Hospital, 'id' | 'createdAt' | 'updatedAt'>
+  ): Promise<string> {
     const hospitalData: Hospital = {
       ...hospital,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
-    const docRef = await this.firestore.collection('hospitals').add(hospitalData);
+    const docRef = await this.firestore
+      .collection('hospitals')
+      .add(hospitalData);
     return docRef.id;
   }
 
@@ -136,7 +149,7 @@ export class AdminService {
   async updateHospital(id: string, hospital: Partial<Hospital>): Promise<void> {
     const updateData = {
       ...hospital,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     await this.firestore.doc(`hospitals/${id}`).update(updateData);
@@ -151,7 +164,7 @@ export class AdminService {
   async toggleHospitalStatus(id: string, isActive: boolean): Promise<void> {
     await this.firestore.doc(`hospitals/${id}`).update({
       isActive,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
   }
 
@@ -159,31 +172,37 @@ export class AdminService {
 
   // Get all doctors
   getDoctors(): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref =>
-      ref.orderBy('createdAt', 'desc')
-    ).valueChanges({ idField: 'id' });
+    return this.firestore
+      .collection<Doctor>('doctors', (ref) => ref.orderBy('createdAt', 'desc'))
+      .valueChanges({ idField: 'id' });
   }
 
   // Get active doctors
   getActiveDoctors(): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref =>
-      ref.where('isActive', '==', true).orderBy('name')
-    ).valueChanges({ idField: 'id' });
+    return this.firestore
+      .collection<Doctor>('doctors', (ref) =>
+        ref.where('isActive', '==', true).orderBy('name')
+      )
+      .valueChanges({ idField: 'id' });
   }
 
   // Get doctors by hospital
   getDoctorsByHospital(hospitalId: string): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref =>
-      ref.where('hospitalId', '==', hospitalId).where('isActive', '==', true)
-    ).valueChanges({ idField: 'id' });
+    return this.firestore
+      .collection<Doctor>('doctors', (ref) =>
+        ref.where('hospitalId', '==', hospitalId).where('isActive', '==', true)
+      )
+      .valueChanges({ idField: 'id' });
   }
 
   // Add new doctor
-  async addDoctor(doctor: Omit<Doctor, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
+  async addDoctor(
+    doctor: Omit<Doctor, 'id' | 'createdAt' | 'updatedAt'>
+  ): Promise<string> {
     const doctorData: Doctor = {
       ...doctor,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     const docRef = await this.firestore.collection('doctors').add(doctorData);
@@ -194,7 +213,7 @@ export class AdminService {
   async updateDoctor(id: string, doctor: Partial<Doctor>): Promise<void> {
     const updateData = {
       ...doctor,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     await this.firestore.doc(`doctors/${id}`).update(updateData);
@@ -209,7 +228,7 @@ export class AdminService {
   async toggleDoctorStatus(id: string, isActive: boolean): Promise<void> {
     await this.firestore.doc(`doctors/${id}`).update({
       isActive,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
   }
 
@@ -217,16 +236,28 @@ export class AdminService {
 
   // Get dashboard statistics
   async getDashboardStats(): Promise<any> {
-    const servicesCount = await this.firestore.collection('services').get().toPromise();
-    const hospitalsCount = await this.firestore.collection('hospitals').get().toPromise();
-    const doctorsCount = await this.firestore.collection('doctors').get().toPromise();
-    const bookingsCount = await this.firestore.collection('bookings').get().toPromise();
+    const servicesCount = await this.firestore
+      .collection('services')
+      .get()
+      .toPromise();
+    const hospitalsCount = await this.firestore
+      .collection('hospitals')
+      .get()
+      .toPromise();
+    const doctorsCount = await this.firestore
+      .collection('doctors')
+      .get()
+      .toPromise();
+    const bookingsCount = await this.firestore
+      .collection('bookings')
+      .get()
+      .toPromise();
 
     return {
       totalServices: servicesCount?.size || 0,
       totalHospitals: hospitalsCount?.size || 0,
       totalDoctors: doctorsCount?.size || 0,
-      totalBookings: bookingsCount?.size || 0
+      totalBookings: bookingsCount?.size || 0,
     };
   }
 }
