@@ -31,6 +31,11 @@ export class MachineTranslateService {
     sourceLang?: string,
     targetLang?: string
   ): Observable<string> {
+    // Temporarily disable machine translation to avoid CORS issues
+    // Return original text instead of calling external API
+    return of(text);
+
+    /* Original implementation commented out due to CORS issues:
     const target = this.mapTarget(targetLang || this.i18n.getCurrentLanguage());
     if (!text || !target) return of(text);
     // no-op if already target language marker like [xx] is present - skip
@@ -52,5 +57,6 @@ export class MachineTranslateService {
 
     this.cache.set(key, req$);
     return req$;
+    */
   }
 }

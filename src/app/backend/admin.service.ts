@@ -15,7 +15,7 @@ export interface Service {
   updatedAt: Date;
 }
 
-export interface Hospital {
+export interface AdminAdminHospital {
   id?: string;
   name: string;
   address: string;
@@ -107,22 +107,22 @@ export class AdminService {
   // ==================== HOSPITALS MANAGEMENT ====================
 
   // Get all hospitals
-  getHospitals(): Observable<Hospital[]> {
-    return this.firestore.collection<Hospital>('hospitals', ref => 
+  getHospitals(): Observable<AdminAdminHospital[]> {
+    return this.firestore.collection<AdminAdminHospital>('hospitals', ref => 
       ref.orderBy('createdAt', 'desc')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get active hospitals
-  getActiveHospitals(): Observable<Hospital[]> {
-    return this.firestore.collection<Hospital>('hospitals', ref => 
+  getActiveHospitals(): Observable<AdminAdminHospital[]> {
+    return this.firestore.collection<AdminAdminHospital>('hospitals', ref => 
       ref.where('isActive', '==', true).orderBy('name')
     ).valueChanges({ idField: 'id' });
   }
 
   // Add new hospital
-  async addHospital(hospital: Omit<Hospital, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
-    const hospitalData: Hospital = {
+  async addHospital(hospital: Omit<AdminAdminHospital, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
+    const hospitalData: AdminAdminHospital = {
       ...hospital,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -133,7 +133,7 @@ export class AdminService {
   }
 
   // Update hospital
-  async updateHospital(id: string, hospital: Partial<Hospital>): Promise<void> {
+  async updateHospital(id: string, hospital: Partial<AdminAdminHospital>): Promise<void> {
     const updateData = {
       ...hospital,
       updatedAt: new Date()
@@ -143,12 +143,12 @@ export class AdminService {
   }
 
   // Delete hospital
-  async deleteHospital(id: string): Promise<void> {
+  async deleteAdminHospital(id: string): Promise<void> {
     await this.firestore.doc(`hospitals/${id}`).delete();
   }
 
   // Toggle hospital status
-  async toggleHospitalStatus(id: string, isActive: boolean): Promise<void> {
+  async toggleAdminHospitalStatus(id: string, isActive: boolean): Promise<void> {
     await this.firestore.doc(`hospitals/${id}`).update({
       isActive,
       updatedAt: new Date()
@@ -172,7 +172,7 @@ export class AdminService {
   }
 
   // Get doctors by hospital
-  getDoctorsByHospital(hospitalId: string): Observable<Doctor[]> {
+  getDoctorsByAdminHospital(hospitalId: string): Observable<Doctor[]> {
     return this.firestore.collection<Doctor>('doctors', ref => 
       ref.where('hospitalId', '==', hospitalId).where('isActive', '==', true)
     ).valueChanges({ idField: 'id' });
@@ -224,7 +224,7 @@ export class AdminService {
 
     return {
       totalServices: servicesCount?.size || 0,
-      totalHospitals: hospitalsCount?.size || 0,
+      totalAdminHospitals: hospitalsCount?.size || 0,
       totalDoctors: doctorsCount?.size || 0,
       totalBookings: bookingsCount?.size || 0
     };

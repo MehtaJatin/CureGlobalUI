@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { ServicesComponent } from './services/services.component';
 import { DentictsComponent } from './denticts/denticts.component';
 import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
+import { HospitalDetailsComponent } from './hospital-details/hospital-details.component';
 import { BookingComponent } from './booking/booking.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
@@ -39,7 +40,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService } from './backend/firebase.service';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { TranslatePipe } from './i18n/translate.pipe';
@@ -57,6 +57,7 @@ import { MachineTranslatePipe } from './i18n/mt.pipe';
     ServicesComponent,
     DentictsComponent,
     DoctorDetailsComponent,
+    HospitalDetailsComponent,
     BookingComponent,
     PricingComponent,
     TestimonialsComponent,
@@ -82,7 +83,7 @@ import { MachineTranslatePipe } from './i18n/mt.pipe';
     DoctorListComponent,
     TranslatePipe,
     LocalizePipe,
-    MachineTranslatePipe,
+    MachineTranslatePipe
   ],
   imports: [
     BrowserModule,
@@ -92,7 +93,6 @@ import { MachineTranslatePipe } from './i18n/mt.pipe';
     HttpClientModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
     AngularFirestoreModule,
   ],
   providers: [FirebaseService],
