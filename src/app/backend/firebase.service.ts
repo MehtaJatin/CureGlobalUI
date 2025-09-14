@@ -132,13 +132,31 @@ export class FirebaseService {
   // Get all hospitals
   getHospitals(): Observable<Hospital[]> {
     const hospitalCollection = collection(this.firestore, 'hospitals');
-    const q = query(hospitalCollection, orderBy('createdAt', 'desc'));
+
     return from(
-      getDocs(q).then((snapshot) => {
-        return snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Hospital[];
+      getDocs(hospitalCollection).then((snapshot) => {
+        console.log('Firebase getHospitals - Raw snapshot size:', snapshot.size);
+        const hospitals = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          console.log('Hospital document data:', { id: doc.id, ...data });
+          return {
+            id: doc.id,
+            ...data,
+          } as Hospital;
+        });
+        console.log('Firebase getHospitals - Returning hospitals:', hospitals);
+        return hospitals;
+      })
+      .catch((error) => {
+        console.error('Firebase getHospitals - Error fetching hospitals:', error);
+        // Try without orderBy in case that's the issue
+        return getDocs(hospitalCollection).then((snapshot) => {
+          console.log('Firebase getHospitals - Fallback fetch, snapshot size:', snapshot.size);
+          return snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as Hospital[];
+        });
       })
     );
   }

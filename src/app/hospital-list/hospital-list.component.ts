@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { hospital } from '../data-type';
+import { FirebaseService, Hospital as FirebaseHospital } from '../backend/firebase.service';
 
 @Component({
   selector: 'app-hospital-list',
@@ -16,19 +17,20 @@ export class HospitalListComponent implements OnInit, OnDestroy {
   selectedService = '';
   sortBy: 'name' | 'rating' | 'bedCount' | 'establishedYear' = 'name';
   sortOrder: 'asc' | 'desc' = 'asc';
-  
-  // Track expanded descriptions
-  expandedHospitals: Set<number> = new Set();
-  
+  loading = true;
+  error = '';
+
+
   // Available filter options
   cities: string[] = [];
   specialties: string[] = [];
-  
+
   private routeSubscription: any;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private firebaseService: FirebaseService
   ) {}
 
   ngOnInit(): void {
@@ -42,140 +44,90 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     }
   }
 
-  private initializeHospitals(): void {
-    this.hospitals = [
-      {
-        id: 1,
-        title: 'Pushpawati Singhania Research Institute',
-        city: 'New Delhi',
-        country: 'India',
-        image: 'assets/images/hospitals/psri.jpg',
-        description: 'A premier multi-specialty hospital offering world-class healthcare services with state-of-the-art facilities.',
-        specialties: ['Cardiology', 'Oncology', 'Neurology', 'Orthopedics', 'Gastroenterology'],
-        rating: 4.8,
-        establishedYear: 1996,
-        bedCount: 200,
-        accreditation: ['NABH', 'JCI'],
-        website: 'https://www.psrihospital.com',
-        phone: '+91-11-26925858',
-        address: 'Press Enclave Marg, J Block, Saket, New Delhi - 110017'
-      },
-      {
-        id: 2,
-        title: 'Batra Hospital & Medical Research Centre',
-        city: 'New Delhi',
-        country: 'India',
-        image: 'assets/images/hospitals/batra.jpg',
-        description: 'Leading healthcare institution providing comprehensive medical care with advanced technology and expert doctors.',
-        specialties: ['Cardiology', 'Neurology', 'Orthopedics', 'Urology', 'Gynecology'],
-        rating: 4.6,
-        establishedYear: 1987,
-        bedCount: 500,
-        accreditation: ['NABH', 'ISO 9001:2015'],
-        website: 'https://www.batrahospitaldelhi.org',
-        phone: '+91-11-29958747',
-        address: '1, Tughlakabad Institutional Area, Mehrauli Badarpur Road, New Delhi - 110062'
-      },
-      {
-        id: 3,
-        title: 'Manipal Hospital Formerly AMRI Hospital',
-        city: 'Kolkata',
-        country: 'India',
-        image: 'assets/images/hospitals/manipal-kolkata.jpg',
-        description: 'Multi-specialty hospital offering advanced medical care with a focus on patient-centric healthcare.',
-        specialties: ['Cardiology', 'Oncology', 'Neurology', 'Orthopedics', 'Pediatrics'],
-        rating: 4.7,
-        establishedYear: 1996,
-        bedCount: 400,
-        accreditation: ['NABH', 'JCI'],
-        website: 'https://www.manipalhospitals.com/kolkata',
-        phone: '+91-33-6606-6606',
-        address: '58, Canal Circular Road, Kadapara, Phool Bagan, Kankurgachi, Kolkata - 700054'
-      },
-      {
-        id: 4,
-        title: 'Fortis Hospital Delhi Shalimar Bagh',
-        city: 'New Delhi',
-        country: 'India',
-        image: 'assets/images/hospitals/fortis-shalimar.jpg',
-        description: 'Advanced multi-specialty hospital providing comprehensive healthcare services with modern infrastructure.',
-        specialties: ['Cardiology', 'Oncology', 'Neurology', 'Orthopedics', 'Transplant'],
-        rating: 4.5,
-        establishedYear: 2010,
-        bedCount: 262,
-        accreditation: ['NABH', 'JCI'],
-        website: 'https://www.fortishealthcare.com',
-        phone: '+91-11-45302222',
-        address: 'A-Block, Shalimar Bagh, New Delhi - 110088'
-      },
-      {
-        id: 5,
-        title: 'Fortis Escorts Hospital',
-        city: 'Amritsar',
-        country: 'India',
-        image: 'assets/images/hospitals/fortis-escorts-amritsar.jpg',
-        description: 'Premier cardiac care hospital with world-class facilities and experienced medical professionals.',
-        specialties: ['Cardiology', 'Cardiac Surgery', 'Interventional Cardiology', 'Electrophysiology'],
-        rating: 4.9,
-        establishedYear: 1991,
-        bedCount: 200,
-        accreditation: ['NABH', 'JCI'],
-        website: 'https://www.fortishealthcare.com',
-        phone: '+91-183-250-0000',
-        address: 'The Mall, Amritsar - 143001, Punjab'
-      },
-      {
-        id: 6,
-        title: 'Apollo Gleneagles Hospital',
-        city: 'Kolkata',
-        country: 'India',
-        image: 'assets/images/hospitals/apollo-kolkata.jpg',
-        description: 'International standard healthcare facility offering comprehensive medical services across multiple specialties.',
-        specialties: ['Cardiology', 'Oncology', 'Neurology', 'Orthopedics', 'Transplant'],
-        rating: 4.6,
-        establishedYear: 2003,
-        bedCount: 700,
-        accreditation: ['NABH', 'JCI'],
-        website: 'https://www.apollohospitals.com',
-        phone: '+91-33-2320-3040',
-        address: '58, Canal Circular Road, Kadapara, Phool Bagan, Kankurgachi, Kolkata - 700054'
-      },
-      {
-        id: 7,
-        title: 'Manipal Hospital Formerly Columbia Asia',
-        city: 'Gurgaon',
-        country: 'India',
-        image: 'assets/images/hospitals/manipal-gurgaon.jpg',
-        description: 'Modern healthcare facility providing advanced medical care with international standards.',
-        specialties: ['Cardiology', 'Oncology', 'Neurology', 'Orthopedics', 'Emergency Medicine'],
-        rating: 4.4,
-        establishedYear: 2008,
-        bedCount: 150,
-        accreditation: ['NABH'],
-        website: 'https://www.manipalhospitals.com',
-        phone: '+91-124-496-2000',
-        address: 'Sector 6, Palam Vihar, Gurgaon - 122017, Haryana'
-      },
-      {
-        id: 8,
-        title: 'Apollo Hospital Bangalore Bannerghatta Road',
-        city: 'Bangalore',
-        country: 'India',
-        image: 'assets/images/hospitals/apollo-bannerghatta.jpg',
-        description: 'Leading multi-specialty hospital providing world-class healthcare services with advanced technology.',
-        specialties: ['Cardiology', 'Oncology', 'Neurology', 'Orthopedics', 'Transplant', 'Robotic Surgery'],
-        rating: 4.7,
-        establishedYear: 2007,
-        bedCount: 250,
-        accreditation: ['NABH', 'JCI'],
-        website: 'https://www.apollohospitals.com',
-        phone: '+91-80-2630-4050',
-        address: '154/11, Bannerghatta Road, Bangalore - 560076, Karnataka'
-      }
-    ];
+  public initializeHospitals(): void {
+    this.loading = true;
+    this.error = '';
 
-    this.extractFilterOptions();
-    this.applyFilters();
+    this.firebaseService.getHospitals().subscribe({
+      next: (firebaseHospitals) => {
+        console.log('Fetched hospitals from Firebase:', firebaseHospitals);
+        console.log('Number of hospitals fetched:', firebaseHospitals.length);
+
+        // Debug: Check isActive status
+        firebaseHospitals.forEach((hospital, index) => {
+          console.log(`Hospital ${index}:`, {
+            name: hospital.name,
+            isActive: hospital.isActive,
+            hasRequiredFields: !!(hospital.name && hospital.address)
+          });
+        });
+
+        this.hospitals = this.mapFirebaseHospitalsToLocal(firebaseHospitals);
+        console.log('Mapped hospitals:', this.hospitals);
+        console.log('Number of mapped hospitals:', this.hospitals.length);
+
+        this.extractFilterOptions();
+        this.applyFilters();
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching hospitals:', error);
+        this.error = 'Failed to load hospitals. Please try again later.';
+        this.loading = false;
+        // Fallback to empty array
+        this.hospitals = [];
+        this.filteredHospitals = [];
+      }
+    });
+  }
+
+  private mapFirebaseHospitalsToLocal(firebaseHospitals: FirebaseHospital[]): hospital[] {
+    console.log('Starting mapping process...');
+
+    // First, let's be more lenient with filtering - only filter out hospitals that are explicitly inactive
+    const filteredHospitals = firebaseHospitals.filter(h => {
+      const isActive = h.isActive !== false; // Consider undefined or true as active
+      console.log(`Hospital ${h.name}: isActive = ${h.isActive}, will include = ${isActive}`);
+      return isActive && h.name && h.address; // Must have name and address
+    });
+
+    console.log(`Filtered ${filteredHospitals.length} hospitals from ${firebaseHospitals.length} total`);
+
+    return filteredHospitals.map((firebaseHospital, index) => {
+      // Extract city from address if not explicitly provided
+      const addressParts = firebaseHospital.address?.split(',') || [];
+      const city = addressParts.length > 1 ? addressParts[addressParts.length - 1].trim() : 'Unknown';
+
+      // Handle createdAt safely
+      let establishedYear = 2023; // Default year
+      if (firebaseHospital.createdAt) {
+        try {
+          establishedYear = new Date(firebaseHospital.createdAt).getFullYear();
+        } catch (e) {
+          console.warn('Invalid createdAt date for hospital:', firebaseHospital.name);
+        }
+      }
+
+      const mappedHospital = {
+        id: firebaseHospital.id || String(index + 1), // Keep as string for navigation
+        title: firebaseHospital.name || 'Unnamed Hospital',
+        city: city,
+        country: 'India', // Default country
+        image: firebaseHospital.image || 'assets/images/hospitals/default-hospital.jpg',
+        description: firebaseHospital.description || 'No description available',
+        specialties: firebaseHospital.specialties || [],
+        rating: 4.5, // Default rating - can be enhanced with actual ratings
+        establishedYear: establishedYear,
+        bedCount: 100, // Default bed count - can be enhanced with actual data
+        accreditation: ['NABH'], // Default accreditation
+        website: '', // Not available in Firebase structure
+        phone: firebaseHospital.phone || '',
+        address: firebaseHospital.address || ''
+      } as any; // Type assertion to handle id type difference
+
+      console.log(`Mapped hospital: ${mappedHospital.title} (${mappedHospital.city})`);
+      return mappedHospital;
+    });
   }
 
   private extractFilterOptions(): void {
@@ -370,17 +322,10 @@ export class HospitalListComponent implements OnInit, OnDestroy {
   }
 
   viewHospitalDetails(hospital: hospital): void {
-    // Toggle expanded state for this hospital
-    if (this.expandedHospitals.has(hospital.id)) {
-      this.expandedHospitals.delete(hospital.id);
-    } else {
-      this.expandedHospitals.add(hospital.id);
-    }
+    // Navigate to hospital details page using the hospital ID
+    this.router.navigate(['/hospital-details', hospital.id]);
   }
 
-  isHospitalExpanded(hospitalId: number): boolean {
-    return this.expandedHospitals.has(hospitalId);
-  }
 
   contactHospital(hospital: hospital): void {
     // Open contact modal or navigate to contact page

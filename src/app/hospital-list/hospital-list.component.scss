@@ -578,3 +578,66 @@
   background-attachment: fixed;
   background-size: cover;
 }
+
+// Loading and Error States
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 20px;
+    color: $main_color;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: $paragraph-color;
+    margin: 0;
+  }
+}
+
+.error-container {
+  padding: 20px 0;
+
+  .alert {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    i {
+      color: #721c24;
+      font-size: 1.2rem;
+    }
+
+    span {
+      color: #721c24;
+      flex: 1;
+      font-size: 1rem;
+    }
+
+    .retry-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #c82333;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}

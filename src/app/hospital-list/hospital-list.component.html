@@ -86,24 +86,50 @@
 <!-- Results Summary -->
 <div class="results-summary">
   <div class="container">
-    <p *ngIf="filteredHospitals.length > 0">
-      Showing {{ filteredHospitals.length }} of {{ hospitals.length }} hospitals
-      <span *ngIf="searchTerm || selectedCity || selectedSpecialty || selectedService">
-        matching your criteria
-      </span>
-    </p>
-    <p *ngIf="filteredHospitals.length === 0" class="no-results">
-      No hospitals found matching your criteria. Try adjusting your filters.
-    </p>
-    <div *ngIf="selectedService" class="active-service-filter">
-      <i class="fa-solid fa-filter"></i>
-      <span>Filtered by service: {{ getServiceName(selectedService) }}</span>
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-container">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <p>Loading hospitals...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="error-container">
+      <div class="alert alert-danger">
+        <i class="fa-solid fa-exclamation-triangle"></i>
+        <span>{{ error }}</span>
+        <button class="retry-btn" (click)="initializeHospitals()">
+          <i class="fa-solid fa-refresh"></i>
+          Retry
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Display -->
+    <div *ngIf="!loading && !error">
+      <p *ngIf="filteredHospitals.length > 0">
+        Showing {{ filteredHospitals.length }} of {{ hospitals.length }} hospitals
+        <span *ngIf="searchTerm || selectedCity || selectedSpecialty || selectedService">
+          matching your criteria
+        </span>
+      </p>
+      <p *ngIf="filteredHospitals.length === 0 && hospitals.length === 0" class="no-results">
+        No hospitals available at the moment.
+      </p>
+      <p *ngIf="filteredHospitals.length === 0 && hospitals.length > 0" class="no-results">
+        No hospitals found matching your criteria. Try adjusting your filters.
+      </p>
+      <div *ngIf="selectedService" class="active-service-filter">
+        <i class="fa-solid fa-filter"></i>
+        <span>Filtered by service: {{ getServiceName(selectedService) }}</span>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Hospitals Grid -->
-<div class="hospitals-area">
+<div class="hospitals-area" *ngIf="!loading && !error">
   <div class="container">
     <div class="row" *ngIf="filteredHospitals.length > 0">
       <div class="col-lg-6 col-xl-4" *ngFor="let hospital of filteredHospitals">
@@ -168,13 +194,10 @@
             </div>
             
             <!-- Hidden description section -->
-            <div class="hospital-description-section" [class.expanded]="isHospitalExpanded(hospital.id)">
-              <p *ngIf="isHospitalExpanded(hospital.id)" class="expanded-description">{{ hospital.description }}</p>
-            </div>
             
             <div class="hospital-actions">
               <button class="btn-primary" (click)="viewHospitalDetails(hospital)">
-                {{ isHospitalExpanded(hospital.id) ? 'Hide Details' : 'View Details' }}
+                View Details
               </button>
               <button class="btn-secondary" (click)="contactHospital(hospital)">
                 Contact
