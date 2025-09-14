@@ -143,12 +143,12 @@ export class AdminService {
   }
 
   // Delete hospital
-  async deleteAdminHospital(id: string): Promise<void> {
+  async deleteHospital(id: string): Promise<void> {
     await this.firestore.doc(`hospitals/${id}`).delete();
   }
 
   // Toggle hospital status
-  async toggleAdminHospitalStatus(id: string, isActive: boolean): Promise<void> {
+  async toggleHospitalStatus(id: string, isActive: boolean): Promise<void> {
     await this.firestore.doc(`hospitals/${id}`).update({
       isActive,
       updatedAt: new Date()
@@ -172,7 +172,7 @@ export class AdminService {
   }
 
   // Get doctors by hospital
-  getDoctorsByAdminHospital(hospitalId: string): Observable<Doctor[]> {
+  getDoctorsByHospital(hospitalId: string): Observable<Doctor[]> {
     return this.firestore.collection<Doctor>('doctors', ref =>
       ref.where('hospitalId', '==', hospitalId).where('isActive', '==', true)
     ).valueChanges({ idField: 'id' });
@@ -224,7 +224,7 @@ export class AdminService {
 
     return {
       totalServices: servicesCount?.size || 0,
-      totalAdminHospitals: hospitalsCount?.size || 0,
+      totalHospitals: hospitalsCount?.size || 0,
       totalDoctors: doctorsCount?.size || 0,
       totalBookings: bookingsCount?.size || 0
     };
