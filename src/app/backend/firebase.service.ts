@@ -226,6 +226,24 @@ export class FirebaseService {
     );
   }
 
+  // Get doctors by hospital ID
+  getDoctorsByHospitalId(hospitalId: string): Observable<any[]> {
+    const doctorsCollection = collection(this.firestore, 'doctors');
+    const q = query(
+      doctorsCollection,
+      where('hospitalId', '==', hospitalId),
+      where('isActive', '==', true)
+    );
+    return from(
+      getDocs(q).then((snapshot) => {
+        return snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      })
+    );
+  }
+
   // Get bookings by email
   getBookingsByEmail(email: string): Observable<any[]> {
     const bookingCollection = collection(this.firestore, 'bookings');

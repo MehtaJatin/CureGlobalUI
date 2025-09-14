@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService, Hospital as FirebaseHospital } from '../backend/firebase.service';
 import { Hospital } from '../models/hospital-specialty.model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-hospital-details',
@@ -43,12 +44,18 @@ export class HospitalDetailsComponent implements OnInit {
 
     console.log('Loading hospital with ID:', hospitalId);
 
-    this.firebaseService.getHospitalById(hospitalId).subscribe({
-      next: (firebaseHospital) => {
-        console.log('Hospital data received from FirebaseService:', firebaseHospital);
-        if (firebaseHospital) {
+    // Fetch hospital data and doctors data concurrently
+    forkJoin({
+      hospital: this.firebaseService.getHospitalById(hospitalId),
+      doctors: this.firebaseService.getDoctorsByHospitalId(hospitalId)
+    }).subscribe({
+      next: (result) => {
+        console.log('Hospital data received from FirebaseService:', result.hospital);
+        console.log('Doctors data received from FirebaseService:', result.doctors);
+
+        if (result.hospital) {
           // Map FirebaseService Hospital to template Hospital interface
-          this.hospital = this.mapFirebaseHospitalToTemplate(firebaseHospital);
+          this.hospital = this.mapFirebaseHospitalToTemplate(result.hospital, result.doctors);
           this.loading = false;
         } else {
           // Hospital not found - show not found message instead of redirecting
@@ -69,8 +76,18 @@ export class HospitalDetailsComponent implements OnInit {
     this.selectedTab = tab;
   }
 
-  private mapFirebaseHospitalToTemplate(firebaseHospital: FirebaseHospital): Hospital {
+  private mapFirebaseHospitalToTemplate(firebaseHospital: FirebaseHospital, doctorsData: any[]): Hospital {
     // Map FirebaseService Hospital interface to template Hospital interface
+    // Convert doctors data from Firestore format to template format
+    const mappedDoctors = doctorsData.map(doctor => ({
+      id: doctor.id,
+      name: doctor.name,
+      specialty: doctor.specialization || doctor.specialty || 'General Medicine',
+      image: doctor.image || 'assets/images/service/service1.jpg',
+      experience: doctor.experience ? `${doctor.experience} years` : 'N/A',
+      qualification: doctor.education || doctor.qualification || 'MD'
+    }));
+
     return {
       id: firebaseHospital.id,
       name: firebaseHospital.name,
@@ -81,24 +98,7 @@ export class HospitalDetailsComponent implements OnInit {
       specialties: firebaseHospital.specialties,
       // Add mock/default data for fields that don't exist in FirebaseService but are needed by template
       images: firebaseHospital.images || [firebaseHospital.image || 'assets/images/blog/blog1.jpg'],
-      doctors: firebaseHospital.doctors || [
-        {
-          id: '1',
-          name: 'Dr. John Smith',
-          specialty: 'Cardiology',
-          image: 'assets/images/service/service1.jpg',
-          experience: '15 years',
-          qualification: 'MD, FACC'
-        },
-        {
-          id: '2',
-          name: 'Dr. Sarah Johnson',
-          specialty: 'Neurology',
-          image: 'assets/images/service/service2.jpg',
-          experience: '12 years',
-          qualification: 'MD, PhD'
-        }
-      ],
+      doctors: mappedDoctors,
       amenities: firebaseHospital.amenities || {
         comfort_during_stay: ['Private Rooms', 'Wi-Fi', 'TV', 'AC'],
         food: ['Restaurant', 'Room Service'],
