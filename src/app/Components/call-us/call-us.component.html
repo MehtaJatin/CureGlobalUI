@@ -5,11 +5,11 @@
                 <div class="overview-content">
                     <span class="sub-title">
                         <i class='bx bx-hash'></i>
-                        We Care For Every Patient 
+                        We Care For Every Patient
                     </span>
                     <h3>Nervous Troubled Attractive Staring Right Anxiously!</h3>
                     <p>
-                        Chat with Us Today 
+                        Chat with Us Today
                         <a href="#">+91 0000000</a>
                     </p>
                 </div>
@@ -23,42 +23,13 @@
     </div>
 </div>
 
-<div class="appointment-overview-area pb-80">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10 col-sm-12">
-                <div class="appointment-overview-box">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 col-md-10 col-sm-12">
-                            <div class="make-appointment-content">
-                                <h4>
-                                    <i class='bx bxs-calendar'></i>
-                                    Make An Appointment 
-                                </h4>
-                                <form (submit)="submitInquiry($event)">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="patientName" placeholder="Patient Name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="tel" class="form-control" name="phone" placeholder="Enter Phone No." required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="city" placeholder="Enter City">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" name="concern" rows="5" placeholder="Kindly describe the health concern....."></textarea>
-                                    </div>
-                                    <button type="submit" class="default-btn">SUBMIT NOW</button>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="booking-overlap">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+        <app-booking [showFormOnly]="true"></app-booking>
+      </div>
     </div>
+  </div>
 </div>
+

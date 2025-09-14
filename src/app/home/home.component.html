@@ -12,7 +12,7 @@
                         <h3>
                             <a routerLink="/service-details"> New Technology </a>
                         </h3>
-                        <p>Using VR and AR technologies like Microsoft Hololens, 
+                        <p>Using VR and AR technologies like Microsoft Hololens,
                         surgeons can perform surgery using both hands more accurately.</p>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         <h3>
                             <a routerLink="/service-details"> Certified Dentist </a>
                         </h3>
-                        <p>The most common professional degree in dentistry is the DDS (Doctor of Dental Surgery). 
+                        <p>The most common professional degree in dentistry is the DDS (Doctor of Dental Surgery).
                             Some universities instead offer a DMD (Doctor of Medicine in Dentistry).</p>
                     </div>
                 </div>
@@ -64,21 +64,21 @@
 
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let service of services">
-        <div 
+        <div
           class="single-services d-flex align-items-center"
           style="cursor: pointer;"
           (click)="goToHospitals(service.title)"
         >
           <!-- Image -->
           <div class="services-image me-3">
-            <img 
-              [src]="service.image" 
-              alt="{{ service.title }}" 
-              class="img-fluid" 
-              style="max-width: 100px;" 
+            <img
+              [src]="service.image"
+              alt="{{ service.title }}"
+              class="img-fluid"
+              style="max-width: 100px;"
             />
           </div>
-    
+
           <!-- Content -->
           <div class="services-content">
             <h3>
@@ -89,8 +89,8 @@
         </div>
       </div>
     </div>
-    
-      
+
+
   </div>
 </div>
 
@@ -168,7 +168,7 @@
         </span>
         <h2>We Cover All Your Needs</h2>
       </div>
-  
+
       <div class="row">
         <div class="col-lg-4 col-md-6" *ngFor="let es of extendedServices">
           <div class="ext-service-box" role="button" tabindex="0">
@@ -181,7 +181,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 
 <!-- <div class="core-features-area pt-100 pb-75 bg-eef9ff">
@@ -189,7 +189,7 @@
         <div class="section-title-warp">
             <span class="sub-title">
                 <i class='bx bx-hash'></i>
-                Specialty and Our Features 
+                Specialty and Our Features
             </span>
             <h2>Features That You Will Love Us</h2>
             <a  class="default-btn" routerLink="/services">View All</a>
@@ -266,45 +266,45 @@
         </div>
       </div>
     </div> -->
-    
+
     <div class="hospitals-area">
       <div class="container">
         <div class="row" *ngIf="hospitals.length > 0">
-          <div 
-            class="col-lg-6 col-xl-4" 
+          <div
+            class="col-lg-6 col-xl-4"
             *ngFor="let hospital of hospitals"
           >
-            <div 
+            <div
               class="hospital-card"
               (click)="goToHospitals(hospital)"
               style="cursor: pointer;"
             >
               <div class="hospital-image">
-                <img 
-                  [src]="hospital.image" 
+                <img
+                  [src]="hospital.image"
                   [alt]="hospital.title"
                   (error)="onHospitalImgError($event)"
                 >
               </div>
-              
+
               <div class="hospital-content">
                 <h3>{{ hospital.title }}</h3>
                 <div class="hospital-location">
                   <i class="fa-solid fa-map-marker-alt"></i>
                   {{ hospital.city }}, {{ hospital.country }}
                 </div>
-                
+
                 <div class="hospital-specialties">
                   <h4>Specialties:</h4>
                   <div class="specialty-tags">
-                    <span 
-                      *ngFor="let specialty of hospital.specialties.slice(0, 3)" 
+                    <span
+                      *ngFor="let specialty of hospital.specialties.slice(0, 3)"
                       class="specialty-tag"
                     >
                       {{ specialty }}
                     </span>
-                    <span 
-                      *ngIf="hospital.specialties.length > 3" 
+                    <span
+                      *ngIf="hospital.specialties.length > 3"
                       class="specialty-tag more"
                     >
                       +{{ hospital.specialties.length - 3 }} more
@@ -317,8 +317,8 @@
         </div>
       </div>
     </div>
-    
-    
+
+
   </div>
 
 </div>
@@ -334,7 +334,7 @@
       </span>
       <h2>Lowest Price Guaranteed</h2>
     </div>
-    
+
     <div class="price-controls">
       <div class="chips">
         <button type="button" class="chip" [class.active]="selectedCategory==='All'" (click)="setCategory('All')">All</button>
@@ -436,7 +436,7 @@
                         </li>
                         <li>
                             <i class='bx bxs-comment'></i>
-                            2 Comments 
+                            2 Comments
                         </li>
                        </ul>
                     </div>
@@ -468,7 +468,7 @@
                         </li>
                         <li>
                             <i class='bx bxs-comment'></i>
-                            2 Comments 
+                            2 Comments
                         </li>
                        </ul>
                     </div>
@@ -500,7 +500,7 @@
                         </li>
                         <li>
                             <i class='bx bxs-comment'></i>
-                            2 Comments 
+                            2 Comments
                         </li>
                        </ul>
                     </div>

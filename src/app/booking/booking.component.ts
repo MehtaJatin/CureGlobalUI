@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FirebaseService } from '../backend/firebase.service';
 import { WhatsAppService } from '../backend/whatsapp.service';
 import { book } from '../data-type';
@@ -9,6 +9,9 @@ import { book } from '../data-type';
   styleUrls: ['./booking.component.scss'],
 })
 export class BookingComponent implements OnInit {
+  @Input() showFormOnly: boolean = false; // Input to control whether to show only the form
+  @Input() customTitle: string = 'Book Your Appointment'; // Custom title for the form
+
   Bookingmsg: string | undefined;
   defaultCountryCode = '91';
   countryCodes: { name: string; dial: string }[] = [
