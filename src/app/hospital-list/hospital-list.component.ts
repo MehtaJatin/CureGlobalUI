@@ -94,6 +94,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     console.log(`Filtered ${filteredHospitals.length} hospitals from ${firebaseHospitals.length} total`);
 
     return filteredHospitals.map((firebaseHospital, index) => {
+      console.log(`hospital ${index}:`, firebaseHospital);
       // Extract city from address if not explicitly provided
       const addressParts = firebaseHospital.address?.split(',') || [];
       const city = addressParts.length > 1 ? addressParts[addressParts.length - 1].trim() : 'Unknown';
@@ -113,7 +114,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
         title: firebaseHospital.name || 'Unnamed Hospital',
         city: city,
         country: 'India', // Default country
-        image: firebaseHospital.image || 'assets/images/hospitals/default-hospital.jpg',
+        image: firebaseHospital.images || [firebaseHospital.image, 'assets/images/hospitals/default-hospital.jpg'],
         description: firebaseHospital.description || 'No description available',
         specialties: firebaseHospital.specialties || [],
         rating: 4.5, // Default rating - can be enhanced with actual ratings
@@ -133,7 +134,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
   private extractFilterOptions(): void {
     // Extract unique cities
     this.cities = [...new Set(this.hospitals.map(h => h.city))].sort();
-    
+
     // Extract unique specialties
     const allSpecialties = this.hospitals.flatMap(h => h.specialties);
     this.specialties = [...new Set(allSpecialties)].sort();
@@ -147,7 +148,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
       this.selectedService = params['service'] || '';
       this.sortBy = params['sortBy'] || 'name';
       this.sortOrder = params['sortOrder'] || 'asc';
-      
+
       this.applyFilters();
     });
   }
@@ -158,7 +159,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     // Apply search filter
     if (this.searchTerm) {
       const term = this.searchTerm.toLowerCase();
-      filtered = filtered.filter(h => 
+      filtered = filtered.filter(h =>
         h.title.toLowerCase().includes(term) ||
         h.city.toLowerCase().includes(term) ||
         h.specialties.some(s => s.toLowerCase().includes(term)) ||
@@ -184,7 +185,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
         '/doctor': 'Orthopedics',
         '/doctor-details': 'Oncology'
       };
-      
+
       const mappedSpecialty = serviceToSpecialtyMap[this.selectedService];
       if (mappedSpecialty) {
         filtered = filtered.filter(h => h.specialties.includes(mappedSpecialty));
@@ -194,7 +195,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     // Apply sorting
     filtered.sort((a, b) => {
       let aValue: any, bValue: any;
-      
+
       switch (this.sortBy) {
         case 'name':
           aValue = a.title;
@@ -245,20 +246,20 @@ export class HospitalListComponent implements OnInit, OnDestroy {
   onSortChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const [sortBy, sortOrder] = target.value.split('-');
-    this.updateQueryParams({ 
-      sortBy: sortBy as any, 
-      sortOrder: sortOrder as any 
+    this.updateQueryParams({
+      sortBy: sortBy as any,
+      sortOrder: sortOrder as any
     });
   }
 
   clearFilters(): void {
-    this.updateQueryParams({ 
-      q: '', 
-      city: '', 
-      specialty: '', 
+    this.updateQueryParams({
+      q: '',
+      city: '',
+      specialty: '',
       service: '',
-      sortBy: 'name', 
-      sortOrder: 'asc' 
+      sortBy: 'name',
+      sortOrder: 'asc'
     });
   }
 
@@ -304,20 +305,20 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     const stars: string[] = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-    
+
     for (let i = 0; i < fullStars; i++) {
       stars.push('full');
     }
-    
+
     if (hasHalfStar) {
       stars.push('half');
     }
-    
+
     const emptyStars = 5 - stars.length;
     for (let i = 0; i < emptyStars; i++) {
       stars.push('empty');
     }
-    
+
     return stars;
   }
 
@@ -340,7 +341,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
       '/doctor': 'Orthopedics',
       '/doctor-details': 'Oncology'
     };
-    
+
     return serviceNameMap[serviceLink] || 'Unknown Service';
   }
 }
