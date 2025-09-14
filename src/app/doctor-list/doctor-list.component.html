@@ -29,45 +29,45 @@
   <div class="container">
     <div class="filters-container">
       <div class="search-filter">
-        <input 
-          type="text" 
-          placeholder="Search doctors, specialties, or hospitals..." 
+        <input
+          type="text"
+          placeholder="Search doctors, specialties, or hospitals..."
           [value]="searchTerm"
           (input)="onSearchChange($event)"
           class="search-input"
         >
       </div>
-      
+
       <div class="filter-controls">
-        <select 
-          [value]="selectedSpecialty" 
+        <select
+          [value]="selectedSpecialty"
           (change)="onSpecialtyChange($event)"
           class="filter-select"
         >
           <option value="">All Specialties</option>
           <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
         </select>
-        
-        <select 
-          [value]="selectedLocation" 
+
+        <select
+          [value]="selectedLocation"
           (change)="onLocationChange($event)"
           class="filter-select"
         >
           <option value="">All Locations</option>
           <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
         </select>
-        
-        <select 
-          [value]="selectedExperience" 
+
+        <select
+          [value]="selectedExperience"
           (change)="onExperienceChange($event)"
           class="filter-select"
         >
           <option value="">All Experience Levels</option>
           <option *ngFor="let exp of experienceLevels" [value]="exp">{{ exp }}</option>
         </select>
-        
-        <select 
-          [value]="sortBy + '-' + sortOrder" 
+
+        <select
+          [value]="sortBy + '-' + sortOrder"
           (change)="onSortChange($event)"
           class="filter-select"
         >
@@ -80,10 +80,10 @@
           <option value="consultationFee-asc">Sort: Fee Low-High</option>
           <option value="consultationFee-desc">Sort: Fee High-Low</option>
         </select>
-        
-        <button 
-          type="button" 
-          (click)="clearFilters()" 
+
+        <button
+          type="button"
+          (click)="clearFilters()"
           class="clear-filters-btn"
         >
           Clear Filters
@@ -120,21 +120,21 @@
               <img src="assets/images/logo.png" alt="MediGlobal" class="logo-img">
             </div>
           </div>
-          
+
           <div class="doctor-content">
             <div class="doctor-profile">
               <div class="doctor-image">
-                <img 
-                  [src]="doctor.image" 
+                <img
+                  [src]="doctor.image"
                   [alt]="doctor.name"
                   (error)="onDoctorImgError($event)"
                 >
               </div>
-              
+
               <div class="doctor-info">
                 <h3 class="doctor-name">{{ doctor.name }}</h3>
                 <div class="specialty-tag">{{ doctor.specialty }}</div>
-                
+
                 <div class="doctor-details">
                   <div class="detail-item">
                     <i class="fa-solid fa-map-marker-alt"></i>
@@ -159,7 +159,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="doctor-description" [class.expanded]="isDoctorExpanded(doctor.id)">
               <p *ngIf="isDoctorExpanded(doctor.id)" class="expanded-description">{{ doctor.description }}</p>
               <div class="doctor-actions">
@@ -177,62 +177,62 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Right Column - Find Your Ideal Doctor Form -->
       <div class="consultation-form">
         <div class="form-container">
           <h3>Find Your Ideal Doctor</h3>
           <p>For any enquiry reach out to us today. We are here to help you every step of the way.</p>
-          
+
           <form class="doctor-inquiry-form">
             <div class="form-group">
-              <input 
-                type="text" 
-                name="patientName" 
-                placeholder="Patient Name" 
+              <input
+                type="text"
+                name="patientName"
+                placeholder="Patient Name"
                 class="form-input"
                 required
               >
             </div>
-            
+
             <div class="form-group">
-              <input 
-                type="tel" 
-                name="phone" 
-                placeholder="Phone No." 
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone No."
                 class="form-input"
                 required
               >
             </div>
-            
+
             <div class="form-group">
-              <input 
-                type="email" 
-                name="email" 
-                placeholder="Enter Email" 
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
                 class="form-input"
                 required
               >
             </div>
-            
+
             <div class="form-group">
-              <input 
-                type="text" 
-                name="city" 
-                placeholder="Enter City" 
+              <input
+                type="text"
+                name="city"
+                placeholder="Enter City"
                 class="form-input"
               >
             </div>
-            
+
             <div class="form-group">
-              <textarea 
-                name="message" 
-                rows="4" 
-                placeholder="Enter Your Message...." 
+              <textarea
+                name="message"
+                rows="4"
+                placeholder="Enter Your Message...."
                 class="form-textarea"
               ></textarea>
             </div>
-            
+
             <button type="submit" class="submit-btn">SUBMIT NOW</button>
           </form>
         </div>
