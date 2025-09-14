@@ -349,4 +349,8 @@ export class HomeComponent implements OnInit, AfterViewInit{
   goToHospitals(serviceName: string) {
     this.router.navigate(['/hospitals'], { queryParams: { speciality: serviceName } });
   }
+  
+  goToHospitalDetails(hospitalId:string){
+    this.router.navigate(['/hospital-details/'+ hospitalId]);
+  }
 }
