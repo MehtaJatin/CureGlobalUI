@@ -77,7 +77,7 @@ export class BookingComponent implements OnInit {
       }
 
       // Basic phone validation
-      if (!data.phone || data.phone.length < 10) {
+      if (!data.phone) {
         this.Bookingmsg = 'Please enter a valid phone number.';
         return;
       }
@@ -91,26 +91,6 @@ export class BookingComponent implements OnInit {
           result.id
         );
 
-        // Send WhatsApp notification
-        try {
-          this.whatsappService
-            .sendBookingNotification(data, result.id)
-            .subscribe({
-              next: (whatsappResult) => {
-                console.log(
-                  'WhatsApp notification sent successfully:',
-                  whatsappResult
-                );
-                this.Bookingmsg += ' WhatsApp notification sent!';
-              },
-              error: (whatsappError) => {
-                console.error('WhatsApp notification failed:', whatsappError);
-                // Don't show error to user as booking was successful
-              },
-            });
-        } catch (whatsappError) {
-          console.error('WhatsApp service error:', whatsappError);
-        }
       } else {
         const code = result.error?.code || 'unknown-error';
         const msg = result.error?.message || '';
