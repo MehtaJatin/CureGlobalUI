@@ -113,43 +113,43 @@
                   [class.active]="selectedTab === 'comfort'"
                   (click)="selectTab('comfort')"
                 >
-                  Comfort During Stay
+                  Amenities
                 </button>
-                <button
-                  class="tab-btn"
-                  [class.active]="selectedTab === 'money'"
-                  (click)="selectTab('money')"
-                >
-                  Money Matters
-                </button>
-                <button
-                  class="tab-btn"
-                  [class.active]="selectedTab === 'food'"
-                  (click)="selectTab('food')"
-                >
-                  Food
-                </button>
-                <button
-                  class="tab-btn"
-                  [class.active]="selectedTab === 'treatment'"
-                  (click)="selectTab('treatment')"
-                >
-                  Treatment Related
-                </button>
-                <button
-                  class="tab-btn"
-                  [class.active]="selectedTab === 'language'"
-                  (click)="selectTab('language')"
-                >
-                  Language
-                </button>
-                <button
-                  class="tab-btn"
-                  [class.active]="selectedTab === 'transportation'"
-                  (click)="selectTab('transportation')"
-                >
-                  Transportation
-                </button>
+<!--                <button-->
+<!--                  class="tab-btn"-->
+<!--                  [class.active]="selectedTab === 'money'"-->
+<!--                  (click)="selectTab('money')"-->
+<!--                >-->
+<!--                  Money Matters-->
+<!--                </button>-->
+<!--                <button-->
+<!--                  class="tab-btn"-->
+<!--                  [class.active]="selectedTab === 'food'"-->
+<!--                  (click)="selectTab('food')"-->
+<!--                >-->
+<!--                  Food-->
+<!--                </button>-->
+<!--                <button-->
+<!--                  class="tab-btn"-->
+<!--                  [class.active]="selectedTab === 'treatment'"-->
+<!--                  (click)="selectTab('treatment')"-->
+<!--                >-->
+<!--                  Treatment Related-->
+<!--                </button>-->
+<!--                <button-->
+<!--                  class="tab-btn"-->
+<!--                  [class.active]="selectedTab === 'language'"-->
+<!--                  (click)="selectTab('language')"-->
+<!--                >-->
+<!--                  Language-->
+<!--                </button>-->
+<!--                <button-->
+<!--                  class="tab-btn"-->
+<!--                  [class.active]="selectedTab === 'transportation'"-->
+<!--                  (click)="selectTab('transportation')"-->
+<!--                >-->
+<!--                  Transportation-->
+<!--                </button>-->
               </div>
 
               <div class="tab-content">
@@ -176,26 +176,26 @@
                 </div>
 
                 <!-- Money Matters Tab -->
-                <div class="tab-pane" *ngIf="selectedTab === 'money'">
-                  <div class="amenity-columns">
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.money_matters?.slice(0, Math.ceil((hospital.amenities.money_matters?.length || 0) / 2))">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.money_matters?.slice(Math.ceil((hospital.amenities.money_matters?.length || 0) / 2))">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+<!--                <div class="tab-pane" *ngIf="selectedTab === 'money'">-->
+<!--                  <div class="amenity-columns">-->
+<!--                    <div class="amenity-column">-->
+<!--                      <ul class="amenity-list">-->
+<!--                        <li *ngFor="let amenity of hospital.amenities.money_matters?.slice(0, Math.ceil((hospital.amenities.money_matters?.length || 0) / 2))">-->
+<!--                          <i class="icon-hand-point"></i>-->
+<!--                          <span>{{ amenity }}</span>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    <div class="amenity-column">-->
+<!--                      <ul class="amenity-list">-->
+<!--                        <li *ngFor="let amenity of hospital.amenities.money_matters?.slice(Math.ceil((hospital.amenities.money_matters?.length || 0) / 2))">-->
+<!--                          <i class="icon-hand-point"></i>-->
+<!--                          <span>{{ amenity }}</span>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
 
                 <!-- Food Tab -->
                 <div class="tab-pane" *ngIf="selectedTab === 'food'">
