@@ -4,11 +4,11 @@ export interface signUp {
   password: string;
 }
 export interface book {
-  name: string;
+  patientName: string;
   email: string;
-  countryCode?: string;
   phone: string;
-  query: string;
+  city?: string;
+  concern: string;
 }
 
 export interface login {

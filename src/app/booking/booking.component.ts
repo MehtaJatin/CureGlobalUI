@@ -71,18 +71,14 @@ export class BookingComponent implements OnInit {
       console.log('Submitting booking data:', data);
 
       // Validate required fields
-      if (!data.name || !data.email || !data.phone || !data.query) {
-        this.Bookingmsg = 'Please fill in all fields.';
+      if (!data.patientName || !data.email || !data.phone || !data.concern) {
+        this.Bookingmsg = 'Please fill in all required fields.';
         return;
       }
 
-      // Country-specific phone validation before submit
-      const phoneError = this.whatsappService.validatePhone(
-        (data as any).countryCode,
-        data.phone
-      );
-      if (phoneError) {
-        this.Bookingmsg = phoneError;
+      // Basic phone validation
+      if (!data.phone || data.phone.length < 10) {
+        this.Bookingmsg = 'Please enter a valid phone number.';
         return;
       }
 

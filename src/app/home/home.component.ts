@@ -261,6 +261,15 @@ export class HomeComponent implements OnInit, AfterViewInit{
     });
   }
 
+  openContactModal(): void {
+    this.showQuoteModal = true;
+    // Delay focusing to after render
+    setTimeout(() => {
+      const firstInput = document.querySelector('.quote-dialog .quote-input') as HTMLInputElement | null;
+      firstInput?.focus();
+    });
+  }
+
   closeQuote(): void {
     this.showQuoteModal = false;
   }
@@ -280,16 +289,15 @@ export class HomeComponent implements OnInit, AfterViewInit{
       next: (services) => {
         const result = services;
         if(result.length>0){
-          let temp = result[0]['services'];
           let cnt=1;
-            for(let ser of temp){
+            for(let ser of result){
               console.log(ser);
               this.services.push({
-                id: cnt++,
-                title: ser.serviceName,
-                description: ser.serviceDescription,
-                image: 'assets/images/services/'+ ser.serviceName + '.avif',
-                link: '/service-details'
+                id: ser.id,
+                title: ser.name,
+                description: ser.description,
+                image: ser.photo,
+                link: '/hospitals'+'?q='+ser.name
               });
               if(cnt>6){
                 break;

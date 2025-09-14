@@ -411,18 +411,49 @@
 
 .extended-services-area{
     /* Teal hero with gradient and light pattern */
+    // background:
+    //     radial-gradient(40px 40px at 15% 20%, rgba(255,255,255,0.12) 0, rgba(255,255,255,0) 100%),
+    //     radial-gradient(50px 50px at 85% 70%, rgba(255,255,255,0.12) 0, rgba(255,255,255,0) 100%),
+    //     linear-gradient(180deg, #0a7a79 0%, #086e70 100%);
     background:
-        radial-gradient(40px 40px at 15% 20%, rgba(255,255,255,0.12) 0, rgba(255,255,255,0) 100%),
-        radial-gradient(50px 50px at 85% 70%, rgba(255,255,255,0.12) 0, rgba(255,255,255,0) 100%),
-        linear-gradient(180deg, #0a7a79 0%, #086e70 100%);
+    radial-gradient(28px 28px at 12% 18%, rgba(1,106,139,0.07) 0, rgba(1,106,139,0) 100%),
+    radial-gradient(28px 28px at 88% 78%, rgba(20,228,154,0.07) 0, rgba(20,228,154,0) 100%),
+    linear-gradient(180deg, #f3fbff 0%, #f8fbfd 100%);
     .section-title-warp{
-        .sub-title{ color: #e1fffb; background: rgba(255,255,255,0.08); }
-        h2{ color: #fff; font-size: 32px; }
+        padding-right: 175px;
+        margin-bottom: 45px;
+        position: relative;
+
+        .sub-title{
+            position: relative;
+            margin-bottom: 20px;
+            border-radius: 50px;
+            display: inline-block;
+            padding: 10px 20px 10px 40px;
+            color: $paragraph_color;
+            background-color: #fff;
+            box-shadow: #959da526 0 8px 24px;
+            font-size: 15px;
+            font-weight: 500;
+
+            i{
+                transform: translateY(-50%);
+                position: absolute;
+                font-size: 19px;
+                color: #14e49a;
+                margin-top: 2px;
+                left: 20px;
+                top: 45%;
+            }
+        }
     }
+
+
+    
 
     .ext-service-box{
         text-align: center;
-        background: #fff;
+        background: #ffffff;
         border-bottom: 2px solid $main_color;
         border-radius: 10px;
         padding: 28px 20px 22px;
@@ -520,7 +551,10 @@
 /* Pricing grid */
 .price-guarantee-area{
     /* Gentle mint-to-cyan gradient with dots */
-    background: radial-gradient(40px 40px at 15% 20%, rgba(10, 4, 90, 0.12) 0, rgba(255, 255, 255, 0) 100%), radial-gradient(50px 50px at 85% 70%, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #0a7a79 0%, #086e70 100%);
+    background:
+    radial-gradient(28px 28px at 12% 18%, rgba(1,106,139,0.07) 0, rgba(1,106,139,0) 100%),
+    radial-gradient(28px 28px at 88% 78%, rgba(20,228,154,0.07) 0, rgba(20,228,154,0) 100%),
+    linear-gradient(180deg, #f3fbff 0%, #f8fbfd 100%);
     .price-controls{
         display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 16px;
         .chips{ display: flex; gap: 8px; flex-wrap: wrap; }
@@ -581,7 +615,7 @@
 .quote-title{ text-align: center; margin: 0 0 14px; color: #0a2740; font-size: 18px; font-weight: 600; }
 .quote-close{ position: absolute; right: 10px; top: 10px; border: 0; background: transparent; font-size: 20px; line-height: 1; cursor: pointer; color: #7a8b96; }
 .quote-input{ width: 100%; margin-bottom: 10px; padding: 10px 12px; border: 1px solid #d7e3ea; border-radius: 6px; font-size: 14px; }
-.submit-btn{ width: 100%; margin-top: 6px; background: #0a7a79; border: none; }
+.submit-btn{ width: 100%; margin-top: 6px; background: #321a88; border: none; }
 .quote-dialog form{ display: flex; flex-direction: column; }
 
 @media screen and (max-width:768px){

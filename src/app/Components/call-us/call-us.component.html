@@ -9,7 +9,7 @@
                     </span>
                     <h3>Nervous Troubled Attractive Staring Right Anxiously!</h3>
                     <p>
-                        Contact Us Today 
+                        Chat with Us Today 
                         <a href="#">+91 0000000</a>
                     </p>
                 </div>
@@ -23,58 +23,39 @@
     </div>
 </div>
 
-<div class="appointment-overview-area pb-100">
+<div class="appointment-overview-area pb-80">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-12">
-                <div class="appointment-overview-contact">
-                   <img src="assets/images/appointment-1.jpg">
-                    <div class="appointment-info">
-                        <div class="call-info">
-                            <i class='bx bx-phone-call'></i>
-                            
-                            <span>
-                                <a routerLink="/home">+91 00000000000</a>
-                            </span>
-                        </div>
-                        <p>Connect with our medical specialists for personalized health guidance.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
                 <div class="appointment-overview-box">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-md-10 col-sm-12">
                             <div class="make-appointment-content">
                                 <h4>
                                     <i class='bx bxs-calendar'></i>
                                     Make An Appointment 
                                 </h4>
-                                <form>
+                                <form (submit)="submitInquiry($event)">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name">
+                                        <input type="text" class="form-control" name="patientName" placeholder="Patient Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <input type="tel" class="form-control" name="phone" placeholder="Enter Phone No." required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" class="form-control" placeholder="Phone">
+                                        <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
                                     </div>
-                                    <button type="submit" routerLink="/booking" class="default-btn">Book Appointment</button>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="city" placeholder="Enter City">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="concern" rows="5" placeholder="Kindly describe the health concern....."></textarea>
+                                    </div>
+                                    <button type="submit" class="default-btn">SUBMIT NOW</button>
                                 </form>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="content">
-                                <h4>Our Doctors Are Here to Help You</h4>
-                                <div class="box-image">
-                                    <img src="assets/images/appointment-2.jpg">
-                                    <!-- <button class="video-btn">
-                                        <i class='bx bx-play'></i>
-                                    </button> -->
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

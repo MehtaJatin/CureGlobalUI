@@ -241,6 +241,10 @@
         Trusted Network
       </span>
       <h2>Top Hospitals</h2>
+      <!-- <h2>{{ "HOME_CARE_HEADLINE" | t }}</h2> -->
+      <a routerLink="/hospitals" class="default-btn">{{
+        "HOME_VIEW_ALL" | t
+      }}</a>
     </div>
 
     <div class="row">
@@ -268,7 +272,7 @@
         <i class='bx bx-hash'></i>
         Transparent Pricing, Trusted Care
       </span>
-      <h2 style="color: white;">Lowest Price Guaranteed</h2>
+      <h2>Lowest Price Guaranteed</h2>
     </div>
     
     <div class="price-controls">
@@ -308,7 +312,7 @@
     </div>
 
     <div class="price-helpers">
-      <button class="secondary-btn" type="button" (click)="onLookingForHelp()">Looking for Help?</button>
+      <button class="secondary-btn" type="button" (click)="openContactModal()">Looking for Help?</button>
       <a class="whatsapp-btn" href="https://wa.me/" target="_blank" rel="noopener">Chat With Us</a>
     </div>
   </div>
@@ -327,7 +331,7 @@
       <input class="quote-input" type="text" name="city" placeholder="Enter City" />
       <textarea class="quote-input" name="concern" rows="3" placeholder="Kindly describe the health concern....."></textarea>
       <input type="hidden" name="procedure" [value]="selectedProcedure?.name || ''" />
-      <button class="default-btn submit-btn" type="submit">SUBMIT NOW</button>
+      <button class="default-btn" type="submit">SUBMIT NOW</button>
     </form>
   </div>
 </div>

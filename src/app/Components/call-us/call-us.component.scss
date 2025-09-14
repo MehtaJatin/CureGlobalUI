@@ -112,12 +112,12 @@
     .appointment-overview-box{
         
         box-shadow: 0 15px 35px #0000001a;
-        border-bottom: 1px solid $main-color;
+        border: 1px solid $main-color;
         background-color: #fff;
         padding: 25px;
         border-radius: 5px;
-
         .make-appointment-content{
+            text-align: center;
 
             h4{
                 font-size: 22px;
@@ -126,6 +126,7 @@
                 position: relative;
                 padding-left: 35px;
                 font-weight: 500;
+                text-align: left;
 
                 i{
                     left: 0;
@@ -139,6 +140,9 @@
             }
 
             form{
+                max-width: 100%;
+                margin: 0 auto;
+
                 .form-group{
                     margin-bottom: 15px;
 
@@ -155,14 +159,26 @@
                         background-color: #fff;
                         padding-left: 15px;
                         padding-right: 15px;
+                        text-align: left;
+
+                        &:focus{
+                            border-color: $main-color;
+                            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                        }
+                    }
+
+                    textarea.form-control{
+                        height: auto;
+                        min-height: 120px;
+                        resize: vertical;
                     }
                 }
 
                 .default-btn{
-                    
                     width: 100%;
                     display: block;
                     padding: 14px 30px;
+                    margin-top: 10px;
                 }
             }
         }
