@@ -79,14 +79,19 @@ export class HospitalDetailsComponent implements OnInit {
   private mapFirebaseHospitalToTemplate(firebaseHospital: FirebaseHospital, doctorsData: any[]): Hospital {
     // Map FirebaseService Hospital interface to template Hospital interface
     // Convert doctors data from Firestore format to template format
-    const mappedDoctors = doctorsData.map(doctor => ({
-      id: doctor.id,
-      name: doctor.name,
-      specialty: doctor.specialization || doctor.specialty || 'General Medicine',
-      image: doctor.image || 'assets/images/service/service1.jpg',
-      experience: doctor.experience ? `${doctor.experience} years` : 'N/A',
-      qualification: doctor.education || doctor.qualification || 'MD'
-    }));
+    const mappedDoctors = doctorsData.map(doctor => {
+      // Use image directly from Firestore as it's already in the correct data URI format
+      const imageUrl = doctor.imageBase64 || 'assets/images/service/service1.jpg';
+
+      return {
+        id: doctor.id,
+        name: doctor.name,
+        specialty: doctor.specialization || doctor.specialty || 'General Medicine',
+        image: imageUrl,
+        experience: doctor.experience ? `${doctor.experience} years` : 'N/A',
+        qualification: doctor.education || doctor.qualification || 'MD'
+      };
+    });
 
     return {
       id: firebaseHospital.id,
@@ -123,5 +128,11 @@ export class HospitalDetailsComponent implements OnInit {
   onSubmitContactForm(formData: any): void {
     // Handle contact form submission
     console.log('Contact form submitted:', formData);
+  }
+
+  onImageError(event: any): void {
+    // Handle image loading errors by setting a fallback image
+    console.log('Image loading error, setting fallback image');
+    event.target.src = 'assets/images/service/service1.jpg';
   }
 }

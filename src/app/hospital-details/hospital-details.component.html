@@ -75,7 +75,7 @@
             <div class="doctors-grid" *ngIf="hospital.doctors && hospital.doctors.length > 0; else noDoctors">
               <div class="doctor-card" *ngFor="let doctor of hospital.doctors">
                 <div class="doctor-image">
-                  <img [src]="doctor.image" [alt]="doctor.name" />
+                  <img src="{{ doctor.image }}"/>
                 </div>
                 <div class="doctor-info">
                   <h3>{{ doctor.name }}</h3>
