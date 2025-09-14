@@ -203,6 +203,32 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  background-color: #f8f9fa;
+  border-radius: 0;
+}
+
+.doctor-image img[src^="data:image"] {
+  /* Specific styling for base64 images */
+  object-fit: cover;
+  object-position: center;
+}
+
+.doctor-image img:not([src]),
+.doctor-image img[src=""],
+.doctor-image img[src="null"] {
+  /* Fallback for missing images */
+  background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctor-image img:not([src])::before,
+.doctor-image img[src=""]::before,
+.doctor-image img[src="null"]::before {
+  content: "👨‍⚕️";
+  font-size: 3rem;
+  color: #6c757d;
 }
 
 .doctor-card:hover .doctor-image img {
