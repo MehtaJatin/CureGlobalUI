@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../backend/firebase.service';
+import { Hospital as FirebaseHospital } from '../backend/firebase.service';
+import { hospital } from '../data-type';
 
 @Component({
   selector: 'app-home',
@@ -58,48 +60,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
     }
   ];
 
-  hospitals = [
-    {
-      title: 'Pushpawati Singhania Research Institute, New Delhi',
-      city: 'New Delhi, India',
-      image: 'assets/images/hospitals/psri.jpg'
-    },
-    {
-      title: 'Batra Hospital & Medical Research Centre, New Delhi',
-      city: 'New Delhi, India',
-      image: 'assets/images/hospitals/batra.jpg'
-    },
-    {
-      title: 'Manipal Hospital Formerly AMRI Hospital, Kolkata',
-      city: 'Kolkata, India',
-      image: 'assets/images/hospitals/manipal-kolkata.jpg'
-    },
-    {
-      title: 'Fortis Hospital Delhi Shalimar Bagh',
-      city: 'New Delhi, India',
-      image: 'assets/images/hospitals/fortis-shalimar.jpg'
-    },
-    {
-      title: 'Fortis Escorts Hospital, Amritsar',
-      city: 'Amritsar, India',
-      image: 'assets/images/hospitals/fortis-escorts-amritsar.jpg'
-    },
-    {
-      title: 'Apollo Gleneagles Hospital Kolkata',
-      city: 'Kolkata, India',
-      image: 'assets/images/hospitals/apollo-kolkata.jpg'
-    },
-    {
-      title: 'Manipal Hospital Formerly Columbia Asia, Palam Vihar Gurgaon',
-      city: 'Gurgaon, India',
-      image: 'assets/images/hospitals/manipal-gurgaon.jpg'
-    },
-    {
-      title: 'Apollo Hospital Bangalore Bannerghatta Road',
-      city: 'Bangalore, India',
-      image: 'assets/images/hospitals/apollo-bannerghatta.jpg'
-    }
-  ];
+  hospitals: any[] = [];
 
   // Tiny neutral placeholder (SVG as data URI) used when an image fails to load
   private readonly hospitalPlaceholder =
@@ -138,6 +99,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     this.getServicesDetails();
+    this.getHospitalDetails();
   }
 
   // Reveal-on-scroll for hospital cards
@@ -291,7 +253,6 @@ export class HomeComponent implements OnInit, AfterViewInit{
         if(result.length>0){
           let cnt=1;
             for(let ser of result){
-              console.log(ser);
               this.services.push({
                 id: ser.id,
                 title: ser.name,
@@ -299,6 +260,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
                 image: ser.photo,
                 link: '/hospitals'+'?q='+ser.name
               });
+              cnt++;
               if(cnt>6){
                 break;
               }
@@ -311,4 +273,80 @@ export class HomeComponent implements OnInit, AfterViewInit{
     });
   }
 
+
+  getHospitalDetails(){
+    this.firebaseService.getHospitals().subscribe({
+      next: (firebaseHospitals) => {
+        console.log('Fetched hospitals from Firebase:', firebaseHospitals);
+        console.log('Number of hospitals fetched:', firebaseHospitals.length);
+
+        // Debug: Check isActive status
+        firebaseHospitals.forEach((hospital, index) => {
+          console.log(`Hospital ${index}:`, {
+            name: hospital.name,
+            isActive: hospital.isActive,
+            hasRequiredFields: !!(hospital.name && hospital.address)
+          });
+        });
+
+        this.hospitals = this.mapFirebaseHospitalsToLocal(firebaseHospitals);
+        console.log('Mapped hospitals:', this.hospitals);
+        console.log('Number of mapped hospitals:', this.hospitals.length);
+
+      },
+      error: (error) => {
+        console.error('Error fetching hospitals:', error);
+        // Fallback to empty array
+        this.hospitals = [];
+      }
+    });
+  }
+
+  private mapFirebaseHospitalsToLocal(firebaseHospitals: FirebaseHospital[]): hospital[] {
+    console.log('Starting mapping process...');
+
+    // First, let's be more lenient with filtering - only filter out hospitals that are explicitly inactive
+    const filteredHospitals = firebaseHospitals.filter(h => {
+      const isActive = h.isActive !== false; // Consider undefined or true as active
+      console.log(`Hospital ${h.name}: isActive = ${h.isActive}, will include = ${isActive}`);
+      return isActive && h.name && h.address; // Must have name and address
+    });
+
+    console.log(`Filtered ${filteredHospitals.length} hospitals from ${firebaseHospitals.length} total`);
+
+    return filteredHospitals.map((firebaseHospital, index) => {
+      // Extract city from address if not explicitly provided
+      const addressParts = firebaseHospital.address?.split(',') || [];
+      const city = addressParts.length > 1 ? addressParts[addressParts.length - 1].trim() : 'Unknown';
+
+      // Handle createdAt safely
+      let establishedYear = 2023; // Default year
+      if (firebaseHospital.createdAt) {
+        try {
+          establishedYear = new Date(firebaseHospital.createdAt).getFullYear();
+        } catch (e) {
+          console.warn('Invalid createdAt date for hospital:', firebaseHospital.name);
+        }
+      }
+
+      const mappedHospital = {
+        id: firebaseHospital.id || String(index + 1), // Keep as string for navigation
+        title: firebaseHospital.name || 'Unnamed Hospital',
+        city: city,
+        country: 'India', // Default country
+        image: firebaseHospital.image || 'assets/images/hospitals/default-hospital.jpg',
+        description: firebaseHospital.description || 'No description available',
+        specialties: firebaseHospital.specialties || ['general'],
+        address: firebaseHospital.address || ''
+      } as any; // Type assertion to handle id type difference
+
+      console.log(`Mapped hospital: ${mappedHospital.title} (${mappedHospital.city})`);
+      return mappedHospital;
+    });
+  }
+  
+
+  goToHospitals(serviceName: string) {
+    this.router.navigate(['/hospitals'], { queryParams: { speciality: serviceName } });
+  }
 }

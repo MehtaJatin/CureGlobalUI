@@ -56,7 +56,7 @@
         <i class="bx bx-hash"></i>
         {{ "HOME_OUR_SERVICES" | t }}
       </span>
-      <h2>{{ "HOME_CARE_HEADLINE" | t }}</h2>
+      <h2>Multi-Specialty Focus</h2>
       <a routerLink="/services" class="default-btn">{{
         "HOME_VIEW_ALL" | t
       }}</a>
@@ -64,19 +64,23 @@
 
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let service of services">
-        <div class="single-services">
-          <div class="services-image">
-            <!-- <a [routerLink]="service.link" class="d-block">
-                <img [src]="service.image" alt="{{ service.title }}">
-              </a> -->
-            <a class="d-block">
-              <img [src]="service.image" alt="{{ service.title }}" />
-            </a>
+        <div 
+          class="single-services d-flex align-items-center"
+          style="cursor: pointer;"
+          (click)="goToHospitals(service.title)"
+        >
+          <!-- Image -->
+          <div class="services-image me-3">
+            <img 
+              [src]="service.image" 
+              alt="{{ service.title }}" 
+              class="img-fluid" 
+              style="max-width: 100px;" 
+            />
           </div>
+    
+          <!-- Content -->
           <div class="services-content">
-            <!-- <h3>
-                <a [routerLink]="service.link">{{ service.title }}</a>
-              </h3> -->
             <h3>
               <a>{{ service.title | mt | async }}</a>
             </h3>
@@ -85,6 +89,8 @@
         </div>
       </div>
     </div>
+    
+      
   </div>
 </div>
 
@@ -247,7 +253,7 @@
       }}</a>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-3 col-md-6" *ngFor="let h of hospitals">
         <div class="hospital-card reveal-card" #hospitalCard role="button" tabindex="0" [attr.aria-label]="h.title + ', ' + h.city" (click)="selectHospital(h)" (keydown.enter)="selectHospital(h)" (keydown.space)="selectHospital(h); $event.preventDefault()" [class.active]="selectedHospital?.title === h.title" [attr.aria-pressed]="selectedHospital?.title === h.title">
           <div class="hospital-img">
@@ -259,8 +265,62 @@
           </div>
         </div>
       </div>
+    </div> -->
+    
+    <div class="hospitals-area">
+      <div class="container">
+        <div class="row" *ngIf="hospitals.length > 0">
+          <div 
+            class="col-lg-6 col-xl-4" 
+            *ngFor="let hospital of hospitals"
+          >
+            <div 
+              class="hospital-card"
+              (click)="goToHospitals(hospital)"
+              style="cursor: pointer;"
+            >
+              <div class="hospital-image">
+                <img 
+                  [src]="hospital.image" 
+                  [alt]="hospital.title"
+                  (error)="onHospitalImgError($event)"
+                >
+              </div>
+              
+              <div class="hospital-content">
+                <h3>{{ hospital.title }}</h3>
+                <div class="hospital-location">
+                  <i class="fa-solid fa-map-marker-alt"></i>
+                  {{ hospital.city }}, {{ hospital.country }}
+                </div>
+                
+                <div class="hospital-specialties">
+                  <h4>Specialties:</h4>
+                  <div class="specialty-tags">
+                    <span 
+                      *ngFor="let specialty of hospital.specialties.slice(0, 3)" 
+                      class="specialty-tag"
+                    >
+                      {{ specialty }}
+                    </span>
+                    <span 
+                      *ngIf="hospital.specialties.length > 3" 
+                      class="specialty-tag more"
+                    >
+                      +{{ hospital.specialties.length - 3 }} more
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    
+    
   </div>
+
 </div>
 
 

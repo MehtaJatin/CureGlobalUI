@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../backend/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-services',
@@ -9,7 +10,7 @@ import { FirebaseService } from '../backend/firebase.service';
 export class ServicesComponent implements OnInit {
   services: any[] = [];
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService, private router:Router) {}
 
   ngOnInit(): void {
     this.getServicesDetails();
@@ -38,5 +39,9 @@ export class ServicesComponent implements OnInit {
         console.error('Error fetching services:', error);
       },
     });
+  }
+
+  goToHospitals(serviceName: string) {
+    this.router.navigate(['/hospitals'], { queryParams: { service: serviceName } });
   }
 }
