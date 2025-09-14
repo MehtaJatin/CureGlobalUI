@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
               title: ser.name,
               description: ser.description,
               image: ser.photo,
-              link: '/service-details',
+              link: ser.name ,
             });
           }
         }
@@ -51,6 +51,13 @@ export class NavbarComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching services:', error);
       },
+    });
+    this.services.push({
+      id: 121313234,
+      title: 'cardiology',
+      description: ' as a sa s a ',
+      image: '',
+      link: 'Cardiology' ,
     });
   }
 }

@@ -56,3 +56,39 @@ export interface order {
   userId: string;
   id: number | undefined;
 }
+
+export interface hospital {
+  id: number;
+  title: string;
+  city: string;
+  country: string;
+  image: string;
+  description: string;
+  specialties: string[];
+  rating: number;
+  establishedYear: number;
+  bedCount: number;
+  accreditation: string[];
+  website?: string;
+  phone?: string;
+  address: string;
+}
+
+export interface doctor {
+  id: number;
+  name: string;
+  specialty: string;
+  image: string;
+  location: string;
+  experience: string;
+  designation: string;
+  hospital: string;
+  qualifications: string[];
+  description: string;
+  rating: number;
+  consultationFee?: number;
+  languages: string[];
+  availability: string;
+  phone?: string;
+  email?: string;
+}

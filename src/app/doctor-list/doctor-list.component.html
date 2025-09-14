@@ -1,0 +1,243 @@
+<!-- Page Header -->
+<div class="page-header-area">
+  <div class="container">
+    <div class="page-header-content">
+      <h1>Our Doctors</h1>
+      <p>Find the best medical professionals for your healthcare needs</p>
+    </div>
+  </div>
+</div>
+
+<!-- Filters Section -->
+<div class="filters-area">
+  <div class="container">
+    <div class="filters-container">
+      <div class="search-filter">
+        <input 
+          type="text" 
+          placeholder="Search doctors, specialties, or hospitals..." 
+          [value]="searchTerm"
+          (input)="onSearchChange($event)"
+          class="search-input"
+        >
+      </div>
+      
+      <div class="filter-controls">
+        <select 
+          [value]="selectedSpecialty" 
+          (change)="onSpecialtyChange($event)"
+          class="filter-select"
+        >
+          <option value="">All Specialties</option>
+          <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
+        </select>
+        
+        <select 
+          [value]="selectedLocation" 
+          (change)="onLocationChange($event)"
+          class="filter-select"
+        >
+          <option value="">All Locations</option>
+          <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+        </select>
+        
+        <select 
+          [value]="selectedExperience" 
+          (change)="onExperienceChange($event)"
+          class="filter-select"
+        >
+          <option value="">All Experience Levels</option>
+          <option *ngFor="let exp of experienceLevels" [value]="exp">{{ exp }}</option>
+        </select>
+        
+        <select 
+          [value]="sortBy + '-' + sortOrder" 
+          (change)="onSortChange($event)"
+          class="filter-select"
+        >
+          <option value="name-asc">Sort: Name A-Z</option>
+          <option value="name-desc">Sort: Name Z-A</option>
+          <option value="rating-desc">Sort: Rating High-Low</option>
+          <option value="rating-asc">Sort: Rating Low-High</option>
+          <option value="experience-desc">Sort: Experience High-Low</option>
+          <option value="experience-asc">Sort: Experience Low-High</option>
+          <option value="consultationFee-asc">Sort: Fee Low-High</option>
+          <option value="consultationFee-desc">Sort: Fee High-Low</option>
+        </select>
+        
+        <button 
+          type="button" 
+          (click)="clearFilters()" 
+          class="clear-filters-btn"
+        >
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Results Summary -->
+<div class="results-summary">
+  <div class="container">
+    <p *ngIf="filteredDoctors.length > 0">
+      Showing {{ filteredDoctors.length }} of {{ doctors.length }} doctors
+      <span *ngIf="searchTerm || selectedSpecialty || selectedLocation || selectedExperience">
+        matching your criteria
+      </span>
+    </p>
+    <p *ngIf="filteredDoctors.length === 0" class="no-results">
+      No doctors found matching your criteria. Try adjusting your filters.
+    </p>
+  </div>
+</div>
+
+<!-- Doctors List -->
+<div class="doctors-area">
+  <div class="container">
+    <div class="doctors-layout" *ngIf="filteredDoctors.length > 0">
+      <!-- Left Column - Doctors List -->
+      <div class="doctors-list">
+        <div class="doctor-card" *ngFor="let doctor of filteredDoctors">
+          <div class="doctor-header">
+            <div class="doctor-logo">
+              <img src="assets/images/logo.png" alt="MediGlobal" class="logo-img">
+            </div>
+          </div>
+          
+          <div class="doctor-content">
+            <div class="doctor-profile">
+              <div class="doctor-image">
+                <img 
+                  [src]="doctor.image" 
+                  [alt]="doctor.name"
+                  (error)="onDoctorImgError($event)"
+                >
+              </div>
+              
+              <div class="doctor-info">
+                <h3 class="doctor-name">{{ doctor.name }}</h3>
+                <div class="specialty-tag">{{ doctor.specialty }}</div>
+                
+                <div class="doctor-details">
+                  <div class="detail-item">
+                    <i class="fa-solid fa-map-marker-alt"></i>
+                    <span>{{ doctor.location }}</span>
+                  </div>
+                  <div class="detail-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>{{ doctor.experience }}</span>
+                  </div>
+                  <div class="detail-item">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>{{ doctor.designation }}</span>
+                  </div>
+                  <div class="detail-item">
+                    <i class="fa-solid fa-hospital"></i>
+                    <span>{{ doctor.hospital }}</span>
+                  </div>
+                  <div class="detail-item" *ngIf="doctor.qualifications.length > 0">
+                    <i class="fa-solid fa-certificate"></i>
+                    <span>{{ doctor.qualifications.join(', ') }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="doctor-description" [class.expanded]="isDoctorExpanded(doctor.id)">
+              <p *ngIf="isDoctorExpanded(doctor.id)" class="expanded-description">{{ doctor.description }}</p>
+              <div class="doctor-actions">
+                <button class="btn-primary" (click)="viewDoctorDetails(doctor)">
+                  {{ isDoctorExpanded(doctor.id) ? 'Hide Details' : 'View Details' }}
+                </button>
+                <button class="btn-secondary" (click)="contactDoctor(doctor)">
+                  Contact
+                </button>
+                <button class="btn-consultation" (click)="bookConsultation(doctor)">
+                  Book Consultation
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Column - Find Your Ideal Doctor Form -->
+      <div class="consultation-form">
+        <div class="form-container">
+          <h3>Find Your Ideal Doctor</h3>
+          <p>For any enquiry reach out to us today. We are here to help you every step of the way.</p>
+          
+          <form class="doctor-inquiry-form">
+            <div class="form-group">
+              <input 
+                type="text" 
+                name="patientName" 
+                placeholder="Patient Name" 
+                class="form-input"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <input 
+                type="tel" 
+                name="phone" 
+                placeholder="Phone No." 
+                class="form-input"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <input 
+                type="email" 
+                name="email" 
+                placeholder="Enter Email" 
+                class="form-input"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <input 
+                type="text" 
+                name="city" 
+                placeholder="Enter City" 
+                class="form-input"
+              >
+            </div>
+            
+            <div class="form-group">
+              <textarea 
+                name="message" 
+                rows="4" 
+                placeholder="Enter Your Message...." 
+                class="form-textarea"
+              ></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">SUBMIT NOW</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Call to Action -->
+<div class="cta-area">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Need Help Finding the Right Doctor?</h2>
+      <p>Our medical experts can help you choose the best doctor for your specific needs.</p>
+      <div class="cta-buttons">
+        <a routerLink="/booking" class="default-btn">Get Free Consultation</a>
+        <a href="https://wa.me/" target="_blank" class="whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          Chat with Us
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

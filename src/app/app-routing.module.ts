@@ -20,14 +20,16 @@ import { AdminSetupComponent } from './admin-setup/admin-setup.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminServicesComponent } from './admin/services/services.component';
 import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
+import { HospitalListComponent } from './hospital-list/hospital-list.component';
+import { DoctorListComponent } from './doctor-list/doctor-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
-  // Alias route for hospitals list
-  { path: 'hospitals', component: ServicesComponent },
+  // Hospital list page with filtering
+  { path: 'hospitals', component: HospitalListComponent },
   { path: 'service-details', component: ServiceDetailsComponent },
   { path: 'dentict', component: DentictsComponent },
   { path: 'booking', component: BookingComponent },
@@ -44,6 +46,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'admin/services', component: AdminServicesComponent },
   { path: 'doctor-details', component: DoctorDetailsComponent },
+  { path: 'doctors', component: DoctorListComponent },
   { path: '**', component: NotfoundComponent },
   { path: 'notfound', component: NotfoundComponent },
 ];

@@ -42,8 +42,14 @@
               {{ "NAV_OUR_HOSPITALS" | t }}
             </a>
             <ul class="dropdown-menu fade-up">
+              <li>
+                <a class="dropdown-item" routerLink="/hospitals">
+                  All Hospitals
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
               <li *ngFor="let service of services">
-                <a class="dropdown-item" [routerLink]="service.link">
+                <a class="dropdown-item" [routerLink]="['/hospitals']" [queryParams]="{specialty: service.link}">
                   {{ service.title | mt | async }}
                 </a>
               </li>
@@ -60,47 +66,53 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item" routerLink="/dentict">{{
+                <a class="dropdown-item" routerLink="/doctors">
+                  All Doctors
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Cardiology'}">{{
                   "SVC_CARDIOLOGY" | t
                 }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor">{{
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Orthopedics'}">{{
                   "SVC_SPINE" | t
                 }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Kidney Transplant'}">{{
                   "SVC_KIDNEY" | t
                 }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Cosmetic'}">{{
                   "SVC_COSMETIC" | t
                 }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Neurology'}">{{
                   "SVC_NEURO" | t
                 }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Oncology'}">{{
                   "SVC_ONCO" | t
                 }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Orthopedics'}">{{
                   "SVC_ORTHO" | t
                 }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Hematology'}">{{
                   "SVC_HEMATO" | t
                 }}</a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/doctor-details">{{
+                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'IVF'}">{{
                   "SVC_IVF" | t
                 }}</a>
               </li>

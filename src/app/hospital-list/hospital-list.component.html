@@ -1,0 +1,188 @@
+<!-- Page Header -->
+<div class="page-header-area">
+  <div class="container">
+    <div class="page-header-content">
+      <h1>Our Hospital Network</h1>
+      <p>Discover world-class healthcare facilities across India</p>
+    </div>
+  </div>
+</div>
+
+<!-- Filters Section -->
+<div class="filters-area">
+  <div class="container">
+    <div class="filters-container">
+      <div class="search-filter">
+        <input 
+          type="text" 
+          placeholder="Search hospitals, cities, or specialties..." 
+          [value]="searchTerm"
+          (input)="onSearchChange($event)"
+          class="search-input"
+        >
+      </div>
+      
+      <div class="filter-controls">
+        <select 
+          [value]="selectedCity" 
+          (change)="onCityChange($event)"
+          class="filter-select"
+        >
+          <option value="">All Cities</option>
+          <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+        </select>
+        
+        <select 
+          [value]="selectedSpecialty" 
+          (change)="onSpecialtyChange($event)"
+          class="filter-select"
+        >
+          <option value="">All Specialties</option>
+          <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
+        </select>
+        
+        <select 
+          [value]="sortBy + '-' + sortOrder" 
+          (change)="onSortChange($event)"
+          class="filter-select"
+        >
+          <option value="name-asc">Sort: Name A-Z</option>
+          <option value="name-desc">Sort: Name Z-A</option>
+          <option value="rating-desc">Sort: Rating High-Low</option>
+          <option value="rating-asc">Sort: Rating Low-High</option>
+          <option value="bedCount-desc">Sort: Beds High-Low</option>
+          <option value="bedCount-asc">Sort: Beds Low-High</option>
+        </select>
+        
+        <button 
+          type="button" 
+          (click)="clearFilters()" 
+          class="clear-filters-btn"
+        >
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Results Summary -->
+<div class="results-summary">
+  <div class="container">
+    <p *ngIf="filteredHospitals.length > 0">
+      Showing {{ filteredHospitals.length }} of {{ hospitals.length }} hospitals
+      <span *ngIf="searchTerm || selectedCity || selectedSpecialty || selectedService">
+        matching your criteria
+      </span>
+    </p>
+    <p *ngIf="filteredHospitals.length === 0" class="no-results">
+      No hospitals found matching your criteria. Try adjusting your filters.
+    </p>
+    <div *ngIf="selectedService" class="active-service-filter">
+      <i class="fa-solid fa-filter"></i>
+      <span>Filtered by service: {{ getServiceName(selectedService) }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Hospitals Grid -->
+<div class="hospitals-area">
+  <div class="container">
+    <div class="row" *ngIf="filteredHospitals.length > 0">
+      <div class="col-lg-6 col-xl-4" *ngFor="let hospital of filteredHospitals">
+        <div class="hospital-card">
+          <div class="hospital-image">
+            <img 
+              [src]="hospital.image" 
+              [alt]="hospital.title"
+              (error)="onHospitalImgError($event)"
+            >
+            <div class="hospital-badge">
+              <span class="rating">
+                <i class="fa-solid fa-star" *ngFor="let star of getStarRating(hospital.rating)"></i>
+                {{ hospital.rating }}
+              </span>
+            </div>
+          </div>
+          
+          <div class="hospital-content">
+            <h3>{{ hospital.title }}</h3>
+            <div class="hospital-location">
+              <i class="fa-solid fa-map-marker-alt"></i>
+              {{ hospital.city }}, {{ hospital.country }}
+            </div>
+            
+            <div class="hospital-details">
+              <div class="detail-item">
+                <i class="fa-solid fa-bed"></i>
+                <span>{{ hospital.bedCount }} Beds</span>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Est. {{ hospital.establishedYear }}</span>
+              </div>
+            </div>
+            
+            <div class="hospital-specialties">
+              <h4>Specialties:</h4>
+              <div class="specialty-tags">
+                <span 
+                  *ngFor="let specialty of hospital.specialties.slice(0, 3)" 
+                  class="specialty-tag"
+                >
+                  {{ specialty }}
+                </span>
+                <span 
+                  *ngIf="hospital.specialties.length > 3" 
+                  class="specialty-tag more"
+                >
+                  +{{ hospital.specialties.length - 3 }} more
+                </span>
+              </div>
+            </div>
+            
+            <div class="hospital-accreditation">
+              <span 
+                *ngFor="let acc of hospital.accreditation" 
+                class="accreditation-badge"
+              >
+                {{ acc }}
+              </span>
+            </div>
+            
+            <!-- Hidden description section -->
+            <div class="hospital-description-section" [class.expanded]="isHospitalExpanded(hospital.id)">
+              <p *ngIf="isHospitalExpanded(hospital.id)" class="expanded-description">{{ hospital.description }}</p>
+            </div>
+            
+            <div class="hospital-actions">
+              <button class="btn-primary" (click)="viewHospitalDetails(hospital)">
+                {{ isHospitalExpanded(hospital.id) ? 'Hide Details' : 'View Details' }}
+              </button>
+              <button class="btn-secondary" (click)="contactHospital(hospital)">
+                Contact
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Call to Action -->
+<div class="cta-area">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Need Help Finding the Right Hospital?</h2>
+      <p>Our medical experts can help you choose the best hospital for your specific needs.</p>
+      <div class="cta-buttons">
+        <a routerLink="/booking" class="default-btn">Get Free Consultation</a>
+        <a href="https://wa.me/" target="_blank" class="whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          Chat with Us
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

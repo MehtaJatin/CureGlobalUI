@@ -33,6 +33,8 @@ import { ScrollComponent } from './Components/scroll/scroll.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminServicesComponent } from './admin/services/services.component';
 import { AdminSetupComponent } from './admin-setup/admin-setup.component';
+import { HospitalListComponent } from './hospital-list/hospital-list.component';
+import { DoctorListComponent } from './doctor-list/doctor-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService } from './backend/firebase.service';
@@ -76,6 +78,8 @@ import { MachineTranslatePipe } from './i18n/mt.pipe';
     AdminDashboardComponent,
     AdminServicesComponent,
     AdminSetupComponent,
+    HospitalListComponent,
+    DoctorListComponent,
     TranslatePipe,
     LocalizePipe,
     MachineTranslatePipe,
