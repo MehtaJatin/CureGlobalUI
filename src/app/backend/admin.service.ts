@@ -15,7 +15,7 @@ export interface Service {
   updatedAt: Date;
 }
 
-export interface AdminAdminHospital {
+export interface Hospital {
   id?: string;
   name: string;
   address: string;
@@ -57,14 +57,14 @@ export class AdminService {
 
   // Get all services
   getServices(): Observable<Service[]> {
-    return this.firestore.collection<Service>('services', ref => 
+    return this.firestore.collection<Service>('services', ref =>
       ref.orderBy('createdAt', 'desc')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get active services
   getActiveServices(): Observable<Service[]> {
-    return this.firestore.collection<Service>('services', ref => 
+    return this.firestore.collection<Service>('services', ref =>
       ref.where('isActive', '==', true).orderBy('name')
     ).valueChanges({ idField: 'id' });
   }
@@ -107,22 +107,22 @@ export class AdminService {
   // ==================== HOSPITALS MANAGEMENT ====================
 
   // Get all hospitals
-  getHospitals(): Observable<AdminAdminHospital[]> {
-    return this.firestore.collection<AdminAdminHospital>('hospitals', ref => 
+  getHospitals(): Observable<Hospital[]> {
+    return this.firestore.collection<Hospital>('hospitals', ref =>
       ref.orderBy('createdAt', 'desc')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get active hospitals
-  getActiveHospitals(): Observable<AdminAdminHospital[]> {
-    return this.firestore.collection<AdminAdminHospital>('hospitals', ref => 
+  getActiveHospitals(): Observable<Hospital[]> {
+    return this.firestore.collection<Hospital>('hospitals', ref =>
       ref.where('isActive', '==', true).orderBy('name')
     ).valueChanges({ idField: 'id' });
   }
 
   // Add new hospital
-  async addHospital(hospital: Omit<AdminAdminHospital, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
-    const hospitalData: AdminAdminHospital = {
+  async addHospital(hospital: Omit<Hospital, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
+    const hospitalData: Hospital = {
       ...hospital,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -133,7 +133,7 @@ export class AdminService {
   }
 
   // Update hospital
-  async updateHospital(id: string, hospital: Partial<AdminAdminHospital>): Promise<void> {
+  async updateHospital(id: string, hospital: Partial<Hospital>): Promise<void> {
     const updateData = {
       ...hospital,
       updatedAt: new Date()
@@ -159,21 +159,21 @@ export class AdminService {
 
   // Get all doctors
   getDoctors(): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref => 
+    return this.firestore.collection<Doctor>('doctors', ref =>
       ref.orderBy('createdAt', 'desc')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get active doctors
   getActiveDoctors(): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref => 
+    return this.firestore.collection<Doctor>('doctors', ref =>
       ref.where('isActive', '==', true).orderBy('name')
     ).valueChanges({ idField: 'id' });
   }
 
   // Get doctors by hospital
   getDoctorsByAdminHospital(hospitalId: string): Observable<Doctor[]> {
-    return this.firestore.collection<Doctor>('doctors', ref => 
+    return this.firestore.collection<Doctor>('doctors', ref =>
       ref.where('hospitalId', '==', hospitalId).where('isActive', '==', true)
     ).valueChanges({ idField: 'id' });
   }
