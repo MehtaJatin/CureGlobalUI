@@ -46,7 +46,6 @@ const routes: Routes = [
   { path: 'admin-setup', component: AdminSetupComponent },
   { path: 'doctor-details', component: DoctorDetailsComponent },
   { path: 'doctors', component: DoctorListComponent },
-  { path: '**', component: NotfoundComponent },
   { path: 'hospital-details/:id', component: HospitalDetailsComponent },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', component: NotfoundComponent },
