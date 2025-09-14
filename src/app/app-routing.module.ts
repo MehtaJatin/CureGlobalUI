@@ -20,6 +20,7 @@ import { AdminSetupComponent } from './admin-setup/admin-setup.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminServicesComponent } from './admin/services/services.component';
 import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
+import { HospitalDetailsComponent } from './hospital-details/hospital-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -41,15 +42,20 @@ const routes: Routes = [
   { path: 'blog-details', component: BlogDetailsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'admin-setup', component: AdminSetupComponent },
-  { path: 'admin', component: AdminDashboardComponent },
-  { path: 'admin/services', component: AdminServicesComponent },
   { path: 'doctor-details', component: DoctorDetailsComponent },
-  { path: '**', component: NotfoundComponent },
+  { path: 'hospital-details/:id', component: HospitalDetailsComponent },
   { path: 'notfound', component: NotfoundComponent },
+  { path: '**', component: NotfoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
