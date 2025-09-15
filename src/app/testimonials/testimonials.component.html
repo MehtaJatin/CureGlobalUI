@@ -16,114 +16,36 @@
 
 <div class="review-area pt-100 pb-75">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
+        <!-- Loading State -->
+        <div *ngIf="isLoading" class="loading-container text-center">
+            <div class="loading-spinner">
+                <i class="fa fa-spinner fa-spin fa-2x"></i>
+                <p>Loading testimonials...</p>
+            </div>
+        </div>
+
+        <!-- Dynamic Testimonials Grid -->
+        <div *ngIf="!isLoading && testimonials.length > 0" class="row">
+            <div class="col-lg-4 col-md-6" *ngFor="let testimonial of testimonials">
                 <div class="single-review-item">
                     <div class="icon">
                         <i class="fa-solid fa-quote-left"></i>
                     </div>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat.
-                    </p>
+                    <p>{{ testimonial.review }}</p>
                     <div class="review-info">
-                        <img src="assets/images/review-1.jpg">
-                        <h3>Dr. Sarah Taylor</h3>
-                        <span>Nephrologists</span>
+                        <img [src]="testimonial.image" [alt]="testimonial.name">
+                        <h3>{{ testimonial.name }}</h3>
+                        <span>{{ testimonial.specialty }}</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-review-item">
-                    <div class="icon">
-                        <i class="fa-solid fa-quote-left"></i>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <div class="review-info">
-                        <img src="assets/images/review-2.jpg">
-                        <h3>Dr. Aiken Ward</h3>
-                        <span>Endocrinologists</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-review-item">
-                    <div class="icon">
-                        <i class="fa-solid fa-quote-left"></i>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <div class="review-info">
-                        <img src="assets/images/review-3.jpg">
-                        <h3>Dr. Eachann Jhon</h3>
-                        <span>Cardiologists</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-review-item">
-                    <div class="icon">
-                        <i class="fa-solid fa-quote-left"></i>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <div class="review-info">
-                        <img src="assets/images/review-4.jpg">
-                        <h3>Dr. Smith Jorge</h3>
-                        <span>General Dentist</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-review-item">
-                    <div class="icon">
-                        <i class="fa-solid fa-quote-left"></i>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <div class="review-info">
-                        <img src="assets/images/review-5.jpg">
-                        <h3>Dr. Aston Alison</h3>
-                        <span>Orthodontist</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-review-item">
-                    <div class="icon">
-                        <i class="fa-solid fa-quote-left"></i>
-                    </div>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipiscing elit
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                        nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <div class="review-info">
-                        <img src="assets/images/review-6.jpg">
-                        <h3>Dr. Moris Johonson</h3>
-                        <span>Periodontist</span>
-                    </div>
-                </div>
+        </div>
+
+        <!-- No Testimonials Message -->
+        <div *ngIf="!isLoading && testimonials.length === 0" class="no-testimonials text-center">
+            <div class="alert alert-info">
+                <i class="fa fa-info-circle"></i>
+                <p>No testimonials available at the moment.</p>
             </div>
         </div>
     </div>

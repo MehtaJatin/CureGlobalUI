@@ -284,10 +284,9 @@ export class FirebaseService {
   // Get testimonials from Firebase
   getTestimonials(): Observable<any[]> {
     const testimonialsRef = collection(this.firestore, 'testimonials');
-    const q = query(testimonialsRef, where('isActive', '==', true), orderBy('createdAt', 'desc'));
 
     return from(
-      getDocs(q).then((snapshot) => {
+      getDocs(testimonialsRef).then((snapshot) => {
         return snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -301,7 +300,6 @@ export class FirebaseService {
     const testimonialsRef = collection(this.firestore, 'testimonials');
     const testimonialData = {
       ...testimonial,
-      isActive: true,
       createdAt: new Date(),
       updatedAt: new Date()
     };
