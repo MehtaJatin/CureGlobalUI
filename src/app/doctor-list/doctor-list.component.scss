@@ -248,7 +248,7 @@
 
           &.expanded {
             background: #f0f8ff;
-            border-left: 3px solid $main_color;
+            // border-left: 3px solid $main_color;
           }
 
           .doctor-actions {
@@ -284,7 +284,7 @@
             .btn-secondary {
               background: transparent;
               color: $main_color;
-              border: 1px solid $main_color;
+              // border: 1px solid $main_color;
 
               &:hover {
                 background: $main_color;
@@ -500,6 +500,7 @@
 
           .doctor-description {
             .doctor-actions {
+              margin-top: 5px;
               justify-content: center;
 
               .btn-primary, .btn-secondary, .btn-consultation {

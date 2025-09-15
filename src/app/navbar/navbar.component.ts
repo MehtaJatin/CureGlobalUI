@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userName: string = '';
   services: any[] = [];
   hospitals: Hospital[] = [];
-  hospitalSpecialties: string[] = [];
+  hospitalSpecialties: any[] = [];
   doctors: any[] = [];
   doctorSpecialties: any[] = [];
   private hospitalsSubscription: Subscription | undefined;
@@ -58,8 +58,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/hospitals'], { queryParams: { speciality: serviceLink } });
   }
 
-  goToHospitalsBySpecialty(specialty: string) {
-    this.router.navigate(['/hospitals'], { queryParams: { speciality: specialty } });
+  goToHospitalsBySpecialty(specialty: any) {
+    this.router.navigate(['/hospitals'], { queryParams: { speciality: specialty.id } });
   }
 
   goToDoctorsBySpecialty(service: any) {
@@ -107,17 +107,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   private extractHospitalSpecialties() {
-    const specialtySet = new Set<string>();
+    const specialitySet = new Set<string>();
 
     this.hospitals.forEach(hospital => {
-      if (hospital.specialties && Array.isArray(hospital.specialties)) {
-        hospital.specialties.forEach(specialty => {
-          specialtySet.add(specialty);
+      if (hospital.specialities && Array.isArray(hospital.specialities)) {
+        hospital.specialities.forEach(specialty => {
+          specialitySet.add(specialty);
         });
       }
     });
+     this.firebaseService.getServices().subscribe((specialites)=>{
+      this.hospitalSpecialties = specialites.filter((spec: any) =>
+        specialitySet.has(spec.id)
+      );
+    });
 
-    this.hospitalSpecialties = Array.from(specialtySet).sort();
     console.log('Extracted hospital specialties:', this.hospitalSpecialties);
   }
 

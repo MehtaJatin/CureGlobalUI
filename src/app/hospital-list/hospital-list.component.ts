@@ -23,7 +23,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
 
   // Available filter options
   cities: string[] = [];
-  specialties: string[] = [];
+  specialties: any[] = [];
 
   private routeSubscription: any;
 
@@ -42,6 +42,11 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
     }
+  }
+
+  getSpeicalityNameById(id: string): string {
+    const matched = (this.specialties || []).find((spec: any) => spec && spec.id == id);
+    return matched?.name || id;
   }
 
   public initializeHospitals(): void {
@@ -116,7 +121,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
         country: 'India', // Default country
         image: firebaseHospital.images || [firebaseHospital.image, 'assets/images/hospitals/default-hospital.jpg'],
         description: firebaseHospital.description || 'No description available',
-        specialties: firebaseHospital.specialties || [],
+        specialities: firebaseHospital.specialities || [],
         rating: 4.5, // Default rating - can be enhanced with actual ratings
         establishedYear: establishedYear,
         bedCount: 100, // Default bed count - can be enhanced with actual data
@@ -135,9 +140,13 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     // Extract unique cities
     this.cities = [...new Set(this.hospitals.map(h => h.city))].sort();
 
+    // this.specialties = [...new Set(this.doctors.flatMap(d => d.specialities || []))].sort();
+    this.firebaseService.getServices().subscribe((specialtyList )=>{
+      this.specialties = specialtyList
+    });
     // Extract unique specialties
-    const allSpecialties = this.hospitals.flatMap(h => h.specialties);
-    this.specialties = [...new Set(allSpecialties)].sort();
+    // const allSpecialties = this.hospitals.flatMap(h => h.specialties);
+    // this.specialties = [...new Set(allSpecialties)].sort();
   }
 
   private setupRouteSubscription(): void {
@@ -162,7 +171,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
       filtered = filtered.filter(h =>
         h.title.toLowerCase().includes(term) ||
         h.city.toLowerCase().includes(term) ||
-        h.specialties.some(s => s.toLowerCase().includes(term)) ||
+        h.specialities.some(s => s.toLowerCase().includes(term)) ||
         h.description.toLowerCase().includes(term)
       );
     }
@@ -173,24 +182,31 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     }
 
     // Apply specialty filter
+    // if (this.selectedSpecialty) {
+    //   filtered = filtered.filter(h => h.specialties.includes(this.selectedSpecialty));
+    // }
+
     if (this.selectedSpecialty) {
-      filtered = filtered.filter(h => h.specialties.includes(this.selectedSpecialty));
+      const selected = this.selectedSpecialty.trim().toLowerCase();
+      filtered = filtered.filter(d =>
+        (d.specialities || []).some(s => (s || '').toString().trim().toLowerCase() === selected)
+      );
     }
 
     // Apply service filter (map service links to specialties)
-    if (this.selectedService) {
-      const serviceToSpecialtyMap: { [key: string]: string } = {
-        '/service-details': '', // General service, no specific filter
-        '/dentict': 'Cardiology',
-        '/doctor': 'Orthopedics',
-        '/doctor-details': 'Oncology'
-      };
+    // if (this.selectedService) {
+    //   const serviceToSpecialtyMap: { [key: string]: string } = {
+    //     '/service-details': '', // General service, no specific filter
+    //     '/dentict': 'Cardiology',
+    //     '/doctor': 'Orthopedics',
+    //     '/doctor-details': 'Oncology'
+    //   };
 
-      const mappedSpecialty = serviceToSpecialtyMap[this.selectedService];
-      if (mappedSpecialty) {
-        filtered = filtered.filter(h => h.specialties.includes(mappedSpecialty));
-      }
-    }
+    //   const mappedSpecialty = serviceToSpecialtyMap[this.selectedService];
+    //   if (mappedSpecialty) {
+    //     filtered = filtered.filter(h => h.specialities.includes(mappedSpecialty));
+    //   }
+    // }
 
     // Apply sorting
     filtered.sort((a, b) => {

@@ -55,7 +55,7 @@
           class="filter-select"
         >
           <option value="">All Specialties</option>
-          <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
+          <option *ngFor="let speciality of specialties" [value]="speciality.id">{{ speciality.name }}</option>
         </select>
 
         <select
@@ -169,19 +169,29 @@
             <div class="hospital-specialties">
               <h4>Specialties:</h4>
               <div class="specialty-tags">
+                <span class="specialty-tag" *ngFor="let specialty of hospital.specialities.slice(0,3)">{{ getSpeicalityNameById(specialty) }}</span>
                 <span
-                  *ngFor="let specialty of hospital.specialties.slice(0, 3)"
+                  *ngIf="hospital.specialities.length > 3"
+                  class="specialty-tag more"
+                >
+                  +{{ hospital.specialities.length - 3 }} more
+                </span>
+              </div>
+              
+              <!-- <div class="specialty-tags">
+                <span
+                  *ngFor="let specialty of hospital.specialities.slice(0, 3)"
                   class="specialty-tag"
                 >
                   {{ specialty }}
                 </span>
                 <span
-                  *ngIf="hospital.specialties.length > 3"
+                  *ngIf="hospital.specialities.length > 3"
                   class="specialty-tag more"
                 >
-                  +{{ hospital.specialties.length - 3 }} more
+                  +{{ hospital.specialities.length - 3 }} more
                 </span>
-              </div>
+              </div> -->
             </div>
 
             <div class="hospital-accreditation">

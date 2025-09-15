@@ -133,7 +133,9 @@
 
               <div class="doctor-info">
                 <h3 class="doctor-name">{{ doctor.name }}</h3>
-                <div class="specialty-tag">{{ doctor.specialities.join('') }}</div>
+                <div class="specialty-tags">
+                  <span class="specialty-tag" *ngFor="let specialty of doctor.specialities">{{ getSpeicalityNameById(specialty) }}</span>
+                </div>
 
                 <div class="doctor-details">
                   <div class="detail-item">
@@ -161,19 +163,19 @@
             </div>
 
             <div class="doctor-description" [class.expanded]="isDoctorExpanded(doctor.id)">
-              <p *ngIf="isDoctorExpanded(doctor.id)" class="expanded-description">{{ doctor.description }}</p>
               <div class="doctor-actions">
                 <button class="btn-primary" (click)="viewDoctorDetails(doctor)">
                   {{ isDoctorExpanded(doctor.id) ? 'Hide Details' : 'View Details' }}
                 </button>
-                <button class="btn-secondary" (click)="contactDoctor(doctor)">
+                <!-- <button class="btn-secondary" (click)="contactDoctor(doctor)">
                   Contact
-                </button>
-                <button class="btn-consultation" (click)="bookConsultation(doctor)">
+                </button> -->
+                <button class="btn-primary" (click)="bookConsultation(doctor)">
                   Book Consultation
                 </button>
               </div>
             </div>
+            <p *ngIf="isDoctorExpanded(doctor.id)" class="expanded-description">{{ doctor.description }}</p>
           </div>
         </div>
       </div>

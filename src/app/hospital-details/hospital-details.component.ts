@@ -100,7 +100,7 @@ export class HospitalDetailsComponent implements OnInit {
       phone: firebaseHospital.phone,
       email: firebaseHospital.email,
       description: firebaseHospital.description,
-      specialties: firebaseHospital.specialties,
+      specialties: firebaseHospital.specialities,
       // Add mock/default data for fields that don't exist in FirebaseService but are needed by template
       images: firebaseHospital.images || [firebaseHospital.image || 'assets/images/blog/blog1.jpg'],
       doctors: mappedDoctors,

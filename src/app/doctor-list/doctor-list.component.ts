@@ -53,7 +53,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
   private initializeDoctors(): void {
     this.doctorsSubscription = this.firebaseService.getDoctors().subscribe({
       next: (doctors) => {
-        console.log('Fetched doctors from Firestore:', doctors);
+        // console.log('Fetched doctors from Firestore:', doctors);
         this.doctors = doctors.map((doc: any) => ({
           id: doc.id,
           name: doc.name || '',
@@ -90,7 +90,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
 
   private extractFilterOptions(): void {
     // Extract unique specialties
-    this.specialties = [...new Set(this.doctors.flatMap(d => d.specialities || []))].sort();
+    // this.specialties = [...new Set(this.doctors.flatMap(d => d.specialities || []))].sort();
     this.firebaseService.getServices().subscribe((specialtyList )=>{
       this.specialties = specialtyList
     });
@@ -98,8 +98,9 @@ export class DoctorListComponent implements OnInit, OnDestroy {
     this.locations = [...new Set(this.doctors.map(d => d.location))].sort();
   }
 
-  private getSpeicalityNameById(id:string){
-    return this.specialties.some(specility => specility.id ==id);
+  getSpeicalityNameById(id: string): string {
+    const matched = (this.specialties || []).find((spec: any) => spec && spec.id == id);
+    return matched?.name || id;
   }
 
   private setupRouteSubscription(): void {
@@ -306,13 +307,13 @@ export class DoctorListComponent implements OnInit, OnDestroy {
 
   contactDoctor(doctor: doctor): void {
     // Open contact modal or navigate to contact page
-    console.log('Contact doctor:', doctor.name);
+    // console.log('Contact doctor:', doctor.name);
     // You can implement contact functionality here
   }
 
   bookConsultation(doctor: doctor): void {
     // Navigate to booking page with doctor details
-    console.log('Book consultation with:', doctor.name);
-    // You can implement booking functionality here
+    // console.log('Book consultation with:', doctor.name);
+    this.router.navigate(['/booking']);
   }
 }

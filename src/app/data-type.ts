@@ -64,7 +64,7 @@ export interface hospital {
   country: string;
   image: string;
   description: string;
-  specialties: string[];
+  specialities: any[];
   rating: number;
   establishedYear: number;
   bedCount: number;
@@ -77,7 +77,7 @@ export interface hospital {
 export interface doctor {
   id: number;
   name: string;
-  specialities: string[];
+  specialities: any[];
   image: string;
   location: string;
   experience: string;

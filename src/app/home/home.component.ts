@@ -398,7 +398,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
         country: 'India', // Default country
         image: firebaseHospital.images? firebaseHospital.images[0] : 'assets/images/hospitals/default-hospital.jpg',
         description: firebaseHospital.description || 'No description available',
-        specialties: firebaseHospital.specialties || ['general'],
+        specialties: firebaseHospital.specialities || [],
         address: firebaseHospital.address || ''
       } as any; // Type assertion to handle id type difference
 

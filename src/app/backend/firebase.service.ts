@@ -29,7 +29,7 @@ export interface Hospital {
   description: string;
   image?: string;
   images?: string[]; // Additional images for detailed view
-  specialties: string[];
+  specialities: string[];
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;

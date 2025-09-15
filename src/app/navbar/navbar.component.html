@@ -50,7 +50,7 @@
               <li><hr class="dropdown-divider"></li>
               <li *ngFor="let specialty of hospitalSpecialties">
                 <a class="dropdown-item" (click)="goToHospitalsBySpecialty(specialty)">
-                  {{ specialty | mt | async }}
+                  {{ specialty.name | mt | async }}
                 </a>
               </li>
             </ul>
