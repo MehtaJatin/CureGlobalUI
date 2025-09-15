@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Sarah Taylor",
+    "specialty": "Nephrologists",
+    "image": "assets/images/review-1.jpg",
+    "review": "Specializing in emergency medicine, Dr. Johnson is prepared of acute illnesses, injuries or conditions. Emergency physicians, or ER doctors, must incorporate knowledge and experience gained across a broad range of medical topics.",
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "name": "Dr. Aiken Ward",
+    "specialty": "Endocrinologists",
+    "image": "assets/images/review-2.jpg",
+    "review": "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "rating": 5
+  },
+  {
+    "id": 3,
+    "name": "Dr. Eachann Jhon",
+    "specialty": "Cardiologists",
+    "image": "assets/images/review-3.jpg",
+    "review": "Specializing in emergency medicine, Dr. Johnson is prepared of acute illnesses, injuries or conditions. Emergency physicians, or ER doctors, must incorporate knowledge and experience gained across a broad range of medical topics.",
+    "rating": 5
+  },
+  {
+    "id": 4,
+    "name": "Dr. Smith Jorge",
+    "specialty": "General Dentist",
+    "image": "assets/images/review-4.jpg",
+    "review": "Excellent dental care with modern equipment and a friendly staff. The treatment was painless and the results exceeded my expectations. Highly recommended for anyone looking for quality dental services.",
+    "rating": 5
+  },
+  {
+    "id": 5,
+    "name": "Dr. Aston Alison",
+    "specialty": "Orthodontist",
+    "image": "assets/images/review-5.jpg",
+    "review": "Professional orthodontic treatment with clear communication throughout the process. The team made sure I understood every step of my treatment plan and the results speak for themselves.",
+    "rating": 5
+  }
+]

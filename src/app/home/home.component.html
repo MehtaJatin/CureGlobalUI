@@ -384,16 +384,86 @@
   <div class="quote-dialog" role="dialog" aria-modal="true" aria-label="Tell Us About The Patient">
     <button type="button" class="quote-close" (click)="closeQuote()" aria-label="Close">×</button>
     <h3 class="quote-title">Tell Us About The Patient</h3>
-    <form (submit)="submitQuote($event)">
-      <input class="quote-input" type="text" name="patientName" placeholder="Patient Name" required />
-      <input class="quote-input" type="tel" name="phone" placeholder="Enter Phone No." required />
-      <input class="quote-input" type="email" name="email" placeholder="Enter Email" required />
-      <input class="quote-input" type="text" name="city" placeholder="Enter City" />
-      <textarea class="quote-input" name="concern" rows="3" placeholder="Kindly describe the health concern....."></textarea>
-      <input type="hidden" name="procedure" [value]="selectedProcedure?.name || ''" />
-      <button class="default-btn" type="submit">SUBMIT NOW</button>
+    <form #userBooking="ngForm" (ngSubmit)="Booking(userBooking.value)">
+      <div class="form-group">
+        <input
+          type="text"
+          placeholder="Patient Name"
+          class="form-control"
+          name="patientName"
+          ngModel
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="tel"
+          placeholder="Enter Phone No."
+          class="form-control"
+          name="phone"
+          ngModel
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          placeholder="Enter Email"
+          class="form-control"
+          name="email"
+          ngModel
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          placeholder="Enter City"
+          class="form-control"
+          name="city"
+          ngModel
+        />
+      </div>
+      <div class="form-group">
+        <textarea
+          placeholder="Kindly describe the health concern....."
+          class="form-control"
+          name="concern"
+          ngModel
+          rows="5"
+        ></textarea>
+      </div>
+      <button type="submit" class="default-btn" [disabled]="isSubmitting">
+        <span *ngIf="!isSubmitting">SUBMIT NOW</span>
+        <span *ngIf="isSubmitting">
+          <i class="fa fa-spinner fa-spin"></i> SUBMITTING...
+        </span>
+      </button>
+      
+      <!-- Success Message -->
+      <div *ngIf="showSuccessMessage && Bookingmsg" class="alert alert-success mt-3 success-message">
+        <div class="success-icon">
+          <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="success-content">
+          <h4>Success!</h4>
+          <p>{{ Bookingmsg }}</p>
+        </div>
+      </div>
+      
+      <!-- Error Message -->
+      <div *ngIf="!showSuccessMessage && Bookingmsg" class="alert alert-danger mt-3 error-message">
+        <div class="error-icon">
+          <i class="fa fa-exclamation-circle"></i>
+        </div>
+        <div class="error-content">
+          <h4>Error</h4>
+          <p>{{ Bookingmsg }}</p>
+        </div>
+      </div>
     </form>
   </div>
+  
 </div>
 
 <app-testimonial-part></app-testimonial-part>

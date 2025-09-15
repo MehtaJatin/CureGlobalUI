@@ -92,3 +92,12 @@ export interface doctor {
   phone?: string;
   email?: string;
 }
+
+export interface testimonial {
+  id: number;
+  name: string;
+  specialty: string;
+  image: string;
+  review: string;
+  rating?: number;
+}

@@ -144,7 +144,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.route.queryParams.subscribe(params => {
       this.searchTerm = params['q'] || '';
       this.selectedCity = params['city'] || '';
-      this.selectedSpecialty = params['specialty'] || '';
+      this.selectedSpecialty = params['speciality'] || '';
       this.selectedService = params['service'] || '';
       this.sortBy = params['sortBy'] || 'name';
       this.sortOrder = params['sortOrder'] || 'asc';

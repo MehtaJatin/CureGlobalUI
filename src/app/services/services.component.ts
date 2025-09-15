@@ -42,6 +42,6 @@ export class ServicesComponent implements OnInit {
   }
 
   goToHospitals(serviceName: string) {
-    this.router.navigate(['/hospitals'], { queryParams: { service: serviceName } });
+    this.router.navigate(['/hospitals'], { queryParams: { speciality: serviceName } });
   }
 }

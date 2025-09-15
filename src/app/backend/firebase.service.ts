@@ -279,4 +279,42 @@ export class FirebaseService {
       })
     );
   }
+
+  // Get testimonials from Firebase
+  getTestimonials(): Observable<any[]> {
+    const testimonialsRef = collection(this.firestore, 'testimonials');
+    const q = query(testimonialsRef, where('isActive', '==', true), orderBy('createdAt', 'desc'));
+    
+    return from(
+      getDocs(q).then((snapshot) => {
+        return snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+      })
+    );
+  }
+
+  // Add a new testimonial to Firebase
+  addTestimonial(testimonial: any): Observable<{ success: boolean; id?: string; error?: any }> {
+    const testimonialsRef = collection(this.firestore, 'testimonials');
+    const testimonialData = {
+      ...testimonial,
+      isActive: true,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    return from(
+      addDoc(testimonialsRef, testimonialData)
+        .then((docRef) => {
+          console.log('Testimonial added with ID:', docRef.id);
+          return { success: true, id: docRef.id };
+        })
+        .catch((error) => {
+          console.error('Error adding testimonial:', error);
+          return { success: false, error };
+        })
+    );
+  }
 }

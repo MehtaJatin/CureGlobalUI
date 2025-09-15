@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FirebaseService } from '../backend/firebase.service';
 import { Hospital as FirebaseHospital } from '../backend/firebase.service';
 import { hospital } from '../data-type';
+import { book } from '../data-type';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import { hospital } from '../data-type';
 })
 export class HomeComponent implements OnInit, AfterViewInit{
   Bookingmsg: string | undefined;
+  isSubmitting: boolean = false;
+  showSuccessMessage: boolean = false;
   services: any[] = [];
   extendedServices = [
     {
@@ -234,6 +237,9 @@ export class HomeComponent implements OnInit, AfterViewInit{
 
   closeQuote(): void {
     this.showQuoteModal = false;
+    this.Bookingmsg = undefined;
+    this.showSuccessMessage = false;
+    this.isSubmitting = false;
   }
 
   submitQuote(event: Event): void {
@@ -244,6 +250,72 @@ export class HomeComponent implements OnInit, AfterViewInit{
     data.forEach((v, k) => payload[k] = String(v));
     console.log('Quote form submitted', payload);
     this.closeQuote();
+  }
+
+  async Booking(data: book) {
+    this.isSubmitting = true;
+    this.Bookingmsg = undefined;
+    this.showSuccessMessage = false;
+
+    try {
+      console.log('Submitting booking data:', data);
+
+      // Validate required fields
+      if (!data.patientName || !data.email || !data.phone || !data.concern) {
+        this.Bookingmsg = 'Please fill in all required fields.';
+        this.isSubmitting = false;
+        return;
+      }
+
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(data.email)) {
+        this.Bookingmsg = 'Please enter a valid email address.';
+        this.isSubmitting = false;
+        return;
+      }
+
+      // Basic phone validation
+      const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+      if (!phoneRegex.test(data.phone.replace(/\s/g, ''))) {
+        this.Bookingmsg = 'Please enter a valid phone number.';
+        this.isSubmitting = false;
+        return;
+      }
+
+      const result = await this.firebaseService.addBooking(data);
+      if (result.success) {
+        this.showSuccessMessage = true;
+        this.Bookingmsg = 'Your appointment request has been submitted successfully.';
+        console.log(
+          'Booking successfully stored in Firestore with ID:',
+          result.id
+        );
+
+        // Auto-close modal after 3 seconds on success
+        setTimeout(() => {
+          this.closeQuote();
+        }, 3000);
+
+      } else {
+        const code = result.error?.code || 'unknown-error';
+        const msg = result.error?.message || '';
+        this.Bookingmsg = `Error submitting booking: ${code}. ${msg}`;
+        console.error('Firebase error:', result.error);
+      }
+    } catch (error) {
+      this.Bookingmsg = 'Error submitting booking. Please try again.';
+      console.error('Booking error:', error);
+    } finally {
+      this.isSubmitting = false;
+    }
+
+    // Clear error message after 5 seconds
+    if (this.Bookingmsg && !this.showSuccessMessage) {
+      setTimeout(() => {
+        this.Bookingmsg = undefined;
+      }, 5000);
+    }
   }
 
   getServicesDetails(){
@@ -277,20 +349,10 @@ export class HomeComponent implements OnInit, AfterViewInit{
   getHospitalDetails(){
     this.firebaseService.getHospitals().subscribe({
       next: (firebaseHospitals) => {
-        console.log('Fetched hospitals from Firebase:', firebaseHospitals);
-        console.log('Number of hospitals fetched:', firebaseHospitals.length);
-
-        // Debug: Check isActive status
-        firebaseHospitals.forEach((hospital, index) => {
-          console.log(`Hospital ${index}:`, {
-            name: hospital.name,
-            isActive: hospital.isActive,
-            hasRequiredFields: !!(hospital.name && hospital.address)
-          });
-        });
-
-        this.hospitals = this.mapFirebaseHospitalsToLocal(firebaseHospitals);
-        console.log('Mapped hospitals:', this.hospitals);
+        // Limit to only 6 hospitals
+        const limitedHospitals = firebaseHospitals.slice(0, 6);
+        this.hospitals = this.mapFirebaseHospitalsToLocal(limitedHospitals);
+        console.log('Mapped hospitals (limited to 6):', this.hospitals);
         console.log('Number of mapped hospitals:', this.hospitals.length);
 
       },
@@ -334,7 +396,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
         title: firebaseHospital.name || 'Unnamed Hospital',
         city: city,
         country: 'India', // Default country
-        image: firebaseHospital.image || 'assets/images/hospitals/default-hospital.jpg',
+        image: firebaseHospital.images? firebaseHospital.images[0] : 'assets/images/hospitals/default-hospital.jpg',
         description: firebaseHospital.description || 'No description available',
         specialties: firebaseHospital.specialties || ['general'],
         address: firebaseHospital.address || ''
