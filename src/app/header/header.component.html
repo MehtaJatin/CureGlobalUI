@@ -5,11 +5,11 @@
         <ul class="top-header-information">
           <li>
             <i class="bx bxs-map"></i>
-            {{ "HEADER_LOCATION" | t }}
+            {{ "Delhi, India" | autoTranslate }}
           </li>
           <li>
             <i class="bx bx-envelope-open"></i>
-            <a routerLink="/home">{{ "HEADER_EMAIL" | t }}</a>
+            <a routerLink="/home">{{ "connect@thecureglobe.com" | autoTranslate }}</a>
           </li>
         </ul>
       </div>
@@ -30,12 +30,10 @@
             </a>
           </li>
           <li class="languages-list">
-            <select [value]="lang" (change)="changeLang($event.target.value)">
-              <option value="en">English</option>
-              <option value="hi">Hindi</option>
-              <option value="pa">Panjabi</option>
-              <option value="it">Italiano</option>
-              <option value="es">Spanish</option>
+            <select [value]="lang" (change)="changeLang($event.target.value)" class="form-select">
+              <option *ngFor="let language of allLanguages | keyvalue" [value]="language.key">
+                {{ language.value }}
+              </option>
             </select>
           </li>
         </ul>
@@ -55,7 +53,7 @@
                 src="assets/images/logo.png"
                 style="width: 60px; height: 60px; margin-right: 10px"
             /></span>
-            <span style="color: #06a3da">{{ "BRAND_NAME" | t }}</span>
+            <span style="color: #06a3da">{{ "The Cure Globe" | autoTranslate }}</span>
           </h3>
         </div>
       </div>
@@ -63,16 +61,16 @@
         <ul class="middle-header-content">
           <li>
             <i class="bx bx-phone-call"></i>
-            {{ "HEADER_CALL_TODAY" | t }}
+            {{ "Call Today" | autoTranslate }}
             <span>
-              <a href="#">{{ "HEADER_PHONE" | t }}</a>
+              <a href="#">{{ "+91 8392923555" | autoTranslate }}</a>
             </span>
           </li>
           <li>
             <i class="bx bx-time-five"></i>
-            {{ "HEADER_OPEN_HOUR" | t }}
+            {{ "Open Hour" | autoTranslate }}
             <span>
-              <a href="#">{{ "HEADER_OPEN_TIME" | t }}</a>
+              <a href="#">{{ "24/7" | autoTranslate }}</a>
             </span>
           </li>
         </ul>

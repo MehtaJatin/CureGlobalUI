@@ -5,12 +5,12 @@
                 <div class="main-slider-content">
                    <span class="sub-title">
                     <i class='bx bx-hash'></i>
-                    {{ slide.subTitle }}
+                    {{ slide.subTitle | autoTranslate }}
                    </span>
-                   <h1>{{ slide.title }}</h1>
-                   <p>{{ slide.description }}</p>
+                   <h1>{{ slide.title | autoTranslate }}</h1>
+                   <p>{{ slide.description | autoTranslate }}</p>
                    <div class="slider-btn">
-                    <a class="default-btn" [href]="slide.buttonLink">{{ slide.buttonText }}</a>
+                    <a class="default-btn" [href]="slide.buttonLink">{{ slide.buttonText | autoTranslate }}</a>
                    </div>
                 </div>
             </div>

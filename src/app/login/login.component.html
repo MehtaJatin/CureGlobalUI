@@ -1,13 +1,13 @@
 <div class="page-banner-area ptb-100 four">
   <div class="container">
     <div class="page-banner-content">
-      <h2>{{ "LOGIN_TITLE" | t }}</h2>
+      <h2>{{ "Login" | autoTranslate }}</h2>
       <div class="pages-list">
         <li>
-          <a routerLink="/home">{{ "HOME" | t }}</a>
+          <a routerLink="/home">{{ "Home" | autoTranslate }}</a>
         </li>
         <li>
-          {{ "LOGIN_TITLE" | t }}
+          {{ "Login" | autoTranslate }}
         </li>
       </div>
     </div>
@@ -17,14 +17,14 @@
 <div class="login-area ptb-100">
   <div class="container">
     <div class="login-form">
-      <h4>{{ "LOGIN_HERE" | t }}</h4>
-      <p>{{ "LOGIN_WELCOME" | t }}</p>
+      <h4>{{ "Login Here" | autoTranslate }}</h4>
+      <p>{{ "Welcome back, login to your account!" | autoTranslate }}</p>
       <form #userLogin="ngForm" (ngSubmit)="login(userLogin.value)">
         <div class="form-group">
-          <label>{{ "LOGIN_EMAIL_LABEL" | t }}</label>
+          <label>{{ "Your email address" | autoTranslate }}</label>
           <input
             type="text"
-            placeholder="{{ 'LOGIN_EMAIL_PLACEHOLDER' | t }}"
+            placeholder="{{ 'Your email address' | autoTranslate }}"
             class="form-control"
             name="email"
             ngModel
@@ -35,14 +35,14 @@
         </div>
         <p class="invalid-input">
           <span *ngIf="email.invalid && email.touched">{{
-            "FORM_INVALID" | t
+            "Please enter valid input" | autoTranslate
           }}</span>
         </p>
         <div class="form-group">
-          <label>{{ "LOGIN_PASSWORD_LABEL" | t }}</label>
+          <label>{{ "Your password" | autoTranslate }}</label>
           <input
             type="password"
-            placeholder="{{ 'LOGIN_PASSWORD_PLACEHOLDER' | t }}"
+            placeholder="{{ 'Your password' | autoTranslate }}"
             class="form-control"
             name="password"
             ngModel
@@ -54,7 +54,7 @@
         </div>
         <p class="invalid-input">
           <span *ngIf="password.invalid && password.touched">{{
-            "FORM_INVALID" | t
+            "Please enter valid input" | autoTranslate
           }}</span>
         </p>
         <div class="row align-items-center">
@@ -69,21 +69,21 @@
                 class="form-check-input"
               />
               <label for="gridCheck" class="form-check-label">
-                {{ "LOGIN_REMEMBER_ME" | t }}
+                {{ "Remember me" | autoTranslate }}
               </label>
             </div>
           </div>
           <div class="col-lg-6 col-md-6 lost-your-password-wrap">
             <a routerLink="/" class="lost-your-password">{{
-              "LOGIN_LOST_PASSWORD" | t
+              "Lost your password?" | autoTranslate
             }}</a>
           </div>
         </div>
-        <button type="submit" class="default-btn">{{ "LOGIN_NOW" | t }}</button>
+        <button type="submit" class="default-btn">{{ "Login Now" | autoTranslate }}</button>
         <div class="account-text">
           <span>
-            {{ "LOGIN_NO_ACCOUNT" | t }}
-            <a routerLink="/register">{{ "LOGIN_CREATE" | t }}</a>
+            {{ "Don't have an account?" | autoTranslate }}
+            <a routerLink="/register">{{ "Create Account" | autoTranslate }}</a>
           </span>
         </div>
       </form>

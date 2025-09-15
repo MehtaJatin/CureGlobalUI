@@ -23,6 +23,8 @@ import { DoctorDetailsComponent } from './doctor-details/doctor-details.componen
 import { HospitalListComponent } from './hospital-list/hospital-list.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
 import { HospitalDetailsComponent } from './hospital-details/hospital-details.component';
+import { TranslationManagerComponent } from './translation-manager/translation-manager.component';
+import { RuntimeTranslationComponent } from './examples/runtime-translation.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -47,6 +49,8 @@ const routes: Routes = [
   { path: 'doctor-details', component: DoctorDetailsComponent },
   { path: 'doctors', component: DoctorListComponent },
   { path: 'hospital-details/:id', component: HospitalDetailsComponent },
+  { path: 'translation-manager', component: TranslationManagerComponent },
+  { path: 'runtime-translation-demo', component: RuntimeTranslationComponent },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', component: NotfoundComponent },
 ];

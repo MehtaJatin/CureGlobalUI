@@ -62,7 +62,7 @@
                   *ngIf="isLoading"
                   class="spinner-border spinner-border-sm me-2"
                 ></span>
-                {{ isLoading ? "Creating Admin User..." : "Create Admin User" }}
+                {{ isLoading ? ("Creating Admin User..." | autoTranslate) : ("Create Admin User" | autoTranslate) }}
               </button>
             </div>
           </form>

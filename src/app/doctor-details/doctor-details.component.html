@@ -35,7 +35,7 @@
         <!-- Loading -->
         <div *ngIf="isLoading" class="loading">
           <div class="spinner"></div>
-          <p>Loading doctors…</p>
+          <p>{{ "Loading doctors..." | autoTranslate }}</p>
         </div>
 
         <!-- Empty State -->
@@ -89,12 +89,12 @@
         <!-- Enquiry Form (sticky on desktop) -->
         <form class="enquiry-form" (ngSubmit)="searchDoctors()" #enquiryForm="ngForm">
           <div class="row">
-            <input type="text" name="name" [(ngModel)]="searchQuery.name" placeholder="Patient Name" />
-            <input type="tel" name="phone" [(ngModel)]="searchQuery.phone" placeholder="Phone No." />
-            <input type="email" name="email" [(ngModel)]="searchQuery.email" placeholder="Enter Email" required />
-            <input type="text" name="city" [(ngModel)]="searchQuery.city" placeholder="Enter City" required />
-            <textarea name="message" [(ngModel)]="searchQuery.message" placeholder="Enter Your Message..."></textarea>
-            <button class="btn primary" type="submit" [disabled]="enquiryForm.invalid">SUBMIT NOW</button>
+            <input type="text" name="name" [(ngModel)]="searchQuery.name" [placeholder]="'Patient Name' | autoTranslate" />
+            <input type="tel" name="phone" [(ngModel)]="searchQuery.phone" [placeholder]="'Phone No.' | autoTranslate" />
+            <input type="email" name="email" [(ngModel)]="searchQuery.email" [placeholder]="'Enter Email' | autoTranslate" required />
+            <input type="text" name="city" [(ngModel)]="searchQuery.city" [placeholder]="'Enter City' | autoTranslate" required />
+            <textarea name="message" [(ngModel)]="searchQuery.message" [placeholder]="'Enter Your Message...' | autoTranslate"></textarea>
+            <button class="btn primary" type="submit" [disabled]="enquiryForm.invalid">{{ "SUBMIT NOW" | autoTranslate }}</button>
           </div>
         </form>
 
@@ -102,11 +102,11 @@
     </div>
     <!-- FAQ Full Width -->
     <section class="faq">
-      <h2 class="animated-headline">Frequently Asked Questions</h2>
+      <h2 class="animated-headline">{{ "Frequently Asked Questions" | autoTranslate }}</h2>
       <div class="accordion">
         <details>
-          <summary>How do I choose the right specialist?</summary>
-          <p>Use the specialty filter from the navigation. You can also compare experience, hospital and profile details.</p>
+          <summary>{{ "How do I choose the right specialist?" | autoTranslate }}</summary>
+          <p>{{ "Use the specialty filter from the navigation. You can also compare experience, hospital and profile details." | autoTranslate }}</p>
         </details>
         <details>
           <summary>Can I book an online consultation?</summary>

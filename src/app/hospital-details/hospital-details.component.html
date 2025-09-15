@@ -1,18 +1,18 @@
 <!-- Loading State -->
 <div class="loading-container" *ngIf="loading">
   <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
+    <span class="sr-only">{{ "Loading..." | autoTranslate }}</span>
   </div>
-  <p>Loading hospital details...</p>
+  <p>{{ "Loading hospital details..." | autoTranslate }}</p>
 </div>
 
 <!-- Not Found State -->
 <div class="not-found-container" *ngIf="!loading && notFound">
   <div class="ast-container">
     <div class="not-found-content" style="text-align: center; padding: 100px 0;">
-      <h2>Hospital Not Found</h2>
-      <p>The hospital you're looking for doesn't exist or has been removed.</p>
-      <a routerLink="/home" class="btn btn-primary">Back to Home</a>
+      <h2>{{ "Hospital Not Found" | autoTranslate }}</h2>
+      <p>{{ "The hospital you're looking for doesn't exist or has been removed." | autoTranslate }}</p>
+      <a routerLink="/home" class="btn btn-primary">{{ "Back to Home" | autoTranslate }}</a>
     </div>
   </div>
 </div>
@@ -47,7 +47,7 @@
                   <i class="icon-location"></i>
                 </div>
                 <div class="stat-content">
-                  <h3>Location</h3>
+                  <h3>{{ "Location" | autoTranslate }}</h3>
                   <p>{{ hospital.address.split(',').pop() }}</p>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                   <i class="icon-certificate"></i>
                 </div>
                 <div class="stat-content">
-                  <h3>Established in</h3>
+                  <h3>{{ "Established in" | autoTranslate }}</h3>
                   <p>{{ hospital.establishedYear }}</p>
                 </div>
               </div>
@@ -65,8 +65,8 @@
                   <i class="icon-specialty"></i>
                 </div>
                 <div class="stat-content">
-                  <h3>Specialty</h3>
-                  <p>Super Specialty</p>
+                  <h3>{{ "Specialty" | autoTranslate }}</h3>
+                  <p>{{ "Super Specialty" | autoTranslate }}</p>
                 </div>
               </div>
               <div class="stat-item">
@@ -74,7 +74,7 @@
                   <i class="icon-beds"></i>
                 </div>
                 <div class="stat-content">
-                  <h3>No. of Beds</h3>
+                  <h3>{{ "No. of Beds" | autoTranslate }}</h3>
                   <p>{{ hospital.totalBeds }}</p>
                 </div>
               </div>
@@ -83,22 +83,22 @@
 
           <!-- Team and Specialties Section -->
           <div class="team-specialties-section">
-            <h2>Our Team and Specialties</h2>
+            <h2>{{ "Our Team and Specialties" | autoTranslate }}</h2>
             <div class="team-description">
-              <p>Medi Global has a dedicated medical team with over 900 experienced doctors and more than 500 trained healthcare staff.</p>
+              <p>{{ "Medi Global has a dedicated medical team with over 900 experienced doctors and more than 500 trained healthcare staff." | autoTranslate }}</p>
 
-              <h3><strong>Specialties</strong></h3>
-              <p>We offer over 30 super specialties, such as:</p>
+              <h3><strong>{{ "Specialties" | autoTranslate }}</strong></h3>
+              <p>{{ "We offer over 30 super specialties, such as:" | autoTranslate }}</p>
               <ul class="specialties-list">
-                <li *ngFor="let specialty of hospital.specialties">{{ specialty }}</li>
+                <li *ngFor="let specialty of hospital.specialties">{{ specialty | autoTranslate }}</li>
               </ul>
-              <p>All your healthcare needs are covered under one roof.</p>
+              <p>{{ "All your healthcare needs are covered under one roof." | autoTranslate }}</p>
 
-              <h3><strong>Centers of Excellence</strong></h3>
-              <p>Each Center of Excellence is focused on delivering high-quality care through expert teams and the latest medical innovations.</p>
+              <h3><strong>{{ "Centers of Excellence" | autoTranslate }}</strong></h3>
+              <p>{{ "Each Center of Excellence is focused on delivering high-quality care through expert teams and the latest medical innovations." | autoTranslate }}</p>
               <ul class="centers-list">
                 <li *ngFor="let center of hospital.centers_of_excellence">
-                  <strong>{{ center }}:</strong> A state-of-the-art facility for complete care with expert teams and advanced diagnostics.
+                  <strong>{{ center | autoTranslate }}:</strong> {{ "A state-of-the-art facility for complete care with expert teams and advanced diagnostics." | autoTranslate }}
                 </li>
               </ul>
             </div>
@@ -113,7 +113,7 @@
                   [class.active]="selectedTab === 'comfort'"
                   (click)="selectTab('comfort')"
                 >
-                  Amenities
+                  {{ "Amenities" | autoTranslate }}
                 </button>
 <!--                <button-->
 <!--                  class="tab-btn"-->
@@ -160,7 +160,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.comfort_during_stay?.slice(0, Math.ceil((hospital.amenities.comfort_during_stay?.length || 0) / 2))">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -168,7 +168,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.comfort_during_stay?.slice(Math.ceil((hospital.amenities.comfort_during_stay?.length || 0) / 2))">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -182,7 +182,7 @@
 <!--                      <ul class="amenity-list">-->
 <!--                        <li *ngFor="let amenity of hospital.amenities.money_matters?.slice(0, Math.ceil((hospital.amenities.money_matters?.length || 0) / 2))">-->
 <!--                          <i class="icon-hand-point"></i>-->
-<!--                          <span>{{ amenity }}</span>-->
+<!--                          <span>{{ amenity | autoTranslate }}</span>-->
 <!--                        </li>-->
 <!--                      </ul>-->
 <!--                    </div>-->
@@ -190,7 +190,7 @@
 <!--                      <ul class="amenity-list">-->
 <!--                        <li *ngFor="let amenity of hospital.amenities.money_matters?.slice(Math.ceil((hospital.amenities.money_matters?.length || 0) / 2))">-->
 <!--                          <i class="icon-hand-point"></i>-->
-<!--                          <span>{{ amenity }}</span>-->
+<!--                          <span>{{ amenity | autoTranslate }}</span>-->
 <!--                        </li>-->
 <!--                      </ul>-->
 <!--                    </div>-->
@@ -204,7 +204,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.food?.slice(0, Math.ceil((hospital.amenities.food?.length || 0) / 2))">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -212,7 +212,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.food?.slice(Math.ceil((hospital.amenities.food?.length || 0) / 2))">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -226,7 +226,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.treatment_related?.slice(0, Math.ceil((hospital.amenities.treatment_related?.length || 0) / 2))">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -234,7 +234,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.treatment_related?.slice(Math.ceil((hospital.amenities.treatment_related?.length || 0) / 2))">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -248,7 +248,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.language">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -262,7 +262,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.transportation?.slice(0, Math.ceil((hospital.amenities.transportation?.length || 0) / 2))">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -270,7 +270,7 @@
                       <ul class="amenity-list">
                         <li *ngFor="let amenity of hospital.amenities.transportation?.slice(Math.ceil((hospital.amenities.transportation?.length || 0) / 2))">
                           <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
+                          <span>{{ amenity | autoTranslate }}</span>
                         </li>
                       </ul>
                     </div>
@@ -282,7 +282,7 @@
 
           <!-- Our Doctors Section -->
           <div class="doctors-section">
-            <h2>Our Doctors</h2>
+            <h2>{{ "Our Doctors" | autoTranslate }}</h2>
             <div class="doctors-grid" *ngIf="hospital.doctors && hospital.doctors.length > 0; else noDoctors">
               <div class="doctor-card" *ngFor="let doctor of hospital.doctors">
                 <div class="doctor-image">
@@ -290,15 +290,15 @@
                 </div>
                 <div class="doctor-info">
                   <h3>{{ doctor.name }}</h3>
-                  <p class="specialty">{{ doctor.specialty }}</p>
-                  <p class="experience">{{ doctor.experience }} Experience</p>
-                  <p class="qualification">{{ doctor.qualification }}</p>
+                  <p class="specialty">{{ doctor.specialty | autoTranslate }}</p>
+                  <p class="experience">{{ doctor.experience }} {{ "Experience" | autoTranslate }}</p>
+                  <p class="qualification">{{ doctor.qualification | autoTranslate }}</p>
                 </div>
               </div>
             </div>
             <ng-template #noDoctors>
               <div class="no-doctors-found">
-                <span>No Doctor Found</span>
+                <span>{{ "No Doctor Found" | autoTranslate }}</span>
               </div>
             </ng-template>
           </div>
@@ -311,11 +311,11 @@
                 <div class="animation-placeholder"></div>
               </div>
               <div class="cta-text">
-                <h2>Patients around the world trust us</h2>
-                <p>Join hundreds of satisfied patients who found the right treatment and care.</p>
+                <h2>{{ "Patients around the world trust us" | autoTranslate }}</h2>
+                <p>{{ "Join hundreds of satisfied patients who found the right treatment and care." | autoTranslate }}</p>
                 <a href="https://api.whatsapp.com/send?phone=918287739641" class="btn btn-whatsapp">
                   <i class="icon-whatsapp"></i>
-                  <span>Chat Now...</span>
+                  <span>{{ "Chat Now..." | autoTranslate }}</span>
                 </a>
               </div>
             </div>

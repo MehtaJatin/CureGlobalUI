@@ -4,13 +4,13 @@
 >
   <div class="container">
     <div class="page-banner-content">
-      <h2>{{ "HOME_OUR_SERVICES" | t }}</h2>
+      <h2>{{ "Our Services" | autoTranslate }}</h2>
       <div class="pages-list">
         <li>
-          <a routerLink="/home">{{ "HOME" | t }}</a>
+          <a routerLink="/home">{{ "Home" | autoTranslate }}</a>
         </li>
         <li>
-          {{ "HOME_OUR_SERVICES" | t }}
+          {{ "Our Services" | autoTranslate }}
         </li>
       </div>
     </div>
@@ -40,9 +40,9 @@
           <!-- Content -->
           <div class="services-content">
             <h3>
-              <a>{{ service.title | mt | async }}</a>
+              <a>{{ service.title | autoTranslate }}</a>
             </h3>
-            <p>{{ service.description | mt | async }}</p>
+            <p>{{ service.description | autoTranslate }}</p>
           </div>
         </div>
       </div>

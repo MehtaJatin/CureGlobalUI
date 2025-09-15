@@ -73,5 +73,19 @@
   "SUCCESS_BOOKING": "La tua richiesta di appuntamento è stata inviata con successo!",
   "ERROR_FILL_FIELDS": "Compila tutti i campi.",
   "ERROR_SUBMIT": "Errore durante l'invio della prenotazione.",
-  "WHATSAPP_OPEN_HINT": "WhatsApp aperto. Premi Invia per consegnare il messaggio."
+  "WHATSAPP_OPEN_HINT": "WhatsApp aperto. Premi Invia per consegnare il messaggio.",
+  "SVC_BONE_MARROW": "Midollo osseo ",
+  "SVC_CARDIOLOGY": "Cardiologia",
+  "SVC_IVF": "IVF (Fecondazione in vitro)",
+  "IVF": "IVF (Fecondazione in vitro)",
+  "SVC_COSMETIC": "Cosmetico",
+  "SVC_KIDNEY": "Trapianto di rene",
+  "SVC_LIVER": "75 Trapianto di fegato",
+  "SVC_GYNE": "Ginecologia ",
+  "SVC_NEURO": "Chirurgia del sistema nervoso",
+  "SVC_ONCO": "Oncologia",
+  "SVC_ORTHO": "Ortopedia",
+  "SVC_SPINE": "Chirurgia della colonna vertebrale",
+  "SVC_WEIGHT": "Perdita di peso",
+  "SVC_HEMATO": "Ematologia"
 }

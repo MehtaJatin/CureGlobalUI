@@ -73,5 +73,19 @@
   "SUCCESS_BOOKING": "¡Tu solicitud de cita se ha enviado correctamente!",
   "ERROR_FILL_FIELDS": "Por favor completa todos los campos.",
   "ERROR_SUBMIT": "Error al enviar la cita.",
-  "WHATSAPP_OPEN_HINT": "WhatsApp se ha abierto. Pulsa Enviar para entregar el mensaje."
+  "WHATSAPP_OPEN_HINT": "WhatsApp se ha abierto. Pulsa Enviar para entregar el mensaje.",
+  "SVC_BONE_MARROW": "Bone Marrow",
+  "SVC_CARDIOLOGY": "Cardiology",
+  "SVC_IVF": "IVF",
+  "IVF": "IVF",
+  "SVC_COSMETIC": "Cosmetic",
+  "SVC_KIDNEY": "Kidney Transplant",
+  "SVC_LIVER": "Liver Transplant",
+  "SVC_GYNE": "Gynecology",
+  "SVC_NEURO": "Neuro Surgery",
+  "SVC_ONCO": "Oncology",
+  "SVC_ORTHO": "Orthopedics",
+  "SVC_SPINE": "Spine Surgery",
+  "SVC_WEIGHT": "Weight Loss",
+  "SVC_HEMATO": "Hematology"
 }

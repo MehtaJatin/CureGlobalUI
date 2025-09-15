@@ -3,9 +3,9 @@
     <div class="section-title">
       <span class="sub-title">
         <i class="bx bx-hash"></i>
-        {{ "CONTACT_MESSAGE_US" | t }}
+        {{ "Message Us" | autoTranslate }}
       </span>
-      <h2>{{ "CONTACT_DROP_MESSAGE" | t }}</h2>
+      <h2>{{ "Drop Us Message for Any Query" | autoTranslate }}</h2>
     </div>
     <div class="contact-form">
       <form>
@@ -15,7 +15,7 @@
               <input
                 type="text"
                 required=""
-                placeholder="{{ 'NAME' | t }}"
+                placeholder="{{ 'Name' | autoTranslate }}"
                 class="form-control"
               />
             </div>
@@ -25,7 +25,7 @@
               <input
                 type="email"
                 required=""
-                placeholder="{{ 'EMAIL' | t }}"
+                placeholder="{{ 'Email' | autoTranslate }}"
                 class="form-control"
               />
             </div>
@@ -35,7 +35,7 @@
               <input
                 type="text"
                 required=""
-                placeholder="{{ 'PHONE' | t }}"
+                placeholder="{{ 'Phone' | autoTranslate }}"
                 class="form-control"
               />
             </div>
@@ -45,7 +45,7 @@
               <input
                 type="text"
                 required=""
-                placeholder="{{ 'CONTACT_SUBJECT' | t }}"
+                placeholder="{{ 'Subject' | autoTranslate }}"
                 class="form-control"
               />
             </div>
@@ -58,7 +58,7 @@
                 cols="30"
                 rows="5"
                 required
-                placeholder="{{ 'CONTACT_YOUR_MESSAGE' | t }}"
+                placeholder="{{ 'Your Message' | autoTranslate }}"
                 class="form-control"
               ></textarea>
             </div>
@@ -66,7 +66,7 @@
           <div class="col-lg-12 col-sm-12">
             <div class="form-group">
               <button type="submit" class="default-btn">
-                {{ "CONTACT_SEND" | t }}
+                {{ "Send Message" | autoTranslate }}
               </button>
             </div>
           </div>

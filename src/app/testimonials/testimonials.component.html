@@ -1,13 +1,13 @@
 <div class="page-banner-area ptb-100 four" style="background-image: url(assets/images/page-title3.jpg);">
     <div class="container">
         <div class="page-banner-content">
-            <h2>Testimonials</h2>
+            <h2>{{ "Testimonials" | autoTranslate }}</h2>
             <div class="pages-list">
                 <li>
-                    <a routerLink="/home">Home</a>
+                    <a routerLink="/home">{{ "Home" | autoTranslate }}</a>
                 </li>
                 <li>
-                    Testimonials
+                    {{ "Testimonials" | autoTranslate }}
                 </li>
             </div>
         </div>
@@ -20,7 +20,7 @@
         <div *ngIf="isLoading" class="loading-container text-center">
             <div class="loading-spinner">
                 <i class="fa fa-spinner fa-spin fa-2x"></i>
-                <p>Loading testimonials...</p>
+                <p>{{ "Loading testimonials..." | autoTranslate }}</p>
             </div>
         </div>
 
@@ -31,11 +31,11 @@
                     <div class="icon">
                         <i class="fa-solid fa-quote-left"></i>
                     </div>
-                    <p>{{ testimonial.review }}</p>
+                    <p>{{ testimonial.review | autoTranslate }}</p>
                     <div class="review-info">
                         <img [src]="testimonial.image" [alt]="testimonial.name">
-                        <h3>{{ testimonial.name }}</h3>
-                        <span>{{ testimonial.specialty }}</span>
+                        <h3>{{ testimonial.name | autoTranslate }}</h3>
+                        <span>{{ testimonial.specialty | autoTranslate }}</span>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
         <div *ngIf="!isLoading && testimonials.length === 0" class="no-testimonials text-center">
             <div class="alert alert-info">
                 <i class="fa fa-info-circle"></i>
-                <p>No testimonials available at the moment.</p>
+                <p>{{ "No testimonials available at the moment." | autoTranslate }}</p>
             </div>
         </div>
     </div>

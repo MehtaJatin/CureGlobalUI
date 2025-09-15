@@ -4,16 +4,16 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            <h3>Create Admin User</h3>
+            <h3>{{ "Create Admin User" | autoTranslate }}</h3>
             <p class="text-muted">
-              Create the first admin user for your medical app
+              {{ "Create the first admin user for your medical app" | autoTranslate }}
             </p>
           </div>
           <div class="card-body">
             <form (ngSubmit)="createAdmin()">
               <div class="mb-3">
                 <label for="displayName" class="form-label"
-                  >Display Name *</label
+                  >{{ "Display Name *" | autoTranslate }}</label
                 >
                 <input
                   type="text"
@@ -21,38 +21,38 @@
                   id="displayName"
                   [(ngModel)]="adminData.displayName"
                   name="displayName"
-                  placeholder="Enter display name"
+                  [placeholder]="'Enter display name' | autoTranslate"
                   required
                 />
               </div>
 
               <div class="mb-3">
-                <label for="email" class="form-label">Email Address *</label>
+                <label for="email" class="form-label">{{ "Email Address *" | autoTranslate }}</label>
                 <input
                   type="email"
                   class="form-control"
                   id="email"
                   [(ngModel)]="adminData.email"
                   name="email"
-                  placeholder="Enter email address"
+                  [placeholder]="'Enter email address' | autoTranslate"
                   required
                 />
               </div>
 
               <div class="mb-3">
-                <label for="password" class="form-label">Password *</label>
+                <label for="password" class="form-label">{{ "Password *" | autoTranslate }}</label>
                 <input
                   type="password"
                   class="form-control"
                   id="password"
                   [(ngModel)]="adminData.password"
                   name="password"
-                  placeholder="Enter password (min 6 characters)"
+                  [placeholder]="'Enter password (min 6 characters)' | autoTranslate"
                   minlength="6"
                   required
                 />
                 <div class="form-text">
-                  Password must be at least 6 characters long
+                  {{ "Password must be at least 6 characters long" | autoTranslate }}
                 </div>
               </div>
 
@@ -66,7 +66,7 @@
                     *ngIf="isLoading"
                     class="spinner-border spinner-border-sm me-2"
                   ></span>
-                  {{ isLoading ? "Creating Admin..." : "Create Admin User" }}
+                  {{ isLoading ? ("Creating Admin..." | autoTranslate) : ("Create Admin User" | autoTranslate) }}
                 </button>
 
                 <button
@@ -74,7 +74,7 @@
                   class="btn btn-outline-secondary"
                   (click)="goToLogin()"
                 >
-                  Go to Login
+                  {{ "Go to Login" | autoTranslate }}
                 </button>
               </div>
             </form>
@@ -95,16 +95,16 @@
         <!-- Instructions -->
         <div class="card mt-3">
           <div class="card-body">
-            <h5>Instructions:</h5>
+            <h5>{{ "Instructions:" | autoTranslate }}</h5>
             <ol>
-              <li>Fill in the admin user details above</li>
-              <li>Click "Create Admin User"</li>
-              <li>Once created, you can login with these credentials</li>
-              <li>You'll have access to the admin dashboard</li>
+              <li>{{ "Fill in the admin user details above" | autoTranslate }}</li>
+              <li>{{ "Click 'Create Admin User'" | autoTranslate }}</li>
+              <li>{{ "Once created, you can login with these credentials" | autoTranslate }}</li>
+              <li>{{ "You'll have access to the admin dashboard" | autoTranslate }}</li>
             </ol>
             <div class="alert alert-info">
-              <strong>Note:</strong> This component should be removed after
-              creating the first admin user for security reasons.
+              <strong>{{ "Note:" | autoTranslate }}</strong> {{ "This component should be removed after" | autoTranslate }}
+              {{ "creating the first admin user for security reasons." | autoTranslate }}
             </div>
           </div>
         </div>

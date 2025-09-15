@@ -73,5 +73,20 @@
   "SUCCESS_BOOKING": "ਤੁਹਾਡੀ ਮੁਲਾਕਾਤ ਬੇਨਤੀ ਸਫਲਤਾਪੂਰਵਕ ਭੇਜੀ ਗਈ ਹੈ!",
   "ERROR_FILL_FIELDS": "ਕਿਰਪਾ ਕਰਕੇ ਸਾਰੇ ਖੇਤਰ ਭਰੋ।",
   "ERROR_SUBMIT": "ਮੁਲਾਕਾਤ ਭੇਜਣ ਵਿੱਚ ਗਲਤੀ।",
-  "WHATSAPP_OPEN_HINT": "ਵਟਸਐਪ ਖੁੱਲ ਗਿਆ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸੁਨੇਹਾ ਭੇਜਣ ਲਈ Send ਦਬਾਓ।"
+  "WHATSAPP_OPEN_HINT": "ਵਟਸਐਪ ਖੁੱਲ ਗਿਆ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਸੁਨੇਹਾ ਭੇਜਣ ਲਈ Send ਦਬਾਓ।",
+  "LOGIN_EMAIL_PLACEHOLDER": "आपका ईमेल पता",
+  "SVC_BONE_MARROW": "अस्थि मज्जा",
+  "SVC_CARDIOLOGY": "कार्डियोलॉजी",
+  "SVC_IVF": "आईवीएफ",
+  "IVF": "आईवीएफ",
+  "SVC_COSMETIC": "कॉस्मेटिक",
+  "SVC_KIDNEY": "गुर्दे का प्रत्यारोपण",
+  "SVC_LIVER": "यकृत प्रत्यारोपण",
+  "SVC_GYNE": "स्त्री-रोग विज्ञान",
+  "SVC_NEURO": "न्यूरो सर्जरी",
+  "SVC_ONCO": "अर्बुदविज्ञान",
+  "SVC_ORTHO": "आर्थोपेडिक्स",
+  "SVC_SPINE": "स्पाइन सर्जरी",
+  "SVC_WEIGHT": "वजन घटना",
+  "SVC_HEMATO": "हेमेटोलॉजी"
 }
