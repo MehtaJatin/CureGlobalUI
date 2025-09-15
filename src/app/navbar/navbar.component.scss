@@ -68,6 +68,7 @@
           padding: 8px 20px;
           position: relative;
           transition: all 0.5s;
+          cursor: pointer;
 
           &:hover {
             color: $main_color;

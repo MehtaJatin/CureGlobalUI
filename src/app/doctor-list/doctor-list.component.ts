@@ -23,7 +23,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
   expandedDoctors: Set<number> = new Set();
 
   // Available filter options
-  specialties: string[] = [];
+  specialties: any[] = [];
   locations: string[] = [];
   experienceLevels: string[] = ['0-5 Years', '5-10 Years', '10-15 Years', '15-20 Years', '20+ Years'];
 
@@ -33,7 +33,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +57,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
         this.doctors = doctors.map((doc: any) => ({
           id: doc.id,
           name: doc.name || '',
-          speciality: doc.specialization || doc.specialty || '',
+          specialities: doc.specializations || doc.specialty || [],
           image: doc.imageBase64 || doc.image || this.doctorPlaceholder,
           location: doc.location || '',
           experience: doc.experience || '',
@@ -90,22 +90,28 @@ export class DoctorListComponent implements OnInit, OnDestroy {
 
   private extractFilterOptions(): void {
     // Extract unique specialties
-    this.specialties = [...new Set(this.doctors.map(d => d.specialty))].sort();
-
+    this.specialties = [...new Set(this.doctors.flatMap(d => d.specialities || []))].sort();
+    this.firebaseService.getServices().subscribe((specialtyList )=>{
+      this.specialties = specialtyList
+    });
     // Extract unique locations
     this.locations = [...new Set(this.doctors.map(d => d.location))].sort();
+  }
+
+  private getSpeicalityNameById(id:string){
+    return this.specialties.some(specility => specility.id ==id);
   }
 
   private setupRouteSubscription(): void {
     this.routeSubscription = this.route.queryParams.subscribe(params => {
       this.searchTerm = params['q'] || '';
-      this.selectedSpecialty = params['specialty'] || '';
+      this.selectedSpecialty = params['speciality'] || '';
       this.selectedLocation = params['location'] || '';
       this.selectedExperience = params['experience'] || '';
       this.sortBy = params['sortBy'] || 'name';
       this.sortOrder = params['sortOrder'] || 'asc';
 
-      this.applyFilters();
+        this.applyFilters();
     });
   }
 
@@ -117,7 +123,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
       const term = this.searchTerm.toLowerCase();
       filtered = filtered.filter(d =>
         d.name.toLowerCase().includes(term) ||
-        d.speciality.toLowerCase().includes(term) ||
+        (d.specialities || []).some(s => s.toLowerCase().includes(term)) ||
         d.hospital.toLowerCase().includes(term) ||
         d.designation.toLowerCase().includes(term) ||
         d.description.toLowerCase().includes(term)
@@ -126,7 +132,10 @@ export class DoctorListComponent implements OnInit, OnDestroy {
 
     // Apply specialty filter
     if (this.selectedSpecialty) {
-      filtered = filtered.filter(d => d.speciality === this.selectedSpecialty);
+      const selected = this.selectedSpecialty.trim().toLowerCase();
+      filtered = filtered.filter(d =>
+        (d.specialities || []).some(s => (s || '').toString().trim().toLowerCase() === selected)
+      );
     }
 
     // Apply location filter
@@ -191,8 +200,9 @@ export class DoctorListComponent implements OnInit, OnDestroy {
   }
 
   onSpecialtyChange(event: Event): void {
+    // this.clearFilters();
     const target = event.target as HTMLSelectElement;
-    this.updateQueryParams({ specialty: target.value });
+    this.updateQueryParams({ speciality: target.value });
   }
 
   onLocationChange(event: Event): void {
@@ -201,6 +211,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
   }
 
   onExperienceChange(event: Event): void {
+    // this.clearFilters();
     const target = event.target as HTMLSelectElement;
     this.updateQueryParams({ experience: target.value });
   }
@@ -217,7 +228,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
   clearFilters(): void {
     this.updateQueryParams({
       q: '',
-      specialty: '',
+      speciality: '',
       location: '',
       experience: '',
       sortBy: 'name',
@@ -259,8 +270,8 @@ export class DoctorListComponent implements OnInit, OnDestroy {
       </svg>
     `);
 
-  getStarRating(rating: number): string[] {
-    const stars = [];
+  getStarRating(rating: number): Array<'full' | 'half' | 'empty'> {
+    const stars: Array<'full' | 'half' | 'empty'> = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
 

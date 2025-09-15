@@ -45,7 +45,7 @@
           class="filter-select"
         >
           <option value="">All Specialties</option>
-          <option *ngFor="let specialty of specialties" [value]="specialty">{{ specialty }}</option>
+          <option *ngFor="let specialty of specialties" [value]="specialty.id">{{ specialty.name }}</option>
         </select>
 
         <select
@@ -133,7 +133,7 @@
 
               <div class="doctor-info">
                 <h3 class="doctor-name">{{ doctor.name }}</h3>
-                <div class="specialty-tag">{{ doctor.specialty }}</div>
+                <div class="specialty-tag">{{ doctor.specialities.join('') }}</div>
 
                 <div class="doctor-details">
                   <div class="detail-item">

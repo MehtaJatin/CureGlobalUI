@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   hospitals: Hospital[] = [];
   hospitalSpecialties: string[] = [];
   doctors: any[] = [];
-  doctorSpecialties: string[] = [];
+  doctorSpecialties: any[] = [];
   private hospitalsSubscription: Subscription | undefined;
   private servicesSubscription: Subscription | undefined;
   private doctorsSubscription: Subscription | undefined;
@@ -62,14 +62,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/hospitals'], { queryParams: { speciality: specialty } });
   }
 
-  goToDoctorsBySpecialty(serviceName: string) {
-    // Find the service key/link that matches this service name
-//     console.log('doctorServiceName', serviceName);
-//     const matchingService = this.services.find(service => service.title === serviceName);
-//     console.log('matchingServiceDoctor', matchingService);
-//     const specialtyKey = matchingService ? matchingService.title : serviceName;
-//     console.log('specialtyKeyDoctor', specialtyKey);
-    this.router.navigate(['/doctors'], { queryParams: { speciality: serviceName } });
+  goToDoctorsBySpecialty(service: any) {
+    this.router.navigate(['/doctors'], { queryParams: { speciality: service.id } });
   }
 
   getServices() {
@@ -157,7 +151,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
             service.id === specialtyId
           );
          console.log('matchingService', matchingService)
-          const displayName = matchingService ? specialtySet.add(matchingService.title) : "";
+          const displayName = matchingService ? specialtySet.add(matchingService) : "";
         });
       }
     });
