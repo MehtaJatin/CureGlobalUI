@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../backend/firebase.service';
 declare var $: any;
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ export class NavbarComponent implements OnInit {
   userName: string = '';
   services: any[] = [];
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService, private router: Router) {}
 
   ngOnInit(): void {
     this.getServices();
@@ -29,6 +30,10 @@ export class NavbarComponent implements OnInit {
         navbar?.classList.remove('sticky');
       }
     }
+  }
+
+  goToHospital(serviceLink: string) {
+    this.router.navigate(['/hospitals'], { queryParams: { speciality: serviceLink } });
   }
 
   getServices() {
