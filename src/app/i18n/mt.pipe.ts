@@ -20,9 +20,16 @@ export class MachineTranslatePipe implements PipeTransform {
     const text = value || '';
     const lang = this.i18n.getCurrentLanguage();
 
-    // Check if it's likely a translation key (more specific pattern)
-    // Only consider it a translation key if it has underscores or starts with specific prefixes
-    if (/^[A-Z0-9_\.]+$/.test(text) && (text.includes('_') || text.startsWith('SVC_') || text.startsWith('NAV_') || text.startsWith('BTN_'))) {
+    // Skip if empty or already English
+    if (!text || lang === 'en') {
+      return of(text);
+    }
+
+    // Check if it's a translation key pattern (uppercase with underscores)
+    const isTranslationKey = /^[A-Z_][A-Z0-9_]*$/.test(text);
+
+    if (isTranslationKey) {
+      // Handle translation keys through i18n service first
       const cacheKey = `${text}_${lang}`;
 
       // Return cached translation if available
@@ -34,20 +41,27 @@ export class MachineTranslatePipe implements PipeTransform {
       if (!this.checkedKeys.has(cacheKey)) {
         this.checkedKeys.add(cacheKey);
         const translated = this.i18n.translate(text);
-        this.translationCache.set(cacheKey, translated);
-        return of(translated);
+
+        // If translation found and different from key, use it
+        if (translated !== text) {
+          this.translationCache.set(cacheKey, translated);
+          return of(translated);
+        }
       }
 
-      // If already checked and not found, return the original text
-      return of(text);
+      // If no translation found for key, treat as regular text
     }
 
-    // For machine translation
-    if (this.lastInput === text && this.lastLang === lang)
+    // For all text (including dynamic content from Firestore), use machine translation
+    if (this.lastInput === text && this.lastLang === lang) {
       return this.lastOutput$;
+    }
+
     this.lastInput = text;
     this.lastLang = lang;
-    this.lastOutput$ = this.mt.translate(text, 'auto', lang);
+
+    // Use machine translation for all text
+    this.lastOutput$ = this.mt.translate(text, 'en', lang);
     return this.lastOutput$;
   }
 }
