@@ -5,7 +5,7 @@
         <!-- <h1>The Cure Globe</h1> -->
         <h3 class="brand">
           <img src="assets/images/logo.png" alt="Logo" class="brand-logo" />
-          <span class="brand-text">{{ "BRAND_NAME" | t }}</span>
+          <span class="brand-text">{{ "The Cure Globe" | autoTranslate }}</span>
         </h3>
       </a>
       <button
@@ -23,14 +23,14 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" routerLink="/home">{{
-              "NAV_HOME" | t
+              "Home" | autoTranslate
             }}</a>
           </li>
           <li>
             <a>{{ userName | titlecase }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about">{{ "NAV_ABOUT" | t }}</a>
+            <a class="nav-link" routerLink="/about">{{ "About Us" | autoTranslate }}</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -39,18 +39,18 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {{ "NAV_OUR_HOSPITALS" | t }}
+              {{ "Our Hospitals" | autoTranslate }}
             </a>
             <ul class="dropdown-menu fade-up">
               <li>
                 <a class="dropdown-item" routerLink="/hospitals">
-                  All Hospitals
+                  {{ 'All Hospitals' | autoTranslate }}
                 </a>
               </li>
               <li><hr class="dropdown-divider"></li>
               <li *ngFor="let specialty of hospitalSpecialties">
                 <a class="dropdown-item" (click)="goToHospitalsBySpecialty(specialty)">
-                  {{ specialty.name | mt | async }}
+                  {{ specialty.name | autoTranslate }}
                 </a>
               </li>
             </ul>
@@ -62,12 +62,12 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              {{ "NAV_OUR_DOCTORS" | t }}
+              {{ "Our Doctors" | autoTranslate }}
             </a>
             <ul class="dropdown-menu">
               <li>
                 <a class="dropdown-item" routerLink="/doctors">
-                  All Doctors
+                  {{ "All Doctors" | autoTranslate }}
                 </a>
               </li>
               <li><hr class="dropdown-divider"></li>
@@ -132,7 +132,7 @@
           </div>
           <div class="option-item">
             <a routerLink="/booking" class="default-btn"
-              >{{ "BTN_FREE_CONSULTATION" | t }}
+              >{{ "Free Consultation" | autoTranslate }}
             </a>
           </div>
         </div>
