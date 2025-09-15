@@ -77,7 +77,7 @@ export interface hospital {
 export interface doctor {
   id: number;
   name: string;
-  specialty: string;
+  specialities: string[];
   image: string;
   location: string;
   experience: string;

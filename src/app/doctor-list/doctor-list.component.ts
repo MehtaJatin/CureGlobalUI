@@ -57,7 +57,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
         this.doctors = doctors.map((doc: any) => ({
           id: doc.id,
           name: doc.name || '',
-          specialty: doc.specialization || doc.specialty || '',
+          speciality: doc.specialization || doc.specialty || '',
           image: doc.imageBase64 || doc.image || this.doctorPlaceholder,
           location: doc.location || '',
           experience: doc.experience || '',
@@ -117,7 +117,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
       const term = this.searchTerm.toLowerCase();
       filtered = filtered.filter(d =>
         d.name.toLowerCase().includes(term) ||
-        d.specialty.toLowerCase().includes(term) ||
+        d.speciality.toLowerCase().includes(term) ||
         d.hospital.toLowerCase().includes(term) ||
         d.designation.toLowerCase().includes(term) ||
         d.description.toLowerCase().includes(term)
@@ -126,7 +126,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
 
     // Apply specialty filter
     if (this.selectedSpecialty) {
-      filtered = filtered.filter(d => d.specialty === this.selectedSpecialty);
+      filtered = filtered.filter(d => d.speciality === this.selectedSpecialty);
     }
 
     // Apply location filter

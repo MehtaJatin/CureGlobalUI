@@ -48,9 +48,9 @@
                 </a>
               </li>
               <li><hr class="dropdown-divider"></li>
-              <li *ngFor="let service of services">
-                <a class="dropdown-item" (click)="goToHospital(service.link)">
-                  {{ service.title | mt | async }}
+              <li *ngFor="let specialty of hospitalSpecialties">
+                <a class="dropdown-item" (click)="goToHospitalsBySpecialty(specialty)">
+                  {{ specialty | mt | async }}
                 </a>
               </li>
             </ul>
@@ -71,50 +71,10 @@
                 </a>
               </li>
               <li><hr class="dropdown-divider"></li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Cardiology'}">{{
-                  "SVC_CARDIOLOGY" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Orthopedics'}">{{
-                  "SVC_SPINE" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Kidney Transplant'}">{{
-                  "SVC_KIDNEY" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Cosmetic'}">{{
-                  "SVC_COSMETIC" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Neurology'}">{{
-                  "SVC_NEURO" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Oncology'}">{{
-                  "SVC_ONCO" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Orthopedics'}">{{
-                  "SVC_ORTHO" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'Hematology'}">{{
-                  "SVC_HEMATO" | t
-                }}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" [routerLink]="['/doctors']" [queryParams]="{specialty: 'IVF'}">{{
-                  "SVC_IVF" | t
-                }}</a>
+              <li *ngFor="let specialty of doctorSpecialties">
+                <a class="dropdown-item" (click)="goToDoctorsBySpecialty(specialty)">
+                  {{ specialty | mt | async }}
+                </a>
               </li>
             </ul>
           </li>
