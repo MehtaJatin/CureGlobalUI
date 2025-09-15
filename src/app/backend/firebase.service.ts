@@ -249,16 +249,17 @@ export class FirebaseService {
     const doctorsCollection = collection(this.firestore, 'doctors');
     const q = query(
       doctorsCollection,
-      where('hospitalId', '==', hospitalId),
+      where('hospitals', 'array-contains', hospitalId),
       where('isActive', '==', true)
     );
+
     return from(
-      getDocs(q).then((snapshot) => {
-        return snapshot.docs.map((doc) => ({
+      getDocs(q).then((snapshot) =>
+        snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        }));
-      })
+        }))
+      )
     );
   }
 
@@ -284,7 +285,7 @@ export class FirebaseService {
   getTestimonials(): Observable<any[]> {
     const testimonialsRef = collection(this.firestore, 'testimonials');
     const q = query(testimonialsRef, where('isActive', '==', true), orderBy('createdAt', 'desc'));
-    
+
     return from(
       getDocs(q).then((snapshot) => {
         return snapshot.docs.map((doc) => ({
