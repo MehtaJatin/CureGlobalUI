@@ -63,7 +63,7 @@
     </div>
 
     <div class="row justify-content-center">
-      <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let service of services">
+      <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let service of services.slice(0,6)">
         <div
           class="single-services d-flex align-items-center"
           style="cursor: pointer;"
@@ -301,7 +301,7 @@
                       *ngFor="let specialty of hospital.specialties.slice(0, 3)"
                       class="specialty-tag"
                     >
-                      {{ specialty }}
+                      {{ getHospitalServiceName(specialty) }}
                     </span>
                     <span
                       *ngIf="hospital.specialties.length > 3"

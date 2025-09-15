@@ -127,6 +127,14 @@ export class HomeComponent implements OnInit, AfterViewInit{
     });
   }
 
+  getHospitalServiceName(id: string): string | undefined {
+    console.log(this.services);
+    const service = this.services.find(ser => ser.id === id);
+    
+    return service ? (service.title || service.name) : undefined;
+  }
+  
+
   onHospitalCardActivate(h: { title: string; city: string }): void {
     // Placeholder: hook navigation or modal here
     console.log('Hospital card activated:', h.title, h.city);
@@ -332,10 +340,6 @@ export class HomeComponent implements OnInit, AfterViewInit{
                 image: ser.photo,
                 link: '/hospitals'+'?q='+ser.name
               });
-              cnt++;
-              if(cnt>6){
-                break;
-              }
             }
         }
       },
