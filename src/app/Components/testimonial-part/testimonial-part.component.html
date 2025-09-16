@@ -3,20 +3,20 @@
         <div class="section-title-warp">
             <span class="sub-title">
                 <i class='bx bx-hash'></i>
-                Our Clients Review 
+                {{ "Our Clients Review" | autoTranslate }}
             </span>
             <!-- <h2>Real Review From Our Real Customer</h2> -->
-            <a  class="default-btn" routerLink="/testimonials">View All</a>
+            <a  class="default-btn" routerLink="/testimonials">{{ "View All" | autoTranslate }}</a>
         </div>
         <div class="review-slides">
             <!-- Loading State -->
             <div *ngIf="isLoading" class="loading-container">
                 <div class="loading-spinner">
                     <i class="fa fa-spinner fa-spin"></i>
-                    <p>Loading testimonials...</p>
+                    <p>{{ "Loading testimonials..." | autoTranslate }}</p>
                 </div>
             </div>
-            
+
             <!-- Testimonials Carousel -->
             <owl-carousel-o *ngIf="!isLoading && testimonials.length > 0" [options]="customOptions" >
                 <ng-template carouselSlide *ngFor="let testimonial of testimonials">
@@ -24,19 +24,19 @@
                         <div class="icon">
                             <i class="fa-solid fa-quote-left"></i>
                         </div>
-                        <p>{{ testimonial.review }}</p>
+                        <p>{{ testimonial.review | autoTranslate }}</p>
                         <div class="review-info">
                           <img [src]="testimonial.image" [alt]="testimonial.name">
-                          <h3>{{ testimonial.name }}</h3>
-                          <span>{{ testimonial.specialty }}</span>
+                          <h3>{{ testimonial.name | autoTranslate }}</h3>
+                          <span>{{ testimonial.specialty | autoTranslate }}</span>
                         </div>
                     </div>
                 </ng-template>
               </owl-carousel-o>
-              
+
             <!-- No Testimonials Message -->
             <div *ngIf="!isLoading && testimonials.length === 0" class="no-testimonials">
-                <p>No testimonials available at the moment.</p>
+                <p>{{ "No testimonials available at the moment." | autoTranslate }}</p>
             </div>
         </div>
     </div>
