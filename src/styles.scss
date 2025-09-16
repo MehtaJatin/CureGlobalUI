@@ -176,3 +176,8 @@ blockquote, .blockquote{
 }
 
 
+/* Prevent horizontal scrolling across the entire app */
+html, body {
+    overflow-x: hidden;
+}
+
