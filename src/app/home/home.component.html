@@ -54,11 +54,11 @@
     <div class="section-title-warp">
       <span class="sub-title">
         <i class="bx bx-hash"></i>
-        {{ "HOME_OUR_SERVICES" | t }}
+        {{ "Our Services" | autoTranslate }}
       </span>
-      <h2>Multi-Specialty Focus</h2>
+      <h2>{{ 'Multi-Specialty Focus' | autoTranslate }}</h2>
       <a routerLink="/services" class="default-btn">{{
-        "HOME_VIEW_ALL" | t
+        "View All" | autoTranslate
       }}</a>
     </div>
 
@@ -82,9 +82,9 @@
           <!-- Content -->
           <div class="services-content">
             <h3>
-              <a>{{ service.title | mt | async }}</a>
+              <a>{{ service.title | autoTranslate }}</a>
             </h3>
-            <p>{{ service.description | mt | async }}</p>
+            <p>{{ service.description | autoTranslate }}</p>
           </div>
         </div>
       </div>
@@ -102,9 +102,9 @@
         <div class="section-title-warp how-we-work-title">
           <span class="sub-title">
             <i class='bx bx-hash'></i>
-            How do we work
+            {{ "How do we work" | autoTranslate }}
           </span>
-          <h2>Clear Steps to Your Better Health</h2>
+          <h2>{{ "Clear Steps to Your Better Health" | autoTranslate }}</h2>
         </div>
 
         <ul class="work-steps" aria-label="Steps to get care">
@@ -113,8 +113,8 @@
               <i class="fa-brands fa-whatsapp"></i>
             </div>
             <div class="work-content">
-              <h3>Get Support</h3>
-              <p>Share your case and we’ll reach out to help.</p>
+              <h3>{{ "Get Support" | autoTranslate }}</h3>
+              <p>{{ "Share your case and we'll reach out to help." | autoTranslate }}</p>
             </div>
           </li>
           <li class="work-step">
@@ -122,8 +122,8 @@
               <i class="fa-regular fa-file-lines"></i>
             </div>
             <div class="work-content">
-              <h3>Fast Estimates</h3>
-              <p>Get your medical opinion and cost estimate in 48 hours.</p>
+              <h3>{{ "Fast Estimates" | autoTranslate }}</h3>
+              <p>{{ "Get your medical opinion and cost estimate in 48 hours." | autoTranslate }}</p>
             </div>
           </li>
           <li class="work-step">
@@ -131,8 +131,8 @@
               <i class="fa-solid fa-plane-departure"></i>
             </div>
             <div class="work-content">
-              <h3>Seamless Arrival</h3>
-              <p>Book your flight and our team will greet you at the airport.</p>
+              <h3>{{ "Seamless Arrival" | autoTranslate }}</h3>
+              <p>{{ "Book your flight and our team will greet you at the airport." | autoTranslate }}</p>
             </div>
           </li>
           <li class="work-step no-border">
@@ -140,8 +140,8 @@
               <i class="fa-solid fa-house-medical"></i>
             </div>
             <div class="work-content">
-              <h3>Continued Care</h3>
-              <p>Get treatment and fly home. We stay in touch for follow ups.</p>
+              <h3>{{ "Continued Care" | autoTranslate }}</h3>
+              <p>{{ "Get treatment and fly home. We stay in touch for follow ups." | autoTranslate }}</p>
             </div>
           </li>
         </ul>
@@ -164,9 +164,9 @@
       <div class="section-title-warp no-btn">
         <span class="sub-title">
           <i class='bx bx-hash'></i>
-          Our Services
+          {{ "Our Services" | autoTranslate }}
         </span>
-        <h2>We Cover All Your Needs</h2>
+        <h2>{{ "We Cover All Your Needs" | autoTranslate }}</h2>
       </div>
 
       <div class="row">
@@ -175,8 +175,8 @@
             <div class="ext-icon">
               <i [class]="es.icon"></i>
             </div>
-            <h3>{{ es.title }}</h3>
-            <p>{{ es.desc }}</p>
+            <h3>{{ es.title | autoTranslate }}</h3>
+            <p>{{ es.desc | autoTranslate }}</p>
           </div>
         </div>
       </div>
@@ -244,12 +244,12 @@
     <div class="section-title-warp no-btn trusted-title">
       <span class="sub-title">
         <i class='bx bx-hash'></i>
-        Trusted Network
+        {{ "Trusted Network" | autoTranslate }}
       </span>
-      <h2>Top Hospitals</h2>
+      <h2>{{ "Top Hospitals" | autoTranslate }}</h2>
       <!-- <h2>{{ "HOME_CARE_HEADLINE" | t }}</h2> -->
       <a routerLink="/hospitals" class="default-btn">{{
-        "HOME_VIEW_ALL" | t
+        "View All" | autoTranslate
       }}</a>
     </div>
 
@@ -330,26 +330,26 @@
     <div class="section-title-warp no-btn">
       <span class="sub-title">
         <i class='bx bx-hash'></i>
-        Transparent Pricing, Trusted Care
+        {{ "Transparent Pricing, Trusted Care" | autoTranslate }}
       </span>
-      <h2>Lowest Price Guaranteed</h2>
+      <h2>{{ "Lowest Price Guaranteed" | autoTranslate }}</h2>
     </div>
 
     <div class="price-controls">
       <div class="chips">
-        <button type="button" class="chip" [class.active]="selectedCategory==='All'" (click)="setCategory('All')">All</button>
-        <button type="button" class="chip" [class.active]="selectedCategory==='Orthopedic'" (click)="setCategory('Orthopedic')">Orthopedic</button>
-        <button type="button" class="chip" [class.active]="selectedCategory==='Oncology'" (click)="setCategory('Oncology')">Oncology</button>
-        <button type="button" class="chip" [class.active]="selectedCategory==='Cardiac'" (click)="setCategory('Cardiac')">Cardiac</button>
-        <button type="button" class="chip" [class.active]="selectedCategory==='Cosmetic'" (click)="setCategory('Cosmetic')">Cosmetic</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='All'" (click)="setCategory('All')">{{ "All" | autoTranslate }}</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='Orthopedic'" (click)="setCategory('Orthopedic')">{{ "Orthopedic" | autoTranslate }}</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='Oncology'" (click)="setCategory('Oncology')">{{ "Oncology" | autoTranslate }}</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='Cardiac'" (click)="setCategory('Cardiac')">{{ "Cardiac" | autoTranslate }}</button>
+        <button type="button" class="chip" [class.active]="selectedCategory==='Cosmetic'" (click)="setCategory('Cosmetic')">{{ "Cosmetic" | autoTranslate }}</button>
       </div>
       <div class="search-sort">
-        <input type="search" class="proc-search" placeholder="Search procedures" [value]="searchTerm" (input)="onProcedureSearch($event)" aria-label="Search procedures"/>
-        <select class="proc-sort" (change)="onSortChange($event)" aria-label="Sort procedures">
-          <option value="relevance">Sort: Relevance</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-          <option value="name-asc">Name: A–Z</option>
+        <input type="search" class="proc-search" placeholder="{{ 'Search procedures' | autoTranslate }}" [value]="searchTerm" (input)="onProcedureSearch($event)" [attr.aria-label]="'Search procedures' | autoTranslate"/>
+        <select class="proc-sort" (change)="onSortChange($event)" [attr.aria-label]="'Sort procedures' | autoTranslate">
+          <option value="relevance">{{ "Sort: Relevance" | autoTranslate }}</option>
+          <option value="price-asc">{{ "Price: Low to High" | autoTranslate }}</option>
+          <option value="price-desc">{{ "Price: High to Low" | autoTranslate }}</option>
+          <option value="name-asc">{{ "Name: A–Z" | autoTranslate }}</option>
         </select>
       </div>
     </div>
@@ -361,19 +361,19 @@
             <img [src]="p.icon" [alt]="p.name" (error)="onProcedureImgError($event)"/>
           </div>
           <div class="procedure-content">
-            <h3>{{ p.name }}</h3>
-            <span class="starting">Starting {{ p.price }}</span>
+            <h3>{{ p.name | autoTranslate }}</h3>
+            <span class="starting">{{ 'Starting' | autoTranslate }} {{ p.price }}</span>
           </div>
           <div class="procedure-cta">
-            <button class="default-btn outline" type="button" (click)="openQuote(p)">Request a Quote</button>
+            <button class="default-btn outline" type="button" (click)="openQuote(p)">{{ "Request a Quote" | autoTranslate }}</button>
           </div>
         </div>
       </div>
     </div>
 
     <div class="price-helpers">
-      <button class="secondary-btn" type="button" (click)="openContactModal()">Looking for Help?</button>
-      <a class="whatsapp-btn" href="https://wa.me/" target="_blank" rel="noopener">Chat With Us</a>
+      <button class="secondary-btn" type="button" (click)="openContactModal()">{{ "Looking for Help?" | autoTranslate }}</button>
+      <a class="whatsapp-btn" href="https://wa.me/" target="_blank" rel="noopener">{{ "Chat With Us" | autoTranslate }}</a>
     </div>
   </div>
 </div>
@@ -381,14 +381,14 @@
 <!-- Quote Modal -->
 <div class="quote-modal" [class.open]="showQuoteModal" (keydown.escape)="closeQuote()" [attr.aria-hidden]="!showQuoteModal">
   <div class="quote-backdrop" (click)="closeQuote()"></div>
-  <div class="quote-dialog" role="dialog" aria-modal="true" aria-label="Tell Us About The Patient">
-    <button type="button" class="quote-close" (click)="closeQuote()" aria-label="Close">×</button>
-    <h3 class="quote-title">Tell Us About The Patient</h3>
+  <div class="quote-dialog" role="dialog" aria-modal="true" [attr.aria-label]="'Tell Us About The Patient' | autoTranslate">
+    <button type="button" class="quote-close" (click)="closeQuote()" [attr.aria-label]="'Close' | autoTranslate">×</button>
+    <h3 class="quote-title">{{ "Tell Us About The Patient" | autoTranslate }}</h3>
     <form #userBooking="ngForm" (ngSubmit)="Booking(userBooking.value)">
       <div class="form-group">
         <input
           type="text"
-          placeholder="Patient Name"
+          placeholder="{{ 'Patient Name' | autoTranslate }}"
           class="form-control"
           name="patientName"
           ngModel
@@ -398,7 +398,7 @@
       <div class="form-group">
         <input
           type="tel"
-          placeholder="Enter Phone No."
+          placeholder="{{ 'Enter Phone No.' | autoTranslate }}"
           class="form-control"
           name="phone"
           ngModel
@@ -408,7 +408,7 @@
       <div class="form-group">
         <input
           type="email"
-          placeholder="Enter Email"
+          placeholder="{{ 'Enter Email' | autoTranslate }}"
           class="form-control"
           name="email"
           ngModel
@@ -418,7 +418,7 @@
       <div class="form-group">
         <input
           type="text"
-          placeholder="Enter City"
+          placeholder="{{ 'Enter City' | autoTranslate }}"
           class="form-control"
           name="city"
           ngModel
@@ -426,7 +426,7 @@
       </div>
       <div class="form-group">
         <textarea
-          placeholder="Kindly describe the health concern....."
+          placeholder="{{ 'Kindly describe the health concern.....' | autoTranslate }}"
           class="form-control"
           name="concern"
           ngModel
@@ -434,36 +434,36 @@
         ></textarea>
       </div>
       <button type="submit" class="default-btn" [disabled]="isSubmitting">
-        <span *ngIf="!isSubmitting">SUBMIT NOW</span>
+        <span *ngIf="!isSubmitting">{{ "SUBMIT NOW" | autoTranslate }}</span>
         <span *ngIf="isSubmitting">
-          <i class="fa fa-spinner fa-spin"></i> SUBMITTING...
+          <i class="fa fa-spinner fa-spin"></i> {{ "SUBMITTING..." | autoTranslate }}
         </span>
       </button>
-      
+
       <!-- Success Message -->
       <div *ngIf="showSuccessMessage && Bookingmsg" class="alert alert-success mt-3 success-message">
         <div class="success-icon">
           <i class="fa fa-check-circle"></i>
         </div>
         <div class="success-content">
-          <h4>Success!</h4>
+          <h4>{{ "Success!" | autoTranslate }}</h4>
           <p>{{ Bookingmsg }}</p>
         </div>
       </div>
-      
+
       <!-- Error Message -->
       <div *ngIf="!showSuccessMessage && Bookingmsg" class="alert alert-danger mt-3 error-message">
         <div class="error-icon">
           <i class="fa fa-exclamation-circle"></i>
         </div>
         <div class="error-content">
-          <h4>Error</h4>
+          <h4>{{ "Error" | autoTranslate }}</h4>
           <p>{{ Bookingmsg }}</p>
         </div>
       </div>
     </form>
   </div>
-  
+
 </div>
 
 <app-testimonial-part></app-testimonial-part>
