@@ -105,7 +105,7 @@ export class WhatsAppService {
   getWhatsAppLink(customMessage?: string): string {
     const whatsappNumber = "918392923555";
     const message = customMessage || "Hi, I would like to know more about your services!";
-    return `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
   }
 
   /**
