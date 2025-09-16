@@ -5,7 +5,7 @@
         <!-- <h1>The Cure Globe</h1> -->
         <h3 class="brand">
           <img src="assets/images/logo.png" alt="Logo" class="brand-logo" />
-          <span class="brand-text">{{ "The Cure Globe" | autoTranslate }}</span>
+          <span class="brand-text">{{ "The Cure Globe" }}</span>
         </h3>
       </a>
       <button
@@ -52,6 +52,7 @@
                 <a class="dropdown-item" (click)="goToHospitalsBySpecialty(specialty)">
                   {{ specialty.name | autoTranslate }}
                 </a>
+                <hr class="dropdown-divider">
               </li>
             </ul>
           </li>
@@ -75,6 +76,7 @@
                 <a class="dropdown-item" (click)="goToDoctorsBySpecialty(specialty)">
                   {{ specialty.title | mt | async }}
                 </a>
+                <hr class="dropdown-divider">
               </li>
             </ul>
           </li>
