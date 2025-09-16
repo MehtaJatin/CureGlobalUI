@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../backend/firebase.service';
+import { WhatsAppService } from '../backend/whatsapp.service';
 import { Hospital as FirebaseHospital } from '../backend/firebase.service';
 import { hospital } from '../data-type';
 import { book } from '../data-type';
@@ -96,6 +97,7 @@ export class HomeComponent implements OnInit, AfterViewInit{
   }
   constructor(
     private firebaseService: FirebaseService,
+    private whatsAppService: WhatsAppService,
     private host: ElementRef<HTMLElement>,
     private router: Router,
   ) {}
@@ -130,10 +132,10 @@ export class HomeComponent implements OnInit, AfterViewInit{
   getHospitalServiceName(id: string): string | undefined {
     console.log(this.services);
     const service = this.services.find(ser => ser.id === id);
-    
+
     return service ? (service.title || service.name) : undefined;
   }
-  
+
 
   onHospitalCardActivate(h: { title: string; city: string }): void {
     // Placeholder: hook navigation or modal here
@@ -410,13 +412,17 @@ export class HomeComponent implements OnInit, AfterViewInit{
       return mappedHospital;
     });
   }
-  
+
 
   goToHospitals(serviceName: string) {
     this.router.navigate(['/hospitals'], { queryParams: { speciality: serviceName } });
   }
-  
+
   goToHospitalDetails(hospitalId:string){
     this.router.navigate(['/hospital-details/'+ hospitalId]);
+  }
+
+  get whatsappLink(): string {
+    return this.whatsAppService.getWhatsAppLink();
   }
 }

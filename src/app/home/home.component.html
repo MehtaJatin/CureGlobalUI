@@ -373,7 +373,13 @@
 
     <div class="price-helpers">
       <button class="secondary-btn" type="button" (click)="openContactModal()">{{ "Looking for Help?" | autoTranslate }}</button>
-      <a class="whatsapp-btn" href="https://wa.me/" target="_blank" rel="noopener">{{ "Chat With Us" | autoTranslate }}</a>
+      <a
+        class="whatsapp-btn"
+        [href]="whatsappLink"
+        target="_blank"
+        rel="noopener">
+        {{ "Chat With Us" | autoTranslate }}
+      </a>
     </div>
   </div>
 </div>

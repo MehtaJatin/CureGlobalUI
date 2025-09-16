@@ -196,9 +196,9 @@
       <p>{{ "Our medical experts can help you choose the best doctor for your specific needs." | autoTranslate }}</p>
       <div class="cta-buttons">
         <a routerLink="/booking" class="default-btn">{{ "Get Free Consultation" | autoTranslate }}</a>
-        <a href="https://wa.me/" target="_blank" class="whatsapp-btn">
+        <a [href]="whatsappLink" target="_blank" class="whatsapp-btn">
           <i class="fa-brands fa-whatsapp"></i>
-          Chat with Us
+          {{ "Chat with Us" | autoTranslate }}
         </a>
       </div>
     </div>

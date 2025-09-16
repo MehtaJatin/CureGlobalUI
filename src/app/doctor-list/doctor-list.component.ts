@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { doctor } from '../data-type';
 import { FirebaseService } from '../backend/firebase.service';
+import { WhatsAppService } from '../backend/whatsapp.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -34,6 +35,7 @@ export class DoctorListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private firebaseService: FirebaseService,
+    private whatsAppService: WhatsAppService,
   ) {}
 
   ngOnInit(): void {
@@ -315,5 +317,9 @@ export class DoctorListComponent implements OnInit, OnDestroy {
     // Navigate to booking page with doctor details
     // console.log('Book consultation with:', doctor.name);
     this.router.navigate(['/booking']);
+  }
+
+  get whatsappLink(): string {
+    return this.whatsAppService.getWhatsAppLink();
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { hospital } from '../data-type';
 import { FirebaseService, Hospital as FirebaseHospital } from '../backend/firebase.service';
+import { WhatsAppService } from '../backend/whatsapp.service';
 
 @Component({
   selector: 'app-hospital-list',
@@ -30,7 +31,8 @@ export class HospitalListComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private whatsAppService: WhatsAppService
   ) {}
 
   ngOnInit(): void {
@@ -359,5 +361,9 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     };
 
     return serviceNameMap[serviceLink] || 'Unknown Service';
+  }
+
+  get whatsappLink(): string {
+    return this.whatsAppService.getWhatsAppLink();
   }
 }

@@ -100,6 +100,23 @@ export class WhatsAppService {
   }
 
   /**
+   * Generate WhatsApp contact link with default message
+   */
+  getWhatsAppLink(customMessage?: string): string {
+    const whatsappNumber = "918392923555";
+    const message = customMessage || "Hi, I would like to know more about your services!";
+    return `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
+  }
+
+  /**
+   * Open WhatsApp chat in new window/tab
+   */
+  openWhatsAppChat(customMessage?: string): void {
+    const url = this.getWhatsAppLink(customMessage);
+    window.open(url, '_blank');
+  }
+
+  /**
    * Send WhatsApp notification for a new booking
    */
   sendBookingNotification(

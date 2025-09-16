@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService, Hospital as FirebaseHospital } from '../backend/firebase.service';
+import { WhatsAppService } from '../backend/whatsapp.service';
 import { Hospital } from '../models/hospital-specialty.model';
 import { forkJoin } from 'rxjs';
 
@@ -19,7 +20,8 @@ export class HospitalDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private whatsAppService: WhatsAppService
   ) {
     console.log('HospitalDetailsComponent constructor called');
   }
@@ -134,5 +136,9 @@ export class HospitalDetailsComponent implements OnInit {
     // Handle image loading errors by setting a fallback image
     console.log('Image loading error, setting fallback image');
     event.target.src = 'assets/images/service/service1.jpg';
+  }
+
+  get whatsappLink(): string {
+    return this.whatsAppService.getWhatsAppLink();
   }
 }
