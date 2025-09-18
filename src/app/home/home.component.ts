@@ -152,18 +152,18 @@ export class HomeComponent implements OnInit, AfterViewInit{
 
   // Procedures (pricing) data
   allProcedures = [
-    { name: 'Knee Replacement', price: 4000, icon: 'assets/images/procedures/knee.png', category: 'Orthopedic' },
-    { name: 'Hip Replacement', price: 5500, icon: 'assets/images/procedures/hip.png', category: 'Orthopedic' },
-    { name: 'Brain Tumor', price: 5000, icon: 'assets/images/procedures/brain.png', category: 'Oncology' },
-    { name: 'Heart Bypass Surgery', price: 4500, icon: 'assets/images/procedures/heart-bypass.png', category: 'Cardiac' },
-    { name: 'Valve Replacement', price: 5000, icon: 'assets/images/procedures/valve.png', category: 'Cardiac' },
-    { name: 'Breast Cancer', price: 5000, icon: 'assets/images/procedures/breast-cancer.png', category: 'Oncology' },
-    { name: 'Lung Cancer', price: 5500, icon: 'assets/images/procedures/lung-cancer.png', category: 'Oncology' },
-    { name: 'Rhinoplasty', price: 1800, icon: 'assets/images/procedures/rhinoplasty.png', category: 'Cosmetic' },
-    { name: 'Breast Implants', price: 2750, icon: 'assets/images/procedures/breast-implants.png', category: 'Cosmetic' },
-    { name: 'Hair Transplant', price: 1400, icon: 'assets/images/procedures/hair-transplant.png', category: 'Cosmetic' },
-    { name: 'Cervical Cancer', price: 4500, icon: 'assets/images/procedures/cervical-cancer.png', category: 'Oncology' },
-    { name: 'Hysterectomy', price: 3000, icon: 'assets/images/procedures/hysterectomy.png', category: 'Oncology' }
+    { name: 'Knee Replacement', price: 4000, icon: 'assets/images/static-service/knee_replacement.png', category: 'Orthopedic' },
+    { name: 'Hip Replacement', price: 5500, icon: 'assets/images/static-service/hip_replacement.png', category: 'Orthopedic' },
+    { name: 'Brain Tumor', price: 5000, icon: 'assets/images/static-service/brain_tumor.png', category: 'Oncology' },
+    { name: 'Heart Bypass Surgery', price: 4500, icon: 'assets/images/static-service/heart_bypass.png', category: 'Cardiac' },
+    { name: 'Valve Replacement', price: 5000, icon: 'assets/images/static-service/valva_replacement.png', category: 'Cardiac' },
+    { name: 'Breast Cancer', price: 5000, icon: 'assets/images/static-service/breast_cance.png', category: 'Oncology' },
+    { name: 'Lung Cancer', price: 5500, icon: 'assets/images/static-service/lung_cancer.png', category: 'Oncology' },
+    { name: 'Rhinoplasty', price: 1800, icon: 'assets/images/static-service/rhinoplasty.png', category: 'Cosmetic' },
+    { name: 'Breast Implants', price: 2750, icon: 'assets/images/static-service/breast_implants.png', category: 'Cosmetic' },
+    { name: 'Hair Transplant', price: 1400, icon: 'assets/images/static-service/hair_transplant.png', category: 'Cosmetic' },
+    { name: 'Cervical Cancer', price: 4500, icon: 'assets/images/static-service/cervical_cancer.png', category: 'Oncology' },
+    { name: 'Hysterectomy', price: 3000, icon: 'assets/images/static-service/hysterectomy.png', category: 'Oncology' }
   ];
 
   procedures = this.allProcedures.map(p => ({...p, price: `$${p.price}`}));
