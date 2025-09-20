@@ -36,7 +36,7 @@
               class="form-select"
             >
               <option
-                *ngFor="let language of allLanguages | keyvalue"
+                *ngFor="let language of sortedLanguages"
                 [value]="language.key"
               >
                 {{ language.value }}

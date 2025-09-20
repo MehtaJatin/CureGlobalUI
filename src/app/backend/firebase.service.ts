@@ -33,6 +33,7 @@ export interface Hospital {
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
+  emergencyService? : Boolean;
   // Extended fields for detailed hospital view
   doctors?: {
     id: string;

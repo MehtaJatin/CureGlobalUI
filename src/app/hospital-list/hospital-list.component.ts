@@ -258,7 +258,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
 
   onSpecialtyChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    this.updateQueryParams({ specialty: target.value });
+    this.updateQueryParams({ speciality: target.value });
   }
 
   onSortChange(event: Event): void {
@@ -285,7 +285,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: params,
-      queryParamsHandling: 'merge'
+      queryParamsHandling: ''
     });
   }
 

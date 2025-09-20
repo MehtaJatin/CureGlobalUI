@@ -8,6 +8,7 @@ import { TranslationService } from '../i18n/translation.service';
 })
 export class HeaderComponent implements OnInit {
   lang: string;
+  sortedLanguages: { key: string; value: string }[] = [];
 
   // All 104 supported languages
   allLanguages = {
@@ -116,6 +117,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang') || 'en';
     this.i18n.setLanguage(this.lang);
+    
+    // Create sorted languages array with English first
+    this.sortedLanguages = Object.entries(this.allLanguages)
+      .map(([key, value]) => ({ key, value }))
+      .sort((a, b) => {
+        // Put English first
+        if (a.key === 'en') return -1;
+        if (b.key === 'en') return 1;
+        // Sort the rest alphabetically by value
+        return a.value.localeCompare(b.value);
+      });
   }
 
   changeLang(lang: string) {

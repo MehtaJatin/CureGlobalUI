@@ -35,9 +35,9 @@
           </div>
 
           <!-- Hospital Description -->
-          <div class="hospital-description-section">
+          <!-- <div class="hospital-description-section">
             <div [innerHTML]="hospital.description"></div>
-          </div>
+          </div> -->
 
           <!-- Hospital Statistics -->
           <div class="hospital-stats-section">
@@ -65,8 +65,8 @@
                   <i class="icon-specialty"></i>
                 </div>
                 <div class="stat-content">
-                  <h3>Specialty</h3>
-                  <p>Super Specialty</p>
+                  <h3>Accreditations</h3>
+                  <p>{{ hospital.accreditations }}</p>
                 </div>
               </div>
               <div class="stat-item">
@@ -83,14 +83,14 @@
 
           <!-- Team and Specialties Section -->
           <div class="team-specialties-section">
-            <h2>Our Team and Specialties</h2>
+            <h2>About {{hospital.name}}</h2>
             <div class="team-description">
-              <p>Medi Global has a dedicated medical team with over 900 experienced doctors and more than 500 trained healthcare staff.</p>
+             <p>{{hospital.description}}</p>
 
               <h3><strong>Specialties</strong></h3>
-              <p>We offer over 30 super specialties, such as:</p>
+              <p>We offer over {{hospital.specialties?.length}} super specialties, such as:</p>
               <ul class="specialties-list">
-                <li *ngFor="let specialty of hospital.specialties">{{ specialty }}</li>
+                <li *ngFor="let specialty of hospital.specialties">{{ getSpecialityNameById(specialty) }}</li>
               </ul>
               <p>All your healthcare needs are covered under one roof.</p>
 
@@ -98,7 +98,7 @@
               <p>Each Center of Excellence is focused on delivering high-quality care through expert teams and the latest medical innovations.</p>
               <ul class="centers-list">
                 <li *ngFor="let center of hospital.centers_of_excellence">
-                  <strong>{{ center }}:</strong> A state-of-the-art facility for complete care with expert teams and advanced diagnostics.
+                  <strong>{{ center.name }}:</strong> {{ center.description }}
                 </li>
               </ul>
             </div>
@@ -106,175 +106,52 @@
 
           <!-- Amenities Tabs Section -->
           <div class="amenities-tabs-section">
-            <div class="tabs-container">
+            <div class="amenties-tabs-title">
+              <h2>Amenities</h2>
+            </div>
+           
+            <div class="tabs-container" style="margin-top: 10px;">
               <div class="tab-navigation">
                 <button
+                  *ngFor="let tab of getAmenityTabs()"
                   class="tab-btn"
-                  [class.active]="selectedTab === 'comfort'"
-                  (click)="selectTab('comfort')"
+                  [class.active]="selectedTab === tab.key"
+                  (click)="selectTab(tab.key)"
                 >
-                  Amenities
+                  {{ tab.label }}
                 </button>
-<!--                <button-->
-<!--                  class="tab-btn"-->
-<!--                  [class.active]="selectedTab === 'money'"-->
-<!--                  (click)="selectTab('money')"-->
-<!--                >-->
-<!--                  Money Matters-->
-<!--                </button>-->
-<!--                <button-->
-<!--                  class="tab-btn"-->
-<!--                  [class.active]="selectedTab === 'food'"-->
-<!--                  (click)="selectTab('food')"-->
-<!--                >-->
-<!--                  Food-->
-<!--                </button>-->
-<!--                <button-->
-<!--                  class="tab-btn"-->
-<!--                  [class.active]="selectedTab === 'treatment'"-->
-<!--                  (click)="selectTab('treatment')"-->
-<!--                >-->
-<!--                  Treatment Related-->
-<!--                </button>-->
-<!--                <button-->
-<!--                  class="tab-btn"-->
-<!--                  [class.active]="selectedTab === 'language'"-->
-<!--                  (click)="selectTab('language')"-->
-<!--                >-->
-<!--                  Language-->
-<!--                </button>-->
-<!--                <button-->
-<!--                  class="tab-btn"-->
-<!--                  [class.active]="selectedTab === 'transportation'"-->
-<!--                  (click)="selectTab('transportation')"-->
-<!--                >-->
-<!--                  Transportation-->
-<!--                </button>-->
               </div>
 
               <div class="tab-content">
-                <!-- Comfort During Stay Tab -->
-                <div class="tab-pane active" *ngIf="selectedTab === 'comfort'">
-                  <div class="amenity-columns">
+                <!-- Dynamic Amenity Tabs -->
+                <div 
+                  *ngFor="let tab of getAmenityTabs()"
+                  class="tab-pane" 
+                  [class.active]="selectedTab === tab.key"
+                >
+                  <div class="amenity-columns" *ngIf="selectedTab === tab.key && getAmenitiesForTab(tab.key).length > 0; else noAmenities">
                     <div class="amenity-column">
                       <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.comfort_during_stay?.slice(0, Math.ceil((hospital.amenities.comfort_during_stay?.length || 0) / 2))">
+                        <li *ngFor="let amenity of getAmenitiesForTab(tab.key).slice(0, Math.ceil(getAmenitiesForTab(tab.key).length / 2))">
                           <i class="icon-hand-point"></i>
                           <span>{{ amenity }}</span>
                         </li>
                       </ul>
                     </div>
-                    <div class="amenity-column">
+                    <div class="amenity-column" *ngIf="getAmenitiesForTab(tab.key).length > 1">
                       <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.comfort_during_stay?.slice(Math.ceil((hospital.amenities.comfort_during_stay?.length || 0) / 2))">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Money Matters Tab -->
-<!--                <div class="tab-pane" *ngIf="selectedTab === 'money'">-->
-<!--                  <div class="amenity-columns">-->
-<!--                    <div class="amenity-column">-->
-<!--                      <ul class="amenity-list">-->
-<!--                        <li *ngFor="let amenity of hospital.amenities.money_matters?.slice(0, Math.ceil((hospital.amenities.money_matters?.length || 0) / 2))">-->
-<!--                          <i class="icon-hand-point"></i>-->
-<!--                          <span>{{ amenity }}</span>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                    <div class="amenity-column">-->
-<!--                      <ul class="amenity-list">-->
-<!--                        <li *ngFor="let amenity of hospital.amenities.money_matters?.slice(Math.ceil((hospital.amenities.money_matters?.length || 0) / 2))">-->
-<!--                          <i class="icon-hand-point"></i>-->
-<!--                          <span>{{ amenity }}</span>-->
-<!--                        </li>-->
-<!--                      </ul>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-                <!-- Food Tab -->
-                <div class="tab-pane" *ngIf="selectedTab === 'food'">
-                  <div class="amenity-columns">
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.food?.slice(0, Math.ceil((hospital.amenities.food?.length || 0) / 2))">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.food?.slice(Math.ceil((hospital.amenities.food?.length || 0) / 2))">
+                        <li *ngFor="let amenity of getAmenitiesForTab(tab.key).slice(Math.ceil(getAmenitiesForTab(tab.key).length / 2))">
                           <i class="icon-hand-point"></i>
                           <span>{{ amenity }}</span>
                         </li>
                       </ul>
                     </div>
                   </div>
-                </div>
-
-                <!-- Treatment Related Tab -->
-                <div class="tab-pane" *ngIf="selectedTab === 'treatment'">
-                  <div class="amenity-columns">
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.treatment_related?.slice(0, Math.ceil((hospital.amenities.treatment_related?.length || 0) / 2))">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
+                  <ng-template #noAmenities>
+                    <div class="no-amenities">
+                      <p>{{ tab.label }} information will be updated soon.</p>
                     </div>
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.treatment_related?.slice(Math.ceil((hospital.amenities.treatment_related?.length || 0) / 2))">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Language Tab -->
-                <div class="tab-pane" *ngIf="selectedTab === 'language'">
-                  <div class="amenity-columns">
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.language">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Transportation Tab -->
-                <div class="tab-pane" *ngIf="selectedTab === 'transportation'">
-                  <div class="amenity-columns">
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.transportation?.slice(0, Math.ceil((hospital.amenities.transportation?.length || 0) / 2))">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="amenity-column">
-                      <ul class="amenity-list">
-                        <li *ngFor="let amenity of hospital.amenities.transportation?.slice(Math.ceil((hospital.amenities.transportation?.length || 0) / 2))">
-                          <i class="icon-hand-point"></i>
-                          <span>{{ amenity }}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  </ng-template>
                 </div>
               </div>
             </div>
@@ -286,7 +163,13 @@
             <div class="doctors-grid" *ngIf="hospital.doctors && hospital.doctors.length > 0; else noDoctors">
               <div class="doctor-card" *ngFor="let doctor of hospital.doctors">
                 <div class="doctor-image">
-                  <img src="{{ doctor.image }}"/>
+                  <img 
+                    [src]="doctor.image"
+                    [alt]="doctor.name"
+                    (error)="onImageError($event)"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2;"
+                  />
+                  
                 </div>
                 <div class="doctor-info">
                   <h3>{{ doctor.name }}</h3>
@@ -303,6 +186,34 @@
             </ng-template>
           </div>
 
+          <!-- Photo Gallery Section -->
+          <div class="photo-gallery-section">
+            <h2>Photo Gallery</h2>
+            <div class="photo-gallery" *ngIf="hospital.images && hospital.images.length > 0; else noGallery">
+              <div class="gallery-grid">
+                <div 
+                  class="gallery-item" 
+                  *ngFor="let image of hospital.images; let i = index"
+                  (click)="openLightbox(i)"
+                >
+                  <img [src]="image" [alt]="'Hospital Image ' + (i + 1)" loading="lazy">
+                  <div class="gallery-overlay">
+                    <i class="icon-zoom"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #noGallery>
+              <div class="no-gallery">
+                <div class="no-gallery-icon">
+                  <i class="icon-camera"></i>
+                </div>
+                <h3>No Photos Available</h3>
+                <p>Photos of this hospital will be added soon.</p>
+              </div>
+            </ng-template>
+          </div>
+
           <!-- Call to Action Section -->
           <div class="cta-section">
             <div class="cta-content">
@@ -313,16 +224,43 @@
               <div class="cta-text">
                 <h2>Patients around the world trust us</h2>
                 <p>Join hundreds of satisfied patients who found the right treatment and care.</p>
-                <a [href]="whatsappLink" class="btn btn-whatsapp">
-                  <i class="icon-whatsapp"></i>
-                  <span>Chat Now...</span>
-                </a>
+                <div class="cta-button">
+                  <a [href]="whatsappLink" target="_blank" class="whatsapp-btn">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    {{ "Chat with Us" | autoTranslate }}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
         </div>
       </main>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="closeLightbox()">
+  <div class="lightbox-container" (click)="$event.stopPropagation()">
+    <button class="lightbox-close" (click)="closeLightbox()">
+      <i class="icon-close"></i>
+    </button>
+    <button class="lightbox-prev" (click)="previousImage()" *ngIf="hasMultipleImages">
+      <i class="icon-arrow-left"></i>
+    </button>
+    <button class="lightbox-next" (click)="nextImage()" *ngIf="hasMultipleImages">
+      <i class="icon-arrow-right"></i>
+    </button>
+    <div class="lightbox-image-container">
+      <img 
+        [src]="currentImageSrc" 
+        [alt]="'Hospital Image ' + (currentImageIndex + 1)"
+        class="lightbox-image"
+      >
+    </div>
+    <div class="lightbox-counter" *ngIf="hasMultipleImages">
+      {{ currentImageIndex + 1 }} / {{ totalImages }}
     </div>
   </div>
 </div>
