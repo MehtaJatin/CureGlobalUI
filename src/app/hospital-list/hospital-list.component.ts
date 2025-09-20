@@ -1,13 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { hospital } from '../data-type';
-import { FirebaseService, Hospital as FirebaseHospital } from '../backend/firebase.service';
+import {
+  FirebaseService,
+  Hospital as FirebaseHospital,
+} from '../backend/firebase.service';
 import { WhatsAppService } from '../backend/whatsapp.service';
 
 @Component({
   selector: 'app-hospital-list',
   templateUrl: './hospital-list.component.html',
-  styleUrls: ['./hospital-list.component.scss']
+  styleUrls: ['./hospital-list.component.scss'],
 })
 export class HospitalListComponent implements OnInit, OnDestroy {
   hospitals: hospital[] = [];
@@ -20,7 +23,6 @@ export class HospitalListComponent implements OnInit, OnDestroy {
   sortOrder: 'asc' | 'desc' = 'asc';
   loading = true;
   error = '';
-
 
   // Available filter options
   cities: string[] = [];
@@ -47,7 +49,9 @@ export class HospitalListComponent implements OnInit, OnDestroy {
   }
 
   getSpeicalityNameById(id: string): string {
-    const matched = (this.specialties || []).find((spec: any) => spec && spec.id == id);
+    const matched = (this.specialties || []).find(
+      (spec: any) => spec && spec.id == id
+    );
     return matched?.name || id;
   }
 
@@ -65,7 +69,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
           console.log(`Hospital ${index}:`, {
             name: hospital.name,
             isActive: hospital.isActive,
-            hasRequiredFields: !!(hospital.name && hospital.address)
+            hasRequiredFields: !!(hospital.name && hospital.address),
           });
         });
 
@@ -84,35 +88,49 @@ export class HospitalListComponent implements OnInit, OnDestroy {
         // Fallback to empty array
         this.hospitals = [];
         this.filteredHospitals = [];
-      }
+      },
     });
   }
 
-  private mapFirebaseHospitalsToLocal(firebaseHospitals: FirebaseHospital[]): hospital[] {
+  private mapFirebaseHospitalsToLocal(
+    firebaseHospitals: FirebaseHospital[]
+  ): hospital[] {
     console.log('Starting mapping process...');
 
     // First, let's be more lenient with filtering - only filter out hospitals that are explicitly inactive
-    const filteredHospitals = firebaseHospitals.filter(h => {
+    const filteredHospitals = firebaseHospitals.filter((h) => {
       const isActive = h.isActive !== false; // Consider undefined or true as active
-      console.log(`Hospital ${h.name}: isActive = ${h.isActive}, will include = ${isActive}`);
+      console.log(
+        `Hospital ${h.name}: isActive = ${h.isActive}, will include = ${isActive}`
+      );
       return isActive && h.name && h.address; // Must have name and address
     });
 
-    console.log(`Filtered ${filteredHospitals.length} hospitals from ${firebaseHospitals.length} total`);
+    console.log(
+      `Filtered ${filteredHospitals.length} hospitals from ${firebaseHospitals.length} total`
+    );
 
     return filteredHospitals.map((firebaseHospital, index) => {
       console.log(`hospital ${index}:`, firebaseHospital);
       // Extract city from address if not explicitly provided
       const addressParts = firebaseHospital.address?.split(',') || [];
-      const city = addressParts.length > 1 ? addressParts[addressParts.length - 1].trim() : 'Unknown';
+      const city =
+        addressParts.length > 1
+          ? addressParts[addressParts.length - 1].trim()
+          : 'Unknown';
 
       // Handle createdAt safely
-      let establishedYear = 2023; // Default year
+      let establishedYear: number = 2025; // Default year
       if (firebaseHospital.createdAt) {
         try {
-          establishedYear = new Date(firebaseHospital.createdAt).getFullYear();
+          establishedYear = firebaseHospital.establishedYear
+            ? firebaseHospital.establishedYear
+            : 2025;
         } catch (e) {
-          console.warn('Invalid createdAt date for hospital:', firebaseHospital.name);
+          console.warn(
+            'Invalid createdAt date for hospital:',
+            firebaseHospital.name
+          );
         }
       }
 
@@ -121,7 +139,10 @@ export class HospitalListComponent implements OnInit, OnDestroy {
         title: firebaseHospital.name || 'Unnamed Hospital',
         city: city,
         country: 'India', // Default country
-        image: firebaseHospital.images || [firebaseHospital.image, 'assets/images/hospitals/default-hospital.jpg'],
+        image: firebaseHospital.images || [
+          firebaseHospital.image,
+          'assets/images/hospitals/default-hospital.jpg',
+        ],
         description: firebaseHospital.description || 'No description available',
         specialities: firebaseHospital.specialities || [],
         rating: 4.5, // Default rating - can be enhanced with actual ratings
@@ -130,21 +151,23 @@ export class HospitalListComponent implements OnInit, OnDestroy {
         accreditation: ['NABH'], // Default accreditation
         website: '', // Not available in Firebase structure
         phone: firebaseHospital.phone || '',
-        address: firebaseHospital.address || ''
+        address: firebaseHospital.address || '',
       } as any; // Type assertion to handle id type difference
 
-      console.log(`Mapped hospital: ${mappedHospital.title} (${mappedHospital.city})`);
+      console.log(
+        `Mapped hospital: ${mappedHospital.title} (${mappedHospital.city})`
+      );
       return mappedHospital;
     });
   }
 
   private extractFilterOptions(): void {
     // Extract unique cities
-    this.cities = [...new Set(this.hospitals.map(h => h.city))].sort();
+    this.cities = [...new Set(this.hospitals.map((h) => h.city))].sort();
 
     // this.specialties = [...new Set(this.doctors.flatMap(d => d.specialities || []))].sort();
-    this.firebaseService.getServices().subscribe((specialtyList )=>{
-      this.specialties = specialtyList
+    this.firebaseService.getServices().subscribe((specialtyList) => {
+      this.specialties = specialtyList;
     });
     // Extract unique specialties
     // const allSpecialties = this.hospitals.flatMap(h => h.specialties);
@@ -152,7 +175,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
   }
 
   private setupRouteSubscription(): void {
-    this.routeSubscription = this.route.queryParams.subscribe(params => {
+    this.routeSubscription = this.route.queryParams.subscribe((params) => {
       this.searchTerm = params['q'] || '';
       this.selectedCity = params['city'] || '';
       this.selectedSpecialty = params['speciality'] || '';
@@ -170,17 +193,18 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     // Apply search filter
     if (this.searchTerm) {
       const term = this.searchTerm.toLowerCase();
-      filtered = filtered.filter(h =>
-        h.title.toLowerCase().includes(term) ||
-        h.city.toLowerCase().includes(term) ||
-        h.specialities.some(s => s.toLowerCase().includes(term)) ||
-        h.description.toLowerCase().includes(term)
+      filtered = filtered.filter(
+        (h) =>
+          h.title.toLowerCase().includes(term) ||
+          h.city.toLowerCase().includes(term) ||
+          h.specialities.some((s) => s.toLowerCase().includes(term)) ||
+          h.description.toLowerCase().includes(term)
       );
     }
 
     // Apply city filter
     if (this.selectedCity) {
-      filtered = filtered.filter(h => h.city === this.selectedCity);
+      filtered = filtered.filter((h) => h.city === this.selectedCity);
     }
 
     // Apply specialty filter
@@ -190,8 +214,10 @@ export class HospitalListComponent implements OnInit, OnDestroy {
 
     if (this.selectedSpecialty) {
       const selected = this.selectedSpecialty.trim().toLowerCase();
-      filtered = filtered.filter(d =>
-        (d.specialities || []).some(s => (s || '').toString().trim().toLowerCase() === selected)
+      filtered = filtered.filter((d) =>
+        (d.specialities || []).some(
+          (s) => (s || '').toString().trim().toLowerCase() === selected
+        )
       );
     }
 
@@ -266,7 +292,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     const [sortBy, sortOrder] = target.value.split('-');
     this.updateQueryParams({
       sortBy: sortBy as any,
-      sortOrder: sortOrder as any
+      sortOrder: sortOrder as any,
     });
   }
 
@@ -277,7 +303,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
       specialty: '',
       service: '',
       sortBy: 'name',
-      sortOrder: 'asc'
+      sortOrder: 'asc',
     });
   }
 
@@ -285,7 +311,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: params,
-      queryParamsHandling: ''
+      queryParamsHandling: '',
     });
   }
 
@@ -345,7 +371,6 @@ export class HospitalListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/hospital-details', hospital.id]);
   }
 
-
   contactHospital(hospital: hospital): void {
     // Open contact modal or navigate to contact page
     console.log('Contact hospital:', hospital.title);
@@ -357,7 +382,7 @@ export class HospitalListComponent implements OnInit, OnDestroy {
       '/service-details': 'General Services',
       '/dentict': 'Cardiology',
       '/doctor': 'Orthopedics',
-      '/doctor-details': 'Oncology'
+      '/doctor-details': 'Oncology',
     };
 
     return serviceNameMap[serviceLink] || 'Unknown Service';
