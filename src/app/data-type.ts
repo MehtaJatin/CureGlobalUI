@@ -67,6 +67,7 @@ export interface hospital {
   specialities: any[];
   rating: number;
   establishedYear: number;
+  emergencyServices: boolean;
   bedCount: number;
   accreditation: string[];
   website?: string;
