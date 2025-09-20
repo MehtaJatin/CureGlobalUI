@@ -54,8 +54,8 @@
           (change)="onSpecialtyChange($event)"
           class="filter-select"
         >
-          <option value="">All Specialties</option>
-          <option *ngFor="let speciality of specialties" [value]="speciality.id">{{ speciality.name }}</option>
+          <option value="">{{ "All Specialties" | autoTranslate }}</option>
+          <option *ngFor="let speciality of specialties" [value]="speciality.id">{{ speciality.name | autoTranslate}}</option>
         </select>
 
         <select
@@ -67,8 +67,8 @@
           <option value="name-desc">{{ "Sort: Name Z-A" | autoTranslate }}</option>
           <option value="rating-desc">{{ "Sort: Rating High-Low" | autoTranslate }}</option>
           <option value="rating-asc">{{ "Sort: Rating Low-High" | autoTranslate }}</option>
-          <option value="bedCount-desc">Sort: Beds High-Low</option>
-          <option value="bedCount-asc">Sort: Beds Low-High</option>
+          <option value="bedCount-desc">{{ "Sort: Beds High-Low" | autoTranslate }}</option>
+          <option value="bedCount-asc">{{ "Sort: Beds Low-High | autoTranslate }}</option>
         </select>
 
         <button
@@ -98,7 +98,7 @@
     <div *ngIf="error && !loading" class="error-container">
       <div class="alert alert-danger">
         <i class="fa-solid fa-exclamation-triangle"></i>
-        <span>{{ error }}</span>
+        <span>{{ error | autoTranslate }}</span>
         <button class="retry-btn" (click)="initializeHospitals()">
           <i class="fa-solid fa-refresh"></i>
           {{ "Retry" | autoTranslate }}
@@ -109,9 +109,9 @@
     <!-- Results Display -->
     <div *ngIf="!loading && !error">
       <p *ngIf="filteredHospitals.length > 0">
-        Showing {{ filteredHospitals.length }} of {{ hospitals.length }} hospitals
+        {{ ("Showing " + (filteredHospitals?.length || 0) + " of " + (hospitals?.length || 0) + " hospitals") | autoTranslate }}
         <span *ngIf="searchTerm || selectedCity || selectedSpecialty || selectedService">
-          matching your criteria
+          {{ "matching your criteria" | autoTranslate }}
         </span>
       </p>
       <p *ngIf="filteredHospitals.length === 0 && hospitals.length === 0" class="no-results">
@@ -122,7 +122,7 @@
       </p>
       <div *ngIf="selectedService" class="active-service-filter">
         <i class="fa-solid fa-filter"></i>
-        <span>Filtered by service: {{ getServiceName(selectedService) }}</span>
+        <span>{{ ("Filtered by service: " + (getServiceName(selectedService) || "")) | autoTranslate }}</span>
       </div>
     </div>
   </div>
@@ -149,10 +149,10 @@
           </div>
 
           <div class="hospital-content">
-            <h3>{{ hospital.title }}</h3>
+            <h3>{{ hospital.title | autoTranslate }}</h3>
             <div class="hospital-location">
               <i class="fa-solid fa-map-marker-alt"></i>
-              {{ hospital.city }}, {{ hospital.country }}
+              {{ hospital.city | autoTranslate }}, {{ hospital.country | autoTranslate }}
             </div>
 
             <div class="hospital-details">
@@ -199,7 +199,7 @@
                 *ngFor="let acc of hospital.accreditation"
                 class="accreditation-badge"
               >
-                {{ acc }}
+                {{ acc | autoTranslate }}
               </span>
             </div>
 
