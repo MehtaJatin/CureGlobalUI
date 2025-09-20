@@ -14,7 +14,7 @@ export class SliderComponent {
       subTitle: 'Where Wellness Meets The World',
       title: 'Excellent Medical Treatment',
       description: 'Connect with experienced specialists who listen, guide, and provide solutions tailored to your needs. Whether you are seeking medical advice, a second opinion, or personalized health recommendations, our team ensures clarity, transparency, and care every step of the way.',
-      buttonText: 'Book Appointment',
+      buttonText: 'Get in Touch',
       buttonLink: '/booking'
     },
     {
@@ -23,7 +23,7 @@ export class SliderComponent {
       subTitle: 'Where Wellness Meets The World',
       title: 'Affordability & Transparency',
       description: 'Our consultation services are built on the values of affordability and transparency. We ensure clear guidance, honest recommendations, and cost-effective solutions so you can make informed decisions with complete confidence.',
-      buttonText: 'Book Appointment',
+      buttonText: 'Get in Touch',
       buttonLink: '/booking'
     },
     {
@@ -32,7 +32,7 @@ export class SliderComponent {
       subTitle: 'Where Wellness Meets The World',
       title: 'Your Health is Our Top Priority',
       description: 'Your well-being comes first. Our consultation services are designed to provide expert guidance, personalized care, and trusted support—ensuring you receive the right advice and treatment at the right time, with complete peace of mind.',
-      buttonText: 'Book Appointment',
+      buttonText: 'Get in Touch',
       buttonLink: '/booking'
     }
   ];

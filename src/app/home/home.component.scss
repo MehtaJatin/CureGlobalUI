@@ -164,6 +164,7 @@
             position: absolute;
             bottom: 5px;
             right: 0;
+            border-radius: 30px;
 
             &:hover{
                 background-color: #005879;
@@ -252,6 +253,8 @@
 
         .default-btn{
             position: absolute;
+            border-radius: 30px;
+
             bottom: 5px;
             right: 0;
         }
@@ -626,7 +629,7 @@
             }
 
             .default-btn{
-                border-radius:5px !important;
+                border-radius:30px !important;
             }
 }
 
@@ -666,6 +669,8 @@
         .default-btn{
             position: relative !important;
             margin-top: 15px !important;
+            border-radius: 30px;
+
             bottom: 0 !important;
         }
     }
@@ -1023,6 +1028,8 @@
           .default-btn, .whatsapp-btn {
             width: 100%;
             max-width: 280px;
+            border-radius: 30px;
+
             justify-content: center;
           }
         }
@@ -1088,7 +1095,7 @@
 .default-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-  
+  border-radius: 30px;
   .fa-spinner {
     animation: spin 1s linear infinite;
   }
